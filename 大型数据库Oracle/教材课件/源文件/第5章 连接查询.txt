@@ -1,0 +1,99 @@
+
+例5-1 
+SELECT teacher_id, name, department_name
+  FROM Teachers, Departments
+    WHERE Teachers.department_id = Departments.department_id;
+
+例5-2 
+SELECT s.student_id, name, course_id, score
+  FROM Students s, Students_grade sg
+    WHERE s.student_id = sg.student_id;
+
+例5-3 
+SELECT student_id, score, grade
+  FROM Students_grade sg, Grades g
+    WHERE sg.score BETWEEN g.low_score AND g.high_score;
+
+例5-4 
+SELECT teacher_id, name, department_name
+  FROM Teachers t, Departments d
+    WHERE t.department_id = d.department_id AND title= '讲师';
+
+例5-5
+SELECT s.student_id, name, course_id, score
+  FROM Students s, Students_grade sg
+    WHERE s.student_id = sg.student_id AND specialty = '计算机';
+
+
+例5-6  
+SELECT s.student_id, s.name, count(*) AS 所修课程门数
+  FROM Students s, Students_grade sg
+    WHERE s.student_id = sg.student_id
+      GROUP BY s.student_id, s.name
+        HAVING count(*)>1
+          ORDER BY s.student_id;
+
+例5-7 
+SELECT s.name, course_name, score
+  FROM Students s, Courses c, Students_grade sg
+    WHERE s.student_id = sg.student_id AND c.course_id = sg.course_id;
+
+例5-8 
+SELECT s.student_id, s.name, c.course_name, AVG(sg.score) AS 平均成绩
+  FROM Students s, Courses c, Students_grade sg
+    WHERE s.student_id = sg.student_id AND c.course_id = sg.course_id
+      GROUP BY s.student_id, s.name, c.course_name;
+
+
+例5-9 
+SELECT teacher_id, name, department_name
+  FROM Teachers t, Departments d
+    WHERE t.department_id = d.department_id(+);
+
+例5-10
+SELECT teacher_id, name, department_name
+  FROM Teachers t LEFT OUTER 
+    JOIN Departments d ON t.department_id = d.department_id;
+
+
+例5-11 
+SELECT teacher_id, name, department_name
+  FROM Teachers t, Departments d
+    WHERE t.department_id(+) = d.department_id;
+
+例5-12
+SELECT teacher_id, name, department_name
+  FROM Teachers t RIGHT OUTER 
+    JOIN Departments d ON t.department_id = d.department_id;
+
+
+例7-13 
+SELECT teacher_id, name, department_name
+  FROM Teachers t, Departments d
+    WHERE t.department_id = d.department_id(+)
+UNION
+SELECT teacher_id, name, department_name
+  FROM Teachers t, Departments d
+    WHERE t.department_id(+) = d.department_id;
+
+例5-14
+SELECT teacher_id, name, department_name
+  FROM Teachers t FULL OUTER
+    JOIN Departments d ON t.department_id = d.department_id;
+
+
+例5-15 
+SELECT teacher_id, name, department_name
+  FROM Teachers, Departments;
+
+
+例5-16 
+SELECT s1.student_id, s1.name AS 学生名, s1.monitor_id, s2.name AS 班长名 
+  FROM Students s1, Students s2
+    WHERE s1.monitor_id = s2.student_id(+);
+
+例5-17 
+SELECT s1.student_id, s1.name AS 学生名, s1.monitor_id, s2.name AS 班长名 
+  FROM Students s1 LEFT OUTER
+    JOIN Students s2 ON s1.monitor_id = s2.student_id;
+

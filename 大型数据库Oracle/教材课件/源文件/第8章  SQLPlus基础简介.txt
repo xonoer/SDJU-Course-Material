@@ -1,0 +1,229 @@
+例8-1：下面用户创建一个包含替代变量的交互SQL命令。
+
+SQL> CLEAR BUFFER
+buffer已清除
+SQL> INPUT
+  1  SELECT ENAME,JOB,SAL
+  2  FROM SCOTT.EMP E,SCOTT.DEPT D
+  3  WHERE E.DEPTNO=D.DEPTNO
+  4  AND DNAME=&DNAME
+  5  
+SQL> SAVE TEST
+已创建文件 TEST.sql.
+
+例8-2：下面运行这个命令：
+
+SQL> @TEST
+输入 dname 的值:  'SALES'
+原值    4: AND DNAME=&DNAME
+新值    4: AND DNAME='SALES'
+
+ENAME     JOB              SAL
+--------------   ------------    -------------
+ALLEN	SALESMAN	1600
+WARD	SALESMAN	1250
+MARTIN	SALESMAN	1250
+BLAKE	MANAGER	2850
+TURNER	SALESMAN	1500
+JAMES	CLERK	950
+
+已选择6行.
+
+例8-3：对上面保存得到的命令TEST.sql进行一些修改，如下所示：
+
+SQL> GET TEST
+  1  SELECT ENAME,JOB,SAL
+  2  FROM SCOTT.EMP E,SCOTT.DEPT D
+  3  WHERE E.DEPTNO=D.DEPTNO
+  4* AND DNAME=&DNAME
+SQL> C/&DNAME/'&DNAME.S'
+  4* AND DNAME='&DNAME.S'
+SQL> SAVE TEST REPLACE
+已写入文件 TEST.sql
+SQL> @TEST
+输入 dname 的值:  SALE
+原值    4: AND DNAME='&DNAME.S'
+新值    4: AND DNAME='SALES'
+
+ENAME     JOB              SAL
+--------------   ------------    -------------
+ALLEN	SALESMAN	1600
+WARD	SALESMAN	1250
+MARTIN	SALESMAN	1250
+BLAKE	MANAGER	2850
+TURNER	SALESMAN	1500
+JAMES	CLERK	950
+
+已选择6行.
+
+例8-4：在什么情况下使用两个&来表示替代变量呢？请看下面这个例子。
+
+SQL> SELECT ENAME,&COL FROM SCOTT.EMP
+  2  ORDER BY &COL;
+输入 col 的值:  SAL
+原值    1: SELECT ENAME,&COL FROM SCOTT.EMP
+新值    1: SELECT ENAME,SAL FROM SCOTT.EMP
+输入 col 的值:  SAL
+原值    2: ORDER BY &COL
+新值    2: ORDER BY SAL
+
+ENAME             SAL
+-----------------    -------------
+SMITH	800
+JAMES	950
+ADAMS	1100
+WARD	1250
+MARTIN	1250
+MILLER	1300
+TURNER	1500
+ALLEN	1600
+CLARK	2450
+BLAKE	2850
+JONES	2975
+
+ENAME             SAL
+-----------------    -------------
+SCOTT	3000
+FORD	3000
+KING	5000
+
+已选择14行.
+
+例8-5：使用两个&符号来标识替代变量。
+
+SQL> SELECT ENAME,&&COL2 FROM SCOTT.EMP
+  2  ORDER BY &&COL2;
+输入 col2 的值:  SAL
+原值    1: SELECT ENAME,&&COL2 FROM SCOTT.EMP
+新值    1: SELECT ENAME,SAL FROM SCOTT.EMP
+原值    2: ORDER BY &&COL2
+新值    2: ORDER BY SAL
+
+ENAME             SAL
+-----------------    -------------
+SMITH	800
+JAMES	950
+ADAMS	1100
+WARD	1250
+MARTIN	1250
+MILLER	1300
+TURNER	1500
+ALLEN	1600
+CLARK	2450
+BLAKE	2850
+JONES	2975
+
+ENAME             SAL
+-----------------    -------------
+SCOTT	3000
+FORD	3000
+KING	5000
+
+已选择14行.
+
+例8-6：执行如下命令，就会发现系统不再需要用户输入变量COL的值了。
+
+SQL> SELECT ENAME,&&COL FROM SCOTT.EMP
+  2  ORDER BY &&COL;
+原值    1: SELECT ENAME,&&COL FROM SCOTT.EMP
+新值    1: SELECT ENAME,SAL FROM SCOTT.EMP
+原值    2: ORDER BY &&COL
+新值    2: ORDER BY SAL
+
+ENAME             SAL
+-----------------    -------------
+SMITH	800
+JAMES	950
+ADAMS	1100
+WARD	1250
+MARTIN	1250
+MILLER	1300
+TURNER	1500
+ALLEN	1600
+CLARK	2450
+BLAKE	2850
+JONES	2975
+
+ENAME             SAL
+-----------------    -------------
+SCOTT	3000
+FORD	3000
+KING	5000
+
+已选择14行.
+
+例8-7：用户只需使用DEFINE命令就会发现其中的奥妙了：一经赋值，这个变量的值就保留在SQL*Plus中，如果再在命令中用到这个变量，系统直接将该值赋给变量。
+
+SQL> DEFINE
+DEFINE _SQLPLUS_RELEASE = "900010001" (CHAR)
+DEFINE _EDITOR = "Notepad" (CHAR)
+DEFINE _O_VERSION  = "Oracle9i Enterprise Edition Release 8.0.1.1.1 - Production
+With the Partitioning option
+JServer Release 8.0.1.1.1 - Production" (CHAR)
+DEFINE _O_RELEASE = "900010101" (CHAR)
+DEFINE MYFRIEND = "SMITH" (CHAR)
+DEFINE DNAME = "SALE" (CHAR)
+DEFINE COL = "SAL" (CHAR)
+DEFINE COL2 = "SAL" (CHAR)
+
+例8-8：下面的代码将提供报告标题，并将它存储在变量MYTITLE中。
+
+SQL> CLEAR BUFFER
+buffer已清除
+SQL> INPUT
+  1  PROMPT Please input a title
+  2  ACCEPT MYTITLE PROMPT 'Title:'
+  3  TTITLE LEFT MYTITLE SKIP2
+  4  SELECT ENAME,JOB
+  5  FROM SCOTT.EMP E,SCOTT.DEPT D
+  6  WHERE E.DEPTNO=D.DEPTNO
+  7  AND DNAME='SALES'
+  8  
+SQL> SAVE TEST1
+已创建文件 TEST1.sql.
+
+例8-9：下面的例子给出了一个范本。
+
+SQL> CLEAR BUFFER
+buffer已清除
+SQL> INPUT
+  1  PROMPT Enter a valid department ID
+  2  PROMPT For example 10, 20, 30 or 40
+  3  ACCEPT DEPTNO NUMBER PROMPT 'Department ID: '
+  4  SELECT * FROM SCOTT.DEPT
+  5  WHERE DEPTNO=&DEPTNO
+  6  
+SQL> SAVE TEST2
+已创建文件 TEST2.sql.
+
+例8-10：如果需要在SQL*Plus中显示绑定变量，可以使用SQL*Plus命令PRINT，例如：
+
+SQL> PRINT RET_VAL
+
+   RET_VAL
+----------------
+          4
+
+例8-11：在下面实例中，将SQL*Plus employee_info变量绑定给游标变量。
+
+BEGIN
+OPEN :employee_info FOR SELECT EMPLOYEE_ID, SALARY FROM EMP_DETAILS_VIEW WHERE
+JOB_ID=’SA_MAN’ ;
+END;
+/
+
+PL/SQL 过程已成功完成。
+
+SELECT语句的结果现在显示在SQL*Plus中：
+
+PRINT employee_info
+EMPLOYEE_ID      SALARY
+---------------------------  ------------------------
+145                 14000
+146                 13500
+147                 12000
+148                 11000
+149                 10500
+
+
+

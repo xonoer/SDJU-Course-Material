@@ -1,0 +1,156 @@
+
+例7-1 
+INSERT INTO Students
+  VALUES(10138,10101,'王一', '男', '26-12月-1989','计算机');
+
+例7-2 
+INSERT INTO Students (student_id,monitor_id,name,dob,sex,specialty)
+  VALUES(10139,10101,'王二', '20-12月-1989', '男','计算机');
+
+例7-3 
+INSERT INTO Teachers (teacher_id,name,department_id)
+    VALUES(10138,'张三',101);
+
+例7-4 
+INSERT INTO Students (student_id,name,dob,sex,specialty)
+    VALUES(10140,'王三',NULL,'男','计算机');
+
+例7-5 
+INSERT INTO Teachers (teacher_id,name,hire_date,department_id)
+    VALUES(10139,'张四',DEFAULT,101);
+
+7.1.2  更新数据（UPDATE）
+例7-6 
+UPDATE Students SET student_id = 10198
+  WHERE student_id = 10138;
+
+例7-7 
+UPDATE Students SET specialty = '计算机应用'
+  WHERE specialty='计算机';
+
+例7-8 
+UPDATE Students SET dob='16-2月-1989'
+  WHERE student_id = 10198;
+
+例7-9 
+UPDATE Students SET specialty = NULL
+  WHERE student_id = 10198;
+
+例7-10 
+UPDATE Teachers SET hire_date = DEFAULT
+  WHERE teacher_id = 11111;
+
+例7-11  
+UPDATE Teachers SET wage = 1.1*wage, bonus = bonus+100
+  WHERE title='教授';
+
+7.1.3  删除数据（DELETE，TRUNCATE TABLE）
+1．DELETE语句格式及说明
+例7-12 
+DELETE FROM students_grade;
+
+例7-13 
+DELETE FROM Students WHERE specialty = '计算机应用';
+
+2．TRUNCATE TABLE
+例7-14 
+TRUNCATE TABLE Teachers;
+
+7.1.4  数据库完整性
+
+1．实体完整性
+例7-15 
+INSERT INTO Students (name,specialty)
+    VALUES('王一','计算机');
+
+例7-16 
+UPDATE Students SET student_id = NULL WHERE student_id = 10205;
+
+例7-17 
+INSERT INTO Students
+  VALUES(10205, NULL,'张三', '男', '26-12月-1989','自动化');
+
+例7-18 
+UPDATE Students
+  SET student_id = 10207
+    WHERE student_id = 10205;
+
+例7-19 
+DELETE FROM Departments WHERE department_id = 101;
+
+例7-20 
+UPDATE Departments SET department_id = 105
+  WHERE department_id = 102;
+
+例7-21 
+INSERT INTO Teachers 
+  VALUES(10805,'李四', '教授', '01-9月-1990',1000,3000,108); 
+
+例7-22 
+UPDATE Teachers SET department_id = 107
+  WHERE teacher_id = 10106;
+
+
+例7-23 
+INSERT INTO Students (student_id,dob,sex,specialty)
+  VALUES(10178,'20-12月-1989','男','计算机');
+
+例7-24 
+UPDATE Students SET sex='南'
+  WHERE student_id = 10205;
+
+
+
+例7-25 
+INSERT INTO Students_computer
+  (SELECT * FROM Students WHERE specialty = '计算机');
+
+例7-26 
+UPDATE Teachers SET bonus =
+  (SELECT AVG(bonus) FROM Teachers)
+    WHERE bonus IS NULL;
+
+例7-27 
+DELETE FROM Teachers 
+  WHERE wage >
+    (SELECT 1.1*AVG(wage) FROM Teachers);
+
+
+例7-28 
+INSERT  INTO departments VALUES(111,'地球物理','X号教学楼'); 
+COMMIT;
+SELECT * FROM departments;
+
+
+例7-29 
+UPDATE departments SET address = '5号教学楼'
+  WHERE department_id = 104;
+SELECT * FROM departments;
+ROLLBACK;
+SELECT * FROM departments;
+
+
+例7-30  
+UPDATE departments SET address = '5号教学楼'
+  WHERE department_id = 104;
+SAVEPOINT sp1;
+DELETE FROM departments WHERE department_id = 104;
+SELECT * FROM departments;
+ROLLBACK TO sp1;
+SELECT * FROM departments;
+
+例7-31
+SET TRANSACTION READ ONLY;
+SELECT * FROM departments;
+UPDATE departments SET address = '8号教学楼'
+  WHERE department_id = 104;
+ROLLBACK;
+
+
+例7-32 
+SET TRANSACTION ISOLATION LEVEL SERIALIZABLE;
+
+
+
+
+

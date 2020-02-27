@@ -1,0 +1,265 @@
+
+例4-1 
+SELECT * FROM Teachers
+  WHERE wage <
+  (SELECT AVG(wage) FROM Teachers);
+
+例4-2 
+SELECT * FROM Students 
+  WHERE specialty =
+  (SELECT specialty FROM Students 
+     WHERE name = '王天仪');
+
+例4-3：显示和雇员scott同部门的雇员姓名、工资和部门编号。 
+SQL>SELECT ename,sal,deptno FROM  emp 
+  2    WHERE deptno= 
+  3   (SELECT deptno FROM emp 
+  4      WHERE ename='SCOTT'); 
+
+例4-4 
+SELECT department_id, AVG(wage) AS 平均工资 FROM Teachers 
+  GROUP BY department_id 
+    HAVING AVG(wage) >
+    (SELECT MIN(AVG(wage))
+       FROM Teachers 
+       GROUP BY department_id);
+
+
+例4-5 
+SELECT * FROM (SELECT * FROM Students WHERE sex ='男')
+  WHERE specialty = '计算机';
+
+
+例4-6 
+SELECT student_id, name FROM Students 
+  WHERE student_id IN
+    (SELECT student_id FROM Students 
+       WHERE name LIKE '王%');
+
+例4-7 
+SELECT course_id, course_name FROM Courses
+  WHERE course_id NOT IN
+    (SELECT course_id
+       FROM Students_grade);
+
+
+例4-8 
+SELECT * FROM Teachers
+  WHERE wage < ANY
+    (SELECT AVG(wage) FROM Teachers GROUP BY department_id);
+
+
+例4-9 
+SELECT * FROM Teachers
+  WHERE wage > ALL
+    (SELECT AVG(wage)
+       FROM Teachers GROUP BY department_id);
+
+
+例4-10 
+SELECT * FROM Students
+  WHERE (specialty, dob)=
+    (SELECT specialty, dob 
+       FROM Students WHERE name='王天仪');
+
+例4-11 
+SELECT * FROM Teachers
+  WHERE (department_id, wage) IN
+    (SELECT department_id, MIN(wage)
+       FROM Teachers GROUP BY department_id);
+
+
+例4-12 
+SELECT * FROM teachers t1
+  WHERE wage >
+    (SELECT AVG(wage) FROM teachers t2
+       WHERE t2.department_id = t1.department_id);
+
+
+例4-13  
+SELECT course_id, course_name FROM courses c
+  WHERE EXISTS
+    (SELECT 2 FROM students_grade sg
+       WHERE sg.course_id = c.course_id);
+
+
+例4-14  
+SELECT course_id, course_name FROM courses c
+  WHERE NOT EXISTS
+    (SELECT 2 FROM Students_grade sg
+       WHERE sg.course_id = c.course_id);
+
+例4-15 
+SELECT department_id, department_name FROM departments
+  WHERE department_id IN
+    (SELECT department_id FROM teachers);
+ 
+例4-16  
+SELECT department_id, department_name FROM departments
+  WHERE department_id NOT IN
+    (SELECT department_id FROM teachers);
+
+
+例4-17 
+SELECT * FROM (SELECT * FROM students 
+   WHERE specialty =
+     (SELECT specialty FROM students 
+        WHERE name = '王天仪'));
+
+
+例4-18
+SELECT course_id, course_name, credit_hour
+  FROM Courses
+UNION ALL
+SELECT minor_id, minor_name, credit_hour
+  FROM Minors;
+
+例4-19
+SELECT course_id, course_name, credit_hour
+  FROM Courses
+UNION ALL
+SELECT minor_id, minor_name, credit_hour
+  FROM Minors ORDER BY 1;
+
+
+
+
+例4-20 
+SELECT course_id, course_name, credit_hour
+  FROM Courses
+UNION 
+SELECT minor_id, minor_name, credit_hour
+  FROM Minors;
+
+例4-21 学生()*专业 男生
+SELECT * FROM Students WHERE specialty='计算机'
+UNION
+SELECT * FROM Students WHERE sex='男';
+
+
+例4-22 
+SELECT course_id, course_name, credit_hour
+  FROM Courses
+INTERSECT 
+SELECT minor_id, minor_name, credit_hour
+  FROM Minors;
+
+例4-23  学生()*专业 男生
+SELECT *
+  FROM students WHERE specialty='计算机'
+INTERSECT
+SELECT *
+  FROM students WHERE sex='男';
+
+
+例4-24 选择课程及副修课程
+SELECT course_id, course_name, credit_hour
+  FROM Courses
+MINUS 
+SELECT minor_id, minor_name, credit_hour
+  FROM Minors;
+
+例4-25 学生()*专业 男生
+SELECT *
+  FROM Students WHERE specialty='计算机'
+MINUS
+SELECT *
+  FROM Students WHERE sex='男';
+
+
+
+例4-26 
+(SELECT course_id, course_name, credit_hour
+   FROM Courses
+INTERSECT
+SELECT minor_id, minor_name, credit_hour
+  FROM Minors)
+UNION
+SELECT course_id, course_name, credit_hour
+  FROM Courses2;
+
+例4-27
+SELECT course_id, course_name, credit_hour
+  FROM Courses
+UNION
+(SELECT minor_id, minor_name, credit_hour
+  FROM Minors
+INTERSECT
+SELECT course_id, course_name, credit_hour
+  FROM Courses2);
+
+
+例4-28 在ORDER BY子句使用列名
+SELECT course_id, course_name, credit_hour
+  FROM courses
+UNION
+SELECT minor_id, minor_name, credit_hour
+  FROM minors ORDER BY course_name;
+
+
+例4-29 在ORDER BY子句使用列位置编号
+SELECT course_id, course_name, credit_hour
+  FROM courses
+UNION
+SELECT minor_id, minor_name, credit_hour
+  FROM minors ORDER BY 2;
+
+
+例4-30 Union中含有复杂的SELECT语句。
+SELECT course_name, SUM(credit_hour)
+  FROM courses WHERE credit_hour>3 GROUP BY course_name
+UNION
+SELECT minor_name, SUM(credit_hour)
+  FROM minors WHERE credit_hour>2 GROUP BY minor_name
+    ORDER BY course_name;
+
+
+例4-31 数据类型相同但宽度不同
+CREATE TABLE table_1(
+  column_11 NUMBER(3),
+  column_12 VARCHAR2(2)
+);
+INSERT INTO table_1 VALUES(111,'aa');
+INSERT INTO table_1 VALUES(222,'bb');
+INSERT INTO table_1 VALUES(333,'cc');
+
+CREATE TABLE table_2(
+  column_21 NUMBER(5),
+  column_22 VARCHAR2(4)
+);
+INSERT INTO table_2 VALUES(44444,'dddd');
+INSERT INTO table_2 VALUES(55555,'eeee');
+INSERT INTO table_2 VALUES(66666,'ffff');
+
+SELECT column_11, column_12 FROM table_1
+UNION
+SELECT column_21, column_22 FROM table_2;
+
+例4-32 数据类型不相同
+CREATE TABLE table_3(
+  column_31 NUMBER(3),
+  column_32 VARCHAR2(2),
+  column_33 VARCHAR2(10)
+);
+INSERT INTO table_3 VALUES(111,'aa','aaaaaaaaaa');
+INSERT INTO table_3 VALUES(222,'bb','bbbbbbbbbb');
+INSERT INTO table_3 VALUES(333,'cc','cccccccccc');
+
+CREATE TABLE table_4(
+  column_41 VARCHAR2(3),
+  column_42 NUMBER(2),
+  column_43 DATE
+);
+INSERT INTO table_4 VALUES('ddd',44,'07-5月-1988');
+INSERT INTO table_4 VALUES('eee',55,'07-5月-1988');
+INSERT INTO table_4 VALUES('fff',66,'07-5月-1988');
+
+COLUMN column_1 FORMAT a10
+COLUMN column_32 FORMAT a10
+COLUMN column_33 FORMAT a10
+
+SELECT TO_CHAR(column_31) AS column_1, column_32, column_33
+  FROM table_3
+UNION
+SELECT column_41, TO_CHAR(column_42), TO_CHAR(column_43,'YYYY-MM-DD')
+  FROM table_4;

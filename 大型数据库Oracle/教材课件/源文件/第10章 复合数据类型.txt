@@ -1,0 +1,749 @@
+
+例10-1
+SET SERVEROUTPUT ON  
+   DECLARE
+     v_student Students%ROWTYPE;
+    BEGIN
+       SELECT * INTO v_student
+         FROM Students WHERE student_id = 10201;
+       DBMS_OUTPUT.PUT_LINE ('姓名  性别  专业');
+       DBMS_OUTPUT.PUT_LINE
+         (v_student.name||'  '||v_student.sex||'  '||v_student.specialty);
+    END;
+
+例10-2 
+CREATE VIEW Students_view AS
+  SELECT * FROM Students
+    WHERE sex='男';
+
+SET SERVEROUTPUT ON  
+   DECLARE
+     v_student Students_view%ROWTYPE;
+    BEGIN
+       SELECT * INTO v_student
+         FROM Students_view WHERE student_id = 10201;
+       DBMS_OUTPUT.PUT_LINE ('姓名  性别  专业');
+       DBMS_OUTPUT.PUT_LINE
+         (v_student.name||'  '||v_student.sex||'  '||v_student.specialty);
+    END;
+
+例10-3
+SET SERVEROUTPUT ON   
+     DECLARE
+       CURSOR students_cur
+       IS
+          SELECT name,dob
+            FROM Students 
+           WHERE specialty = '计算机';
+       v_student students_cur%ROWTYPE;
+     BEGIN
+        DBMS_OUTPUT.PUT_LINE ('序号  学生姓名   出生日期');
+        FOR Students_record IN Students_cur LOOP
+           v_student.name := Students_record.name;
+           v_student.dob := Students_record.dob;
+           DBMS_OUTPUT.PUT_LINE (Students_cur%ROWCOUNT||'     '||v_student.name||'     '||v_student.dob);
+        END LOOP;
+     END;
+
+
+例10-4 
+      SET SERVEROUT ON
+      DECLARE
+      TYPE s_record IS RECORD
+          (name Students.name%TYPE,
+           sex Students.sex%TYPE,
+           dob Students.dob%TYPE);
+      students_record s_record;
+      v_id Students.student_id%TYPE; 
+      BEGIN
+         v_id := &student_id;
+         DBMS_OUTPUT.PUT_LINE ('学生姓名  性别   出生日期');
+         SELECT name,sex,dob INTO students_record
+           FROM Students WHERE student_id = v_id;
+         DBMS_OUTPUT.PUT_LINE (students_record.name||'   '||Students_record.sex||'    '||Students_record.dob);
+      EXCEPTION
+         WHEN OTHERS THEN
+          DBMS_OUTPUT.PUT_LINE (sqlcode||sqlerrm);
+      END;
+
+
+例10-5 
+      SET SERVEROUT ON
+      DECLARE
+      TYPE s_record IS RECORD
+          (name Students.name%TYPE,
+           sex Students.sex%TYPE,
+           dob Students.dob%TYPE);
+      students_record s_record;
+      v_specialty Students.specialty%TYPE; 
+      i INT :=  0;
+      BEGIN
+         v_specialty := '&specialty';
+         DBMS_OUTPUT.PUT_LINE ('序号  学生姓名  性别   出生日期');
+         FOR students_row 
+             IN (SELECT * FROM Students WHERE specialty=v_specialty) LOOP
+             i:=i+1;
+             students_record.name := students_row.name;
+             students_record.sex := students_row.sex;
+             students_record.dob := students_row.dob;
+             DBMS_OUTPUT.PUT_LINE (i||'     '||students_record.name||'   '||Students_record.sex||'    '||Students_record.dob);
+         END LOOP;
+      EXCEPTION
+         WHEN OTHERS THEN
+          DBMS_OUTPUT.PUT_LINE (sqlcode||sqlerrm);
+      END;
+
+
+例10-6 
+   DECLARE
+      TYPE s_record IS RECORD
+          (id Students.student_id%TYPE,
+           dob Students.dob%TYPE);
+      students_record s_record;   
+   BEGIN
+      students_record.id := 10101;
+      students_record.dob := '25-11月-1990';
+      UPDATE Students SET dob = students_record.dob 
+             WHERE student_id = students_record.id;
+   END;
+
+例10-7 
+   DECLARE
+      TYPE s_record IS RECORD
+          (id Students.student_id%TYPE,
+           monitor_id Students.monitor_id%TYPE,
+           name Students.name%TYPE,
+           sex Students.sex%TYPE,
+           dob Students.dob%TYPE,
+           specialty Students.specialty%TYPE);
+      students_record s_record;   
+   BEGIN
+      students_record.id := 10288;
+      students_record.monitor_id := 10205;
+      students_record.name := '王天仪';
+      students_record.sex := '男';
+      students_record.dob := '25-11月-1990';
+      students_record.specialty := '自动化';
+      UPDATE Students SET ROW = students_record 
+             WHERE student_id = 10103;
+   END;
+
+
+例10-8 
+   DECLARE
+      students_record Students%ROWTYPE;   
+   BEGIN
+      students_record.student_id := 10288;
+      students_record.monitor_id := 10205;
+      students_record.name := '王一';
+      students_record.sex := '男';
+      students_record.dob := '25-11月-1990';
+      students_record.specialty := '自动化';
+      INSERT INTO Students VALUES students_record;
+   END;
+
+例10-9 
+DECLARE
+      TYPE s_record IS RECORD
+          (id Departments.department_id%TYPE,
+           name Departments.department_name%TYPE);
+      departments_record s_record;   
+   BEGIN
+      departments_record.id := 111;
+      departments_record.name := '地球物理';
+      INSERT INTO Departments(department_id,department_name)
+          VALUES (departments_record.id,departments_record.name);
+   END;
+
+
+例10-10 
+DECLARE
+      TYPE d_record IS RECORD
+          (id Departments.department_id%TYPE);
+      departments_record d_record;   
+   BEGIN
+      departments_record.id := 111;
+      DELETE FROM Departments WHERE department_id = departments_record.id;
+   END;
+
+
+例10-11 
+      SET SERVEROUT ON
+      DECLARE
+         TYPE student_tab_type IS TABLE OF
+           Students%ROWTYPE INDEX BY BINARY_INTEGER;
+         student_tab student_tab_type;
+         v_id Students.student_id%TYPE; 
+      BEGIN
+         v_id := &student_id;
+         SELECT * INTO student_tab(999)
+           FROM Students WHERE student_id = v_id;
+         DBMS_OUTPUT.PUT_LINE ('学生姓名：'||student_tab(999).name);
+         DBMS_OUTPUT.PUT_LINE ('学生性别：'||student_tab(999).sex);
+         DBMS_OUTPUT.PUT_LINE ('出生日期：'||student_tab(999).dob);
+         DBMS_OUTPUT.PUT_LINE ('专    业：'||student_tab(999).specialty);
+      END;
+
+例10-12
+      SET SERVEROUT ON
+      DECLARE
+         TYPE student_tab_type IS TABLE OF
+           students%ROWTYPE INDEX BY BINARY_INTEGER;
+         student_tab student_tab_type;
+         v_specialty students.specialty%TYPE;
+         CURSOR students_cur
+         IS
+            SELECT *
+              FROM students 
+              WHERE specialty = v_specialty;
+         i INT := 1;
+      BEGIN
+        v_specialty := '&specialty';
+        OPEN students_cur;
+        DBMS_OUTPUT.PUT_LINE ('学生姓名   出生日期');
+        LOOP
+           FETCH Students_cur INTO student_tab(i);
+           EXIT WHEN Students_cur%NOTFOUND;
+           DBMS_OUTPUT.PUT_LINE
+             (student_tab(i).name||'     '||student_tab(i).dob);
+           i := i+1;
+        END LOOP;
+        CLOSE Students_cur;
+      END;
+
+例10-13
+      SET SERVEROUT ON
+      DECLARE
+         TYPE sname_tab_type IS TABLE OF
+           Students.name%TYPE INDEX BY BINARY_INTEGER;
+         sname_tab sname_tab_type;
+         TYPE sdob_tab_type IS TABLE OF
+           Students.dob%TYPE INDEX BY BINARY_INTEGER;
+         sdob_tab sdob_tab_type;
+         v_specialty Students.specialty%TYPE;
+         CURSOR Students_cur
+         IS
+            SELECT name,dob
+              FROM Students 
+              WHERE specialty = v_specialty;
+         i INT:=1;
+      BEGIN
+        v_specialty := '&specialty';
+        OPEN Students_cur;
+        DBMS_OUTPUT.PUT_LINE ('学生姓名   出生日期');
+        LOOP
+           FETCH Students_cur INTO sname_tab(i),sdob_tab(i);
+           EXIT WHEN Students_cur%NOTFOUND;
+           DBMS_OUTPUT.PUT_LINE (sname_tab(i)||'     '||sdob_tab(i));
+           i := i+1;
+        END LOOP;
+        CLOSE Students_cur;
+      END;
+
+
+例10-14 
+      SET SERVEROUT ON
+      DECLARE
+         TYPE sname_tab_type IS TABLE OF
+           VARCHAR2(10) INDEX BY BINARY_INTEGER;
+         sname_tab sname_tab_type;
+         v_id students.student_id%TYPE; 
+      BEGIN
+         v_id := &student_id;
+         SELECT name INTO sname_tab(-999)
+           FROM students WHERE student_id = v_id;
+         DBMS_OUTPUT.PUT_LINE ('学生姓名：'||sname_tab(-999));
+      END;
+
+例10-15 
+      SET SERVEROUT ON
+      DECLARE
+         TYPE sname_tab_type IS TABLE OF
+           students.name%TYPE INDEX BY BINARY_INTEGER;
+         sname_tab sname_tab_type;
+         TYPE sdob_tab_type IS TABLE OF
+           Students.dob%TYPE INDEX BY BINARY_INTEGER;
+         sdob_tab sdob_tab_type;
+         v_specialty students.specialty%TYPE;
+         CURSOR students_cur
+         IS
+            SELECT name,dob
+              FROM students 
+              WHERE specialty = v_specialty;
+         i INT:=1;
+      BEGIN
+        v_specialty := '&specialty';
+        OPEN students_cur;
+        DBMS_OUTPUT.PUT_LINE ('学生姓名   出生日期');
+        LOOP
+           FETCH students_cur INTO sname_tab(i),sdob_tab(i);
+           EXIT WHEN students_cur%NOTFOUND;
+           DBMS_OUTPUT.PUT_LINE
+             (sname_tab(i)||'     '||sdob_tab(i));
+           i := i+1;
+        END LOOP;
+        CLOSE students_cur;
+      END;
+
+例10-16 
+      SET SERVEROUT ON
+      DECLARE
+         TYPE sname_tab_type IS TABLE OF
+           Students.name%TYPE INDEX BY VARCHAR2(10);
+         sname_tab sname_tab_type;
+         v_id Students.student_id%TYPE; 
+      BEGIN
+         v_id := &student_id;
+         SELECT name INTO sname_tab('学生姓名')
+           FROM Students WHERE student_id = v_id;
+         DBMS_OUTPUT.PUT_LINE
+           ('学生姓名：'||sname_tab('学生姓名'));
+      END;
+
+
+例10-17 
+   SET SERVEROUT ON
+      DECLARE
+        TYPE sname_type IS TABLE OF VARCHAR2(10);
+        sname_table sname_type :=
+          sname_type(NULL,NULL,NULL,'王一');
+       BEGIN
+         DBMS_OUTPUT.PUT_LINE ('初始化学生姓名：');
+         FOR i IN 1..4 LOOP
+           DBMS_OUTPUT.PUT_LINE (sname_table(i));        
+         END LOOP;
+         sname_table(1) := '赵一';
+         sname_table(2) := '钱二';
+         sname_table(3) := '孙三';
+         sname_table(4) := '李四';
+         DBMS_OUTPUT.PUT_LINE ('重新指定的学生姓名：');
+         FOR i IN 1..4 LOOP
+           DBMS_OUTPUT.PUT_LINE (sname_table(i));        
+         END LOOP;
+     END;
+
+例10-18 
+      SET SERVEROUT ON
+      DECLARE
+        TYPE sname_type IS TABLE OF
+          students.name%TYPE NOT NULL;
+        sname_table sname_type := sname_type('张三','张三');
+        v_id Students.student_id%TYPE; 
+      BEGIN
+        v_id := &student_id;
+        SELECT name
+          INTO sname_table(1)
+          FROM Students
+          WHERE student_id = v_id;
+        DBMS_OUTPUT.PUT_LINE ('学生1姓名：'||sname_table(1)); 
+        DBMS_OUTPUT.PUT_LINE ('学生2姓名：'||sname_table(2));      
+      END;
+
+
+例10-19
+BEGIN
+  INSERT INTO mentors 
+    VALUES(10101,'王彤',sname_type('王晓芳','张纯玉','刘春苹'));
+END;
+
+例10-20 
+SET SERVEROUT ON
+  DECLARE
+    sname_table sname_type;
+  BEGIN
+    SELECT student_name INTO sname_table
+      FROM Mentors WHERE mentor_name = '王彤';
+    DBMS_OUTPUT.PUT_LINE ('王彤导师的研究生姓名：');
+    FOR i IN 1..sname_table.COUNT LOOP
+      DBMS_OUTPUT.PUT_LINE (sname_table(i));
+    END LOOP;
+  END;
+
+例10-21 修改表mentors中student_name列的数据。
+      DECLARE
+        sname_table sname_type :=
+          sname_type('王一','张三','刘四');
+      BEGIN
+        UPDATE Mentors
+        SET student_name = sname_table
+        WHERE mentor_name = '王彤';
+      END;
+
+
+例10-22 
+    SET SERVEROUT ON
+      DECLARE
+        TYPE sname_varry_type IS VARRAY(3) OF VARCHAR2(10);
+        sname_varry sname_varry_type :=
+          sname_varry_type(NULL,NULL,'李四');
+       BEGIN
+         DBMS_OUTPUT.PUT_LINE ('初始化学生姓名：');
+         FOR i IN 1..3 LOOP
+           DBMS_OUTPUT.PUT_LINE (sname_varry(i));        
+         END LOOP;
+         sname_varry(1) := '赵一';
+         sname_varry(2) := '钱二';
+         sname_varry(3) := '孙三';
+         DBMS_OUTPUT.PUT_LINE ('重新指定的学生姓名：');
+         FOR i IN 1..3 LOOP
+           DBMS_OUTPUT.PUT_LINE (sname_varry(i));        
+         END LOOP;
+      END;
+
+
+例10-23
+      SET SERVEROUT ON
+      DECLARE
+        TYPE sname_type IS VARRAY(3) OF VARCHAR2(10);
+        sname_varry sname_type;
+        v_id Students.student_id%TYPE; 
+      BEGIN
+        v_id := &student_id;
+        sname_varry := sname_type('李四','李四');
+        SELECT name
+        INTO sname_varry(2)
+        FROM Students
+        WHERE student_id = v_id;
+        DBMS_OUTPUT.PUT_LINE ('学生1姓名：'||sname_varry(1)); 
+        DBMS_OUTPUT.PUT_LINE ('学生2姓名：'||sname_varry(2));         
+      END;
+
+
+例10-24 
+BEGIN
+  INSERT INTO hierophants
+    VALUES(10101,'王彤',studname_type('王晓芳','张纯玉','刘春苹'));
+END;
+
+例10-25 
+    SET SERVEROUT ON
+      DECLARE
+        studname_varry studname_type;
+      BEGIN
+        SELECT student_name INTO studname_varry
+          FROM hierophants
+            WHERE hierophant_name = '王彤';
+        DBMS_OUTPUT.PUT_LINE ('王彤导师的研究生姓名：');
+        FOR i IN 1..studname_varry.COUNT LOOP
+           DBMS_OUTPUT.PUT_LINE (studname_varry(i));
+        END LOOP;
+      END;
+
+例10-26 
+      DECLARE
+        studname_varry studname_type :=
+          studname_type('王一','张三','刘四');
+      BEGIN
+        UPDATE hierophants
+        SET student_name = studname_varry
+        WHERE hierophant_name = '王彤';
+      END;
+
+
+例10-27 
+     SET SERVEROUTPUT ON   
+     DECLARE
+       TYPE sname_tab_type IS TABLE OF
+         students.name%TYPE INDEX BY BINARY_INTEGER;
+       sname_tab sname_tab_type;
+       i INT:=1;
+     BEGIN
+       FOR students_record IN 
+         (SELECT name FROM students WHERE specialty = '计算机') LOOP
+           sname_tab(i) := students_record.name;
+           i := i+1;
+        END LOOP;
+        DBMS_OUTPUT.PUT_LINE
+          ('计算机专业共有学生总数：'||sname_tab.COUNT||' 名。');
+     END;
+
+
+例10-28 
+  SET SERVEROUT ON
+    DECLARE
+      TYPE sname_varry_type IS VARRAY(15) OF students.name%TYPE;
+      sname_varry sname_varry_type :=
+        sname_varry_type('王一','李二','张三');
+    BEGIN
+      DBMS_OUTPUT.PUT_LINE
+        ('集合（VARRAY）变量的最大下标值：'||sname_varry.LIMIT);
+      DBMS_OUTPUT.PUT_LINE
+        ('集合（VARRAY）变量的元素个数：'||sname_varry.COUNT);
+    END;
+
+
+例10-29 
+  SET SERVEROUT ON
+    DECLARE
+      TYPE sname_tab_type IS TABLE OF VARCHAR2(10);
+      sname_tab sname_tab_type;
+      v_id students.student_id%TYPE; 
+    BEGIN
+      v_id := &student_id;
+      IF sname_tab.EXISTS(1) THEN
+         NULL;
+      ELSE
+         sname_tab := sname_tab_type('王一','李二','张三');
+      END IF;   
+      SELECT name INTO sname_tab(1)
+        FROM students
+          WHERE student_id = v_id;
+      DBMS_OUTPUT.PUT_LINE ('学生姓名：'||sname_tab(1));
+    END;
+
+
+例10-30 
+  SET SERVEROUTPUT ON   
+    DECLARE
+      TYPE sname_tab_type IS TABLE OF
+        students.name%TYPE INDEX BY BINARY_INTEGER;
+      sname_tab sname_tab_type;
+      i INT := -10;
+    BEGIN
+      FOR students_record IN 
+        (SELECT name FROM students WHERE specialty = '计算机') LOOP
+          sname_tab(i) := students_record.name;
+          i := i+10;
+      END LOOP;
+      DBMS_OUTPUT.PUT_LINE ('第一个元素下标为：'||sname_tab.FIRST);
+      DBMS_OUTPUT.PUT_LINE ('sname_tab中元素个数：'||sname_tab.COUNT);
+      DBMS_OUTPUT.PUT_LINE ('最后一个元素下标为：'||sname_tab.LAST);
+    END;
+
+例10-31 
+  SET SERVEROUTPUT ON   
+    DECLARE
+      TYPE sname_tab_type IS TABLE OF
+        students.name%TYPE INDEX BY BINARY_INTEGER;
+        sname_tab sname_tab_type;
+        i INT := -10;
+        counter INT;
+    BEGIN
+      FOR students_record IN 
+         (SELECT name FROM students WHERE specialty = '计算机') LOOP
+           sname_tab(i) := students_record.name;
+           i := i+10;
+      END LOOP;
+      counter := sname_tab.FIRST;
+      WHILE counter <= sname_tab.LAST LOOP
+        DBMS_OUTPUT.PUT_LINE
+          ('sname_tab('||counter||') = '||sname_tab(counter));
+        counter := sname_tab.NEXT(counter);
+      END LOOP;
+    END;
+
+例10-32
+  SET SERVEROUTPUT ON   
+    DECLARE
+      TYPE sname_type IS TABLE OF VARCHAR2(10);
+      sname_varry sname_type := 
+        sname_type('王一','李二','张三','赵四','周五','刘六');
+    BEGIN
+      DBMS_OUTPUT.PUT_LINE
+        ('sname_varry初始元素个数：'||sname_varry.COUNT);
+      sname_varry.DELETE(2);
+      DBMS_OUTPUT.PUT_LINE
+        ('DELETE(2)后sname_varry元素个数：'||sname_varry.COUNT);
+      sname_varry.DELETE(3,5);
+      DBMS_OUTPUT.PUT_LINE
+        ('DELETE(3,5)后sname_varry元素个数：'||sname_varry.COUNT);   
+      sname_varry.DELETE;
+      DBMS_OUTPUT.PUT_LINE
+        ('DELETE后sname_tab元素个数：'||sname_varry.COUNT); 
+    END;
+
+
+例10-33
+  SET SERVEROUTPUT ON   
+    DECLARE
+      TYPE sname_type IS TABLE OF VARCHAR2(10);
+      sname_varry sname_type := 
+        sname_type('王一','李二','张三');
+      i INT:=1;
+    BEGIN
+      DBMS_OUTPUT.PUT_LINE
+        ('sname_varry初始元素个数：'||sname_varry.COUNT);
+      sname_varry.EXTEND;
+      DBMS_OUTPUT.PUT_LINE
+        ('EXTEND后sname_varry元素：'||sname_varry.COUNT);
+      sname_varry.EXTEND(2,3);
+      DBMS_OUTPUT.PUT_LINE
+        ('EXTEND(2,3)后sname_varry元素个数：'||sname_varry.COUNT);
+      sname_varry.EXTEND(2);
+      DBMS_OUTPUT.PUT_LINE
+        ('EXTEND(2)后sname_varry元素个数：'||sname_varry.COUNT);
+      WHILE i <= sname_varry.COUNT LOOP
+        DBMS_OUTPUT.PUT_LINE ('学生姓名：'||sname_varry(i));
+        i := i+1;
+      END LOOP;            
+    END;
+
+
+例10-34 
+  SET SERVEROUTPUT ON   
+    DECLARE
+      TYPE sname_type IS TABLE OF VARCHAR2(10);
+      sname_varry sname_type := 
+        sname_type('王一','李二','张三','赵四','周五','刘六');
+      i INT:=1;
+    BEGIN
+      DBMS_OUTPUT.PUT_LINE
+        ('sname_varry初始元素个数：'||sname_varry.COUNT);
+      sname_varry.TRIM;
+      DBMS_OUTPUT.PUT_LINE
+        ('TRIM后sname_varry元素个数：'||sname_varry.COUNT);
+      sname_varry.TRIM(2);
+      DBMS_OUTPUT.PUT_LINE
+        ('TRIM(2)后sname_varry元素个数：'||sname_varry.COUNT);
+      WHILE i <= sname_varry.COUNT LOOP
+        DBMS_OUTPUT.PUT_LINE ('学生姓名：'||sname_varry(i));
+        i := i+1;
+      END LOOP;            
+    END;
+
+
+      
+例10-35 
+      SET SERVEROUT ON
+      DECLARE
+        sname_table1 sname_type;
+        sname_table sname_type;
+      BEGIN
+         SELECT student_name
+           INTO sname_table1
+           FROM mentors
+           WHERE mentor_name = '王彤';
+         DBMS_OUTPUT.PUT_LINE ('集合sname_table1中的元素--');         
+         FOR i IN 1..sname_table1.COUNT LOOP
+            DBMS_OUTPUT.PUT_LINE ('学生姓名：'||sname_table1(i));
+         END LOOP;
+         sname_table := SET(sname_table1);
+         DBMS_OUTPUT.PUT_LINE ('集合sname_table中的元素--');   
+         FOR i IN 1..sname_table.COUNT LOOP
+            DBMS_OUTPUT.PUT_LINE ('学生姓名：'||sname_table(i));
+         END LOOP;
+      END;
+
+例10-36 
+     SET SERVEROUT ON
+      DECLARE
+        sname_table1 sname_type;
+        sname_table2 sname_type;
+        sname_table sname_type;
+      BEGIN
+         SELECT student_name
+           INTO sname_table1
+           FROM mentors
+           WHERE mentor_name = '王彤';
+         DBMS_OUTPUT.PUT_LINE ('集合sname_table1中的元素--');         
+         FOR i IN 1..sname_table1.COUNT LOOP
+            DBMS_OUTPUT.PUT_LINE ('学生姓名：'||sname_table1(i));
+         END LOOP;
+         SELECT student_name
+           INTO sname_table2
+           FROM Mentors
+           WHERE mentor_name = '孔世杰';
+         DBMS_OUTPUT.PUT_LINE ('集合sname_table2中的元素--');         
+         FOR i IN 1..sname_table2.COUNT LOOP
+            DBMS_OUTPUT.PUT_LINE ('学生姓名：'||sname_table2(i));
+         END LOOP;
+         sname_table := sname_table1 MULTISET UNION sname_table2;
+         DBMS_OUTPUT.PUT_LINE ('集合sname_table中的元素--');   
+         FOR i IN 1..sname_table.COUNT LOOP
+            DBMS_OUTPUT.PUT_LINE ('学生姓名：'||sname_table(i));
+         END LOOP;
+      END;
+
+例10-37 
+     SET SERVEROUT ON
+      DECLARE
+        sname_table1 sname_type;
+        sname_table2 sname_type;
+        sname_table sname_type;
+      BEGIN
+         SELECT student_name
+           INTO sname_table1
+           FROM mentors
+           WHERE mentor_name = '王彤';
+         DBMS_OUTPUT.PUT_LINE ('集合sname_table1中的元素--');         
+         FOR i IN 1..sname_table1.COUNT LOOP
+            DBMS_OUTPUT.PUT_LINE ('学生姓名：'||sname_table1(i));
+         END LOOP;
+         SELECT student_name
+           INTO sname_table2
+           FROM mentors
+           WHERE mentor_name = '孔世杰';
+         DBMS_OUTPUT.PUT_LINE ('集合sname_table2中的元素--');         
+         FOR i IN 1..sname_table2.COUNT LOOP
+            DBMS_OUTPUT.PUT_LINE ('学生姓名：'||sname_table2(i));
+         END LOOP;
+         sname_table := sname_table1 MULTISET UNION DISTINCT sname_table2;
+         DBMS_OUTPUT.PUT_LINE ('集合sname_table中的元素--');   
+         FOR i IN 1..sname_table.COUNT LOOP
+            DBMS_OUTPUT.PUT_LINE ('学生姓名：'||sname_table(i));
+         END LOOP;
+      END;
+
+例10-38 
+     SET SERVEROUT ON
+      DECLARE
+        sname_table1 sname_type;
+        sname_table2 sname_type;
+        sname_table sname_type;
+      BEGIN
+         SELECT student_name
+           INTO sname_table1
+           FROM Mentors
+           WHERE mentor_name = '王彤';
+         DBMS_OUTPUT.PUT_LINE ('集合sname_table1中的元素--');         
+         FOR i IN 1..sname_table1.COUNT LOOP
+            DBMS_OUTPUT.PUT_LINE ('学生姓名：'||sname_table1(i));
+         END LOOP;
+         SELECT student_name
+           INTO sname_table2
+           FROM Mentors
+           WHERE mentor_name = '孔世杰';
+         DBMS_OUTPUT.PUT_LINE ('集合sname_table2中的元素--');         
+         FOR i IN 1..sname_table2.COUNT LOOP
+            DBMS_OUTPUT.PUT_LINE ('学生姓名：'||sname_table2(i));
+         END LOOP;
+         sname_table := sname_table1 MULTISET INTERSECT sname_table2;
+         DBMS_OUTPUT.PUT_LINE ('集合sname_table中的元素--');   
+         FOR i IN 1..sname_table.COUNT LOOP
+            DBMS_OUTPUT.PUT_LINE ('学生姓名：'||sname_table(i));
+         END LOOP;
+      END;
+
+例10-39 
+     SET SERVEROUT ON
+      DECLARE
+        sname_table1 sname_type;
+        sname_table2 sname_type;
+        sname_table sname_type;
+      BEGIN
+         SELECT student_name
+           INTO sname_table1
+           FROM mentors
+           WHERE mentor_name = '王彤';
+         DBMS_OUTPUT.PUT_LINE ('集合sname_table1中的元素--');         
+         FOR i IN 1..sname_table1.COUNT LOOP
+            DBMS_OUTPUT.PUT_LINE ('学生姓名：'||sname_table1(i));
+         END LOOP;
+         SELECT student_name
+           INTO sname_table2
+           FROM mentors
+           WHERE mentor_name = '孔世杰';
+         DBMS_OUTPUT.PUT_LINE ('集合sname_table2中的元素--');         
+         FOR i IN 1..sname_table2.COUNT LOOP
+            DBMS_OUTPUT.PUT_LINE ('学生姓名：'||sname_table2(i));
+         END LOOP;
+         sname_table := sname_table1 MULTISET EXCEPT sname_table2;
+         DBMS_OUTPUT.PUT_LINE ('集合sname_table中的元素--');   
+         FOR i IN 1..sname_table.COUNT LOOP
+            DBMS_OUTPUT.PUT_LINE ('学生姓名：'||sname_table(i));
+         END LOOP;
+      END;
+
+
+
+

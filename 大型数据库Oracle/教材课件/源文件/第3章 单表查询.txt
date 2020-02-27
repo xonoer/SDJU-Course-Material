@@ -1,0 +1,136 @@
+例3-1 数值型
+SELECT name, hire_date, title, wage 
+  FROM teachers WHERE wage >= 2000;
+
+例3-2 字符型
+SELECT student_id, name, specialty, dob 
+  FROM students WHERE specialty = '计算机';
+
+例3-3 日期型
+SELECT student_id, name, specialty, dob
+  FROM students WHERE dob < '1-1月-1990';
+
+例3-4 数值型
+SELECT name, hire_date, title, bonus
+  FROM teachers WHERE bonus IN(500,600);
+
+例3-5 日期型
+SELECT student_id, name, specialty, dob
+  FROM students WHERE dob IN ('08-10月-1990','26-12月-1989');
+
+例3-6 数值型
+SELECT name, hire_date, title, bonus
+  FROM teachers WHERE bonus BETWEEN 500 AND 600;
+
+例3-7 字符型
+SELECT student_id, name, specialty, dob
+  FROM students WHERE name LIKE '王%';
+
+例3-8 数值型
+SELECT name, hire_date, title, bonus
+  FROM teachers WHERE bonus IS NULL;
+
+例3-9 字符型
+SELECT name, hire_date, title, bonus
+  FROM teachers WHERE title IS NULL;
+
+例3-10 日期型
+SELECT student_id, name, specialty, dob
+  FROM students WHERE dob IS NULL;
+
+
+例3-11 AND
+SELECT student_id, name, sex, specialty
+  FROM students WHERE specialty = '计算机' AND sex = '男';
+
+例3-12 OR
+SELECT student_id, name, sex, specialty
+  FROM students WHERE specialty = '计算机' OR specialty = '自动化';
+
+例3-13 NOT
+SELECT student_id, name, sex, specialty
+  FROM students WHERE NOT specialty = '计算机';
+
+
+例3-14 数值型
+SELECT name, hire_date, title, bonus, wage
+  FROM teachers ORDER BY wage ASC;
+
+例3-15 数值型
+SELECT name, hire_date, title, bonus, wage
+  FROM teachers ORDER BY wage;
+
+例3-16 字符型
+SELECT student_id, name, specialty, dob
+  FROM students ORDER BY 2 DESC;
+
+例3-17： 按工资由小到大的顺序检索teachers表。（升序排序可省略ASC）
+SQL> SELECT name, hire_date, title, bonus, wage
+  2    FROM teachers ORDER BY wage;
+
+
+例3-18： 按学生姓名降序检索students表（使用列序号）。汉字排序，按其拼音对应的英文字母的顺序进行。
+SQL> SELECT student_id, name, specialty, dob
+  2    FROM students ORDER BY 2 DESC;
+
+
+例3-19 日期型（使用别名）
+SELECT name AS "姓名", dob AS "出生日期"
+  FROM students ORDER BY "出生日期" DESC;
+
+
+例3-20 升序
+SELECT student_id, name, specialty, dob
+  FROM students ORDER BY specialty, name;
+
+例3-21 降序
+SELECT student_id, name, specialty, dob
+  FROM students ORDER BY specialty, name DESC;
+
+
+
+例3-22 函数AVG()用于取得列或表达式的平均值，它只适用于数字类型。
+SELECT AVG(wage) FROM teachers;
+
+例3-23 函数COUNT()用于取得总计行数。
+SELECT COUNT(*) FROM students;
+
+例3-24 函数MAX()用于取得列或表达式的最大值，函数MIN()用于取得列或表达式的最小值，
+SELECT MAX(dob), MIN(dob) FROM students;
+
+例3-25 函数SUM()用于取得列或表达式的总和，它只适用于数字类型。
+SELECT SUM(wage) FROM teachers;
+
+例3-26 函数VARIANCE()用于取得列或表达式的方差，并且该函数只适用于数字类型。
+SELECT VARIANCE(wage) FROM teachers;
+
+例3-27 函数STDDEV()用于取得列或表达式的标准偏差，并且该函数只适用于数字类型。
+SELECT STDDEV(wage) FROM teachers;
+
+
+例3-28 GROUP BY子句，使用单列
+SELECT department_id FROM teachers GROUP BY department_id;
+
+例3-29 GROUP BY子句，使用多列
+SELECT department_id, title
+  FROM teachers GROUP BY department_id, title;
+
+例3-30 GROUP BY子句，带有MAX() and MIN()
+SELECT department_id, MAX(wage), MIN(wage)
+  FROM teachers GROUP BY department_id;
+
+
+例3-31 同时使用GROUP BY 子句以及HAVING子句
+SELECT department_id, AVG(wage) FROM teachers
+  GROUP BY department_id HAVING AVG(wage) > 2200;
+    
+例3-32 同时使用WHERE子句、GROUP BY 子句以及HAVING子句
+SELECT department_id, AVG(wage) FROM teachers
+  WHERE wage < 3000 GROUP BY department_id HAVING AVG(wage) > 2000;
+    
+例3-33 使用ORDER BY子句改变分组查询输出结果的顺序。
+SELECT department_id, AVG(wage) FROM teachers
+  WHERE wage < 3000 GROUP BY department_id
+  HAVING AVG(wage) >= 2000 ORDER BY 2;
+    
+

@@ -1,0 +1,595 @@
+
+例11-1： 定义一个过程display_teacher，以系部号为参数，查询并输出该部门的平均工资，最高工资及最低工资。（参数模式未选，默认IN）
+SQL> CREATE OR REPLACE PROCEDURE display_teacher(
+  2        v_no teachers.department_id%TYPE)
+  3      AS
+  4      v_wage teachers.wage%TYPE;
+  5      v_maxwage teachers.wage%TYPE;
+  6      v_minwage teachers.wage%TYPE;
+  7      BEGIN
+  8        SELECT AVG(wage) INTO v_wage
+  9          FROM teachers WHERE department_id = v_no;
+ 10        SELECT MAX(wage) INTO v_maxwage
+ 11          FROM teachers WHERE department_id = v_no;
+ 12        SELECT MIN(wage) INTO v_minwage
+ 13          FROM teachers WHERE department_id = v_no;
+ 14        DBMS_OUTPUT.PUT_LINE
+ 15          ('该系平均工资为：'||v_wage);
+ 16        DBMS_OUTPUT.PUT_LINE
+ 17          ('该系最高工资为：'||v_maxwage);
+ 18        DBMS_OUTPUT.PUT_LINE
+ 19          ('该系最低工资为：'||v_minwage);    
+ 20      EXCEPTION
+ 21        WHEN NO_DATA_FOUND THEN
+ 22          DBMS_OUTPUT.PUT_LINE('该系不存在。');
+ 23      END display_teacher;
+ 24  /
+
+过程已创建。
+
+例11-2： 调用过程display_teacher。
+使用CALL语句：
+SQL> SET SERVEROUTPUT ON
+SQL> CALL display_teacher(101);
+该系平均工资为：2180
+该系最高工资为：3000
+该系最低工资为：1000
+
+调用完成。
+使用EXECUTE语句：
+SQL> SET SERVEROUTPUT ON
+SQL> EXECUTE display_teacher(102);
+该系平均工资为：2240
+该系最高工资为：3100
+该系最低工资为：1000
+
+PL/SQL 过程已成功完成。
+
+例11-3： 定义一个函数total，以教师号为参数，计算出该教师的月总收入，并将其作为函数返回值。
+SQL>   CREATE OR REPLACE FUNCTION total(v_no NUMBER)
+  2      RETURN NUMBER
+  3      AS
+  4      v_wage teachers.wage%TYPE;
+  5      v_bonus teachers.bonus%TYPE;
+  6      v_total teachers.wage%TYPE;
+  7      BEGIN
+  8        SELECT wage, bonus INTO v_wage, v_bonus
+  9          FROM teachers WHERE teacher_id = v_no;
+ 10        v_total := v_wage + v_bonus;
+ 11        RETURN v_total;
+ 12      EXCEPTION
+ 13        WHEN NO_DATA_FOUND THEN
+ 14          DBMS_OUTPUT.PUT_LINE('该教师不存在。');
+ 15      END total;
+ 16  /
+
+函数已创建。
+
+例11-4： 调用函数total，计算教师号为10101的月总收入。
+SQL> SET SERVEROUTPUT ON  
+SQL>   BEGIN
+  2      DBMS_OUTPUT.PUT_LINE('该教师月总收入为：'||total(10101));
+  3    END;
+  4  /
+该教师月总收入为：4300
+
+PL/SQL 过程已成功完成。
+
+
+
+例11-5： 定义包jiaoxue_package的规范，其中包括函数display_grade和过程app_department。
+SQL> CREATE OR REPLACE PACKAGE jiaoxue_package IS
+  2    FUNCTION display_grade(v_sno NUMBER, v_cno NUMBER)
+  3      RETURN NUMBER;
+  4   PROCEDURE app_department
+  5     (v_id NUMBER, v_name VARCHAR2, v_address VARCHAR2);
+  6   END jiaoxue_package;
+  7  /
+
+程序包已创建。
+
+例11-6： 定义包体jiaoxue_package，其中包括实现函数display_grade和过程app_department的具体代码。
+SQL> CREATE OR REPLACE PACKAGE BODY jiaoxue_package IS 
+  2     FUNCTION display_grade(v_sno NUMBER, v_cno NUMBER)
+  3     RETURN NUMBER
+  4     AS
+  5       v_score students_grade.score%TYPE;
+  6       BEGIN
+  7         SELECT score INTO v_score FROM students_grade
+  8           WHERE student_id = v_sno AND course_id = v_cno;
+  9         RETURN v_score;
+ 10       EXCEPTION
+ 11         WHEN NO_DATA_FOUND THEN
+ 12           DBMS_OUTPUT.PUT_LINE('该生或该门课程不存在。'); 
+ 13    END display_grade;
+ 14    PROCEDURE app_department
+ 15      (v_id NUMBER, v_name VARCHAR2, v_address VARCHAR2)
+ 16    AS
+ 17      BEGIN
+ 18        INSERT INTO departments VALUES(v_id, v_name, v_address);
+ 19      EXCEPTION
+ 20        WHEN DUP_VAL_ON_INDEX THEN
+ 21          DBMS_OUTPUT.PUT_LINE('插入系部信息时，系部号不能重复。'); 
+ 22    END app_department;
+ 23  END jiaoxue_package;
+ 24  /
+
+程序包体已创建。
+
+例11-7： 通过视图user_objects查看包（对象）名（object_name）、包建立时间（created）、包状态（status）等信息。
+SQL> SELECT object_name, created, status from user_objects
+  2    WHERE object_name = 'JIAOXUE_PACKAGE';
+
+OBJECT_NAME
+--------------------------------------------------------------------------------
+CREATED        STATUS
+-------------- -------
+JIAOXUE_PACKAGE
+16-7月 -08     VALID
+
+JIAOXUE_PACKAGE
+16-7月 -08     VALID
+
+
+例11-8： 通过SHOW ERRORS命令查看包jiaoxue_package的错误信息，通过EDIT命令修改包jiaoxue_package中的错误。
+SQL> CREATE OR REPLACE PACKAGE BODY jiaoxue_package IS 
+  2     FUNCTION display_garde(v_sno NUMBER, v_cno NUMBER)
+  3     RETURN NUMBER
+  4     AS
+  5       v_score students_grade.score%TYPE;
+  6       BEGIN
+  7         SELECT score INTO v_score FROM students_grade
+  8           WHERE student_id = v_sno AND course_id = v_cno;
+  9         RETURN v_score;
+ 10       EXCEPTION
+ 11         WHEN NO_DATA_FOUND THEN
+ 12           DBMS_OUTPUT.PUT_LINE('该生或该门课程不存在。'); 
+ 13    END display_grade;
+ 14    PROCEDURE app_department
+ 15      (v_id NUMBER, v_name VARCHAR2, v_address VARCHAR2)
+ 16    AS
+ 17      BEGIN
+ 18        INSERT INTO departments VALUES(v_id, v_name, v_address);
+ 19      EXCEPTION
+ 20        WHEN DUP_VAL_ON_INDEX THEN
+ 21          DBMS_OUTPUT.PUT_LINE('插入系部信息时，系部号不能重复。'); 
+ 22    END app_department;
+ 23  END jiaoxue_package;
+ 24  /
+
+警告: 创建的包体带有编译错误。
+SQL> SHOW ERRORS
+PACKAGE BODY JIAOXUE_PACKAGE 出现错误:
+
+LINE/COL ERROR
+-------- -----------------------------------------------------------------
+13/7     PLS-00113: END 标识符 'DISPLAY_GRADE' 必须同 'DISPLAY_GARDE'
+         匹配 (在第 2 行, 第 13 列)
+SQL> EDIT
+已写入 file afiedt.buf
+执行EDIT命令后，自动打开记事本处于文件编辑状态，如图11-3所示。程序第2行的“display_garde”错误，应该为：“display_grade”。修改保存后，重新运行即可。
+
+例11-9： 删除包体jiaoxue_package。
+SQL> DROP PACKAGE BODY jiaoxue_package;
+
+程序包体已删除。
+一并删除包规范及包体可以使用DROP PACKAGE语句，其语句格式如下：
+DROP PACKAGE package_name;
+其中，package_name指定要删除的包（给出名字）。
+
+例11-10： 删除包（一并删除包规范及包体）jiaoxue_package。
+SQL> DROP PACKAGE jiaoxue_package;
+
+程序包已删除。
+
+例11-11：例如，下面的包实现了一个随机数函数。
+
+CREATE OR REPLACE PACKAGE Random AS
+-- Random number generator. Uses the same algorithm as the
+-- rand() function in C.
+-- Used to change the seed. From a given seed, the same
+-- sequence of random numbers will be generated.
+PROCEDURE ChangeSeed(p_NewSeed IN NUMBER);
+-- Returns a random integer between 1 and 32767.
+FUNCTION Rand RETURN NUMBER;
+-- Same as Rand, but with a procedural interface.
+PROCEDURE GetRand(p_RandomNumber OUT NUMBER);
+-- Returns a random integer between 1 and p_MaxVal.
+FUNCTION RandMax(p_MaxVal IN NUMBER) RETURN NUMBER;
+-- Same as RandMax, but with a procedural interface.
+PROCEDURE GetRandMax(p_RandomNumber OUT NUMBER,
+p_MaxVal IN NUMBER);
+END Random;
+CREATE OR REPLACE PACKAGE BODY Random AS
+/* Used for calculating the next number. */
+v_Multiplier CONSTANT NUMBER := 22695477;
+v_Increment CONSTANT NUMBER := 1;
+/* Seed used to generate random sequence. */
+v_Seed number := 1;
+PROCEDURE ChangeSeed(p_NewSeed IN NUMBER) IS
+BEGIN
+v_Seed := p_NewSeed;
+END ChangeSeed;
+FUNCTION Rand RETURN NUMBER IS
+BEGIN
+v_Seed := MOD(v_Multiplier * v_Seed + v_Increment,
+(2 ** 32));
+RETURN BITAND(v_Seed/(2 ** 16), 32767);
+END Rand;
+PROCEDURE GetRand(p_RandomNumber OUT NUMBER) IS
+BEGIN
+-- Simply call RandMax and return the value.
+p_RandomNumber := Rand;
+END GetRand;
+FUNCTION RandMax(p_MaxVal IN NUMBER) RETURN NUMBER IS
+BEGIN
+RETURN MOD(Rand, p_MaxVal) + 1;
+END RandMax;
+PROCEDURE GetRandMax(p_RandomNumber OUT NUMBER,
+p_MaxVal IN NUMBER) IS
+BEGIN
+-- Simply call RandMax and return the value.
+p_RandomNumber := RandMax(p_MaxVal);
+END GetRandMax;
+BEGIN
+/* Package initialization. Initialize the seed to the current
+time in seconds. */
+ChangeSeed(TO_NUMBER(TO_CHAR(SYSDATE, 'SSSSS')));
+END Random;
+
+例11-12： 调用包jiaoxue_package中的函数display_grade。
+SQL> VARIABLE grade NUMBER
+SQL> exec :grade :=jiaoxue_package.display_grade(10101, 10201)
+
+PL/SQL 过程已成功完成。
+
+SQL> PRINT :grade
+
+     GRADE
+----------
+       100
+
+例11-13： 调用包jiaoxue_package中的过程app_department。
+在调用包jiaoxue_package中的过程app_departmen之前，首先查询系部表departments中的原内容。
+SQL> SELECT * FROM departments;
+
+DEPARTMENT_ID DEPARTME ADDRESS
+------------- -------- ----------------------------------------
+          101 信息工程 1号教学楼
+          102 电气工程 2号教学楼
+          103 机电工程 3号教学楼
+          104 工商管理 4号教学楼
+          111 地球物理 X号教学楼
+          222 航空机械 Y号教学楼
+
+已选择6行。
+调用包jiaoxue_package中的过程app_department：
+SQL> exec jiaoxue_package.app_department(333, '建筑工程', 'Z号教学楼')
+
+PL/SQL 过程已成功完成。
+调用包jiaoxue_package中的过程app_department之后，再查询系部表departments中的内容，其中的变化反映了包jiaoxue_package中过程app_department的功能。
+SQL> SELECT * FROM departments;
+
+DEPARTMENT_ID DEPARTME ADDRESS
+------------- -------- ----------------------------------------
+          101 信息工程 1号教学楼
+          102 电气工程 2号教学楼
+          103 机电工程 3号教学楼
+          104 工商管理 4号教学楼
+          111 地球物理 X号教学楼
+          222 航空机械 Y号教学楼
+          333 建筑工程 Z号教学楼
+
+已选择7行。
+
+例11-14： 定义具有重载特征的包。其中过程erase_department为重载子程序。
+SQL> CREATE OR REPLACE PACKAGE jiaoxue_package IS
+  2    FUNCTION display_grade(v_sno NUMBER, v_cno NUMBER)
+  3      RETURN NUMBER;
+  4   PROCEDURE app_department
+  5     (v_id NUMBER, v_name VARCHAR2, v_address VARCHAR2);
+  6   PROCEDURE erase_department(v_id NUMBER);
+  7   PROCEDURE erase_department(v_name VARCHAR2);
+  8  END jiaoxue_package;
+  9  
+ 10  /
+
+程序包已创建。
+SQL> CREATE OR REPLACE PACKAGE BODY jiaoxue_package IS 
+  2     FUNCTION display_grade(v_sno NUMBER, v_cno NUMBER)
+  3      RETURN NUMBER
+  4      AS
+  5      v_score students_grade.score%TYPE;
+  6      BEGIN
+  7      SELECT score INTO v_score FROM students_grade
+  8         WHERE student_id = v_sno AND course_id = v_cno;
+  9      RETURN v_score;
+ 10    EXCEPTION
+ 11      WHEN NO_DATA_FOUND THEN
+ 12        DBMS_OUTPUT.PUT_LINE('该生或该门课程不存在。'); 
+ 13    END display_grade;
+ 14    PROCEDURE app_department
+ 15      (v_id NUMBER, v_name VARCHAR2, v_address VARCHAR2)
+ 16    AS
+ 17      BEGIN
+ 18        INSERT INTO departments VALUES(v_id, v_name, v_address);
+ 19      EXCEPTION
+ 20        WHEN DUP_VAL_ON_INDEX THEN
+ 21          DBMS_OUTPUT.PUT_LINE('插入系部信息时，系部号不能重复。'); 
+ 22    END app_department;
+ 23    PROCEDURE erase_department(v_id NUMBER)
+ 24    AS
+ 25      BEGIN
+ 26        DELETE FROM departments WHERE department_id = v_id;
+ 27    IF SQL%NOTFOUND THEN
+ 28         DBMS_OUTPUT.PUT_LINE('系部号指定的系部不存在。'); 
+ 29    END IF;
+ 30   END erase_department;
+ 31   PROCEDURE erase_department(v_name VARCHAR2)
+ 32    AS
+ 33    BEGIN
+ 34      DELETE FROM departments WHERE department_name = v_name;
+ 35      IF SQL%NOTFOUND THEN
+ 36        DBMS_OUTPUT.PUT_LINE('系部号指定的系部不存在。'); 
+ 37      END IF; 
+ 38    END erase_department;
+ 39  END jiaoxue_package;
+ 40  /
+
+程序包体已创建。
+
+例11-15： 调用重载子程序erase_department。
+SQL> exec jiaoxue_package.erase_department(111)
+
+PL/SQL 过程已成功完成。
+
+SQL> SELECT * FROM departments;
+
+DEPARTMENT_ID DEPARTME ADDRESS
+------------- -------- ----------------------------------------
+          101 信息工程 1号教学楼
+          102 电气工程 2号教学楼
+          103 机电工程 3号教学楼
+          104 工商管理 4号教学楼
+          222 航空机械 Y号教学楼
+          333 建筑工程 Z号教学楼
+
+已选择6行。
+
+SQL> exec jiaoxue_package.erase_department('航空机械')
+
+PL/SQL 过程已成功完成。
+
+SQL> SELECT * FROM departments;
+
+DEPARTMENT_ID DEPARTME ADDRESS
+------------- -------- ----------------------------------------
+          101 信息工程 1号教学楼
+          102 电气工程 2号教学楼
+          103 机电工程 3号教学楼
+          104 工商管理 4号教学楼
+          333 建筑工程 Z号教学楼
+
+
+例11-16： 定义示例触发器change_teacher。禁止用户在非工作时间段改变教师信息。
+SQL> CREATE OR REPLACE TRIGGER change_teacher
+  2        BEFORE INSERT OR UPDATE OR DELETE ON teachers
+  3      BEGIN
+  4        IF (TO_CHAR(SYSDATE, 'HH24') NOT BETWEEN '8' AND '17') OR
+  5          (TO_CHAR(SYSDATE, 'DY', 'nls date_langudage = american') IN ('SAT', 'SUN'))
+  6        THEN
+  7          RAISE_APPLICATION_ERROR(-20000, '在非工作时间不能改变教师信息。');
+  8        END IF;
+  9      END change_teacher;
+ 10  /
+
+例11-17： 为了审计DML操作给表students_grade带来的数据变化，可以使用AFTER行触发器。触发器s_g_change在表students_grade中的成绩被修改后，保存学生成绩修改的前、后值和修改日期以供审计。
+在建立触发器s_g_change之前，首先建立存放审计数据的表students_grade_change。
+CREATE TABLE students_grade_change(
+            student_id NUMBER(5),
+            course_id NUMBER(5),
+            oldscore NUMBER(4,1),
+            newscore NUMBER(4,1),
+            time_change DATE);
+下面建立触发器s_g_change。
+SQL>    CREATE OR REPLACE TRIGGER s_g_change
+  2       AFTER UPDATE OF score ON students_grade
+  3       FOR EACH ROW
+  4     BEGIN
+  5       INSERT INTO students_grade_change
+  6         VALUES(:old.student_id,
+  7           :old.course_id, :old.score, :new.score, SYSDATE);
+  8     END s_g_change;
+  9     /
+
+触发器已创建
+在建立触发器s_g_change之后，当修改学生成绩时，会将每个学生的成绩变化全部写入到审计表students_grade_change中。
+SQL> UPDATE students_grade SET score = 0.95*score;
+
+已更新3行。
+上面的DML语句修改了学生成绩，通过下面的查询结果可以了解到触发器s_g_change的作用。
+SQL> SELECT * FROM students_grade_change;
+
+STUDENT_ID  COURSE_ID   OLDSCORE   NEWSCORE TIME_CHANGE
+---------- ---------- ---------- ---------- --------------
+     10101      10101         87       82.7 16-7月 -08
+     10101      10201        100         95 16-7月 -08
+     10101      10301         79       75.1 16-7月 -08
+
+
+例11-18： 建立多个触发事件的DML触发器change_teacher。禁止用户在非工作时间时间段增加、修改和删除教师信息。
+下面建立触发器change_teacher。
+SQL>     CREATE OR REPLACE TRIGGER change_teacher
+  2        BEFORE INSERT OR UPDATE OR DELETE ON teachers
+  3      BEGIN
+  4        IF (TO_CHAR(SYSDATE, 'HH24') NOT BETWEEN '8' AND '17')
+  5          OR (TO_CHAR(SYSDATE, 'DY',
+  6            'nls date_langudage = american') IN ('SAT', 'SUN'))
+  7        THEN
+  8          CASE
+  9            WHEN INSERTING THEN
+ 10              RAISE_APPLICATION_ERROR
+ 11                (-20001, '在非工作时间不能增加教师信息。');
+ 12            WHEN UPDATING THEN
+ 13              RAISE_APPLICATION_ERROR
+ 14                (-20002, '在非工作时间不能修改教师信息。');
+ 15            WHEN DELETING THEN
+ 16              RAISE_APPLICATION_ERROR
+ 17                (-20003, '在非工作时间不能删除教师信息。'); 
+ 18          END CASE;         
+ 19        END IF;
+ 20      END change_teacher;
+ 21  /
+
+触发器已创建
+在建立触发器change_teacher之后，当在非工作时间时间段增加、修改或删除教师信息时，触发器change_teacher将给出相应的错误信息，并且拒绝执行INSERT、UPDATE和DELETE操作。
+SQL> DELETE FROM teachers;
+DELETE FROM teachers
+            *
+第 1 行出现错误:
+ORA-20003: 在非工作时间不能删除教师信息。
+ORA-06512: 在 "SYSTEM.CHANGE_TEACHER", line 14
+ORA-04088: 触发器 'SYSTEM.CHANGE_TEACHER' 执行过程中出错
+
+
+例11-19：在建立触发器t_d_change之前，首先建立复杂视图teachers_view2。视图teachers_view2映射表teachers 的teacher_id和name列，表departments 的department_id和department_name列。
+SQL> CREATE VIEW Teachers_view2 AS
+  2    SELECT t.teacher_id, t.name, d.department_id, d.department_name
+  3      FROM Teachers t, Departments d 
+  4        WHERE t.department_id=d.department_id;
+
+视图已创建。
+
+SQL> SELECT * FROM Teachers_view2;
+
+TEACHER_ID NAME     DEPARTMENT_ID DEPARTME
+---------- -------- ------------- --------
+     10101 王彤               101 信息工程
+     10104 孔世杰             101 信息工程
+     10103 邹人文             101 信息工程
+     10106 韩冬梅             101 信息工程
+     10210 杨文化             102 电气工程
+     10206 崔天               102 电气工程
+     10209 孙晴碧             102 电气工程
+     10207 张珂               102 电气工程
+     10308 齐沈阳             103 机电工程
+     10306 车东日             103 机电工程
+     10309 臧海涛             103 机电工程
+
+TEACHER_ID NAME     DEPARTMENT_ID DEPARTME
+---------- -------- ------------- --------
+     10307 赵昆               103 机电工程
+     10128 王晓               101 信息工程
+     10328 张笑               103 机电工程
+     10228 赵天宇             102 电气工程
+
+已选择15行。
+
+例11-20： 建立系统事件触发器sys_event。当在用户模式中执行DROP操作时，将删除的对象信息存入event_drop表中。
+首先建立表event_drop，以便存储删除对象的有关信息。
+SQL> CREATE TABLE event_drop(
+  2    user_name VARCHAR2(15),
+  3    object_name VARCHAR2(15),
+  4    object_type VARCHAR2(10),
+  5    object_owner VARCHAR2(15),
+  6    creation_date DATE);
+
+表已创建。
+然后建立系统事件触发器sys_event。
+SQL> CREATE OR REPLACE TRIGGER sys_event
+  2    AFTER DROP ON SCHEMA
+  3     BEGIN
+  4       INSERT INTO event_drop VALUES
+  5         (USER, ORA_DICT_OBJ_NAME,
+  6           ORA_DICT_OBJ_TYPE, ORA_DICT_OBJ_OWNER, SYSDATE);
+  7     END sys_event;
+  8  /
+
+触发器已创建
+用下面的语句激活系统事件触发器sys_event。
+SQL> DROP TABLE grades;
+
+表已删除。
+查看表event_drop存储删除对象的有关信息。
+SQL> SELECT * FROM event_drop;
+
+USER_NAME       OBJECT_NAME     OBJECT_TYP OBJECT_OWNER    CREATION_DATE
+--------------- --------------- ---------- --------------- --------------
+SYSTEM          GRADES          TABLE      SYSTEM          16-7月 -08
+
+SQL>
+
+
+例11-21： 定义游标students_cur。通过使用游标FOR循环，逐个显示某专业学生姓名和出生日期，并在每名学生姓名前加上序号。
+SQL>      DECLARE
+  2       v_specialty Students.specialty%TYPE; 
+  3         CURSOR Students_cur
+  4         IS
+  5            SELECT name,dob
+  6              FROM Students 
+  7             WHERE specialty = v_specialty;
+  8       BEGIN
+  9          v_specialty := '&specialty';
+ 10          DBMS_OUTPUT.PUT_LINE ('序号  学生姓名   出生日期');
+ 11          FOR Students_record IN Students_cur LOOP
+ 12             DBMS_OUTPUT.PUT_LINE (Students_cur%ROWCOUNT||'     '||Students_record.name||'   
+|Students_record.dob);
+ 13          END LOOP;
+ 14       END;
+ 15  /
+输入 specialty 的值:  机电工程
+原值    9:         v_specialty := '&specialty';
+新值    9:         v_specialty := '机电工程';
+序号  学生姓名   出生日期
+1     高山     08-10月-90
+2     张冬云     26-12月-89
+3     张杨     08-5月 -90
+4     赵迪帆     22-9月 -89
+5     白菲菲     07-5月 -88
+6     曾程程
+
+PL/SQL 过程已成功完成。
+
+例11-22： 定义游标students_cur。通过使用游标FOR循环，逐个显示某专业学生姓名和出生日期。
+由于是隐式定义游标（游标未指定名字），因此例11.4_5 PL/SQL程序代码中，不能显式使用游标属性%ROWCOUNT，即不能在每名学生姓名前加上序号。
+SQL>      DECLARE
+  2       v_specialty Students.specialty%TYPE; 
+  3         CURSOR Students_cur
+  4         IS
+  5            SELECT name,dob
+  6              FROM Students 
+  7             WHERE specialty = v_specialty;
+  8       BEGIN
+  9          v_specialty := '&specialty';
+ 10          DBMS_OUTPUT.PUT_LINE ('学生姓名   出生日期');
+ 11          FOR Students_record IN 
+ 12             (SELECT name,dob FROM Students WHERE specialty = v_specialty) LOOP
+ 13             DBMS_OUTPUT.PUT_LINE (Students_record.name||'     '||Students_record.dob);
+ 14          END LOOP;
+ 15       END;
+ 16  /
+输入 specialty 的值:  机电工程
+原值    9:         v_specialty := '&specialty';
+新值    9:         v_specialty := '机电工程';
+学生姓名   出生日期
+高山     08-10月-90
+张冬云     26-12月-89
+张杨     08-5月 -90
+赵迪帆     22-9月 -89
+白菲菲     07-5月 -88
+曾程程
+
+PL/SQL 过程已成功完成。
+
+
+
+
+
+
+
+
+
+
+
+
+

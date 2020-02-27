@@ -1,0 +1,38 @@
+﻿
+Microsoft Visual Studio Solution File, Format Version 9.00
+# Visual Studio 2005
+Project("{E24C65DC-7377-472B-9ABA-BC803B73C61A}") = "E:\TDDOWNLOAD\Mispersonal\", "E:\TDDOWNLOAD\Mispersonal\", "{6DEE24BC-3027-4C97-8FA7-1A6C5BFE70DB}"
+	ProjectSection(WebsiteProperties) = preProject
+		Debug.AspNetCompiler.VirtualPath = "/Mispersonal"
+		Debug.AspNetCompiler.PhysicalPath = "E:\TDDOWNLOAD\Mispersonal\"
+		Debug.AspNetCompiler.TargetPath = "PrecompiledWeb\Mispersonal\"
+		Debug.AspNetCompiler.Updateable = "true"
+		Debug.AspNetCompiler.ForceOverwrite = "true"
+		Debug.AspNetCompiler.FixedNames = "false"
+		Debug.AspNetCompiler.Debug = "True"
+		Release.AspNetCompiler.VirtualPath = "/Mispersonal"
+		Release.AspNetCompiler.PhysicalPath = "E:\TDDOWNLOAD\Mispersonal\"
+		Release.AspNetCompiler.TargetPath = "PrecompiledWeb\Mispersonal\"
+		Release.AspNetCompiler.Updateable = "true"
+		Release.AspNetCompiler.ForceOverwrite = "true"
+		Release.AspNetCompiler.FixedNames = "false"
+		Release.AspNetCompiler.Debug = "False"
+		VWDPort = "4610"
+		DefaultWebSiteLanguage = "Visual C#"
+	EndProjectSection
+EndProject
+Global
+	GlobalSection(SolutionConfigurationPlatforms) = preSolution
+		Debug|.NET = Debug|.NET
+		Release|.NET = Release|.NET
+	EndGlobalSection
+	GlobalSection(ProjectConfigurationPlatforms) = postSolution
+		{6DEE24BC-3027-4C97-8FA7-1A6C5BFE70DB}.Debug|.NET.ActiveCfg = Debug|.NET
+		{6DEE24BC-3027-4C97-8FA7-1A6C5BFE70DB}.Debug|.NET.Build.0 = Debug|.NET
+		{6DEE24BC-3027-4C97-8FA7-1A6C5BFE70DB}.Release|.NET.ActiveCfg = Debug|.NET
+		{6DEE24BC-3027-4C97-8FA7-1A6C5BFE70DB}.Release|.NET.Build.0 = Debug|.NET
+	EndGlobalSection
+	GlobalSection(SolutionProperties) = preSolution
+		HideSolutionNode = FALSE
+	EndGlobalSection
+EndGlobal

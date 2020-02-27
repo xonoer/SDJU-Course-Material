@@ -1,0 +1,496 @@
+
+例6-1 建立用户wang并指定口令为office
+CONNECT system/huali1963
+CREATE USER wang IDENTIFIED BY office;
+CONNECT wang/office
+
+例6-2 建立用户xiaoli并指定口令为finance。
+CONNECT system/huali1963
+CREATE USER xiaoli IDENTIFIED BY finance
+  DEFAULT TABLESPACE users
+    TEMPORARY TABLESPACE temp;
+CONNECT xiaoli/finance
+
+
+例6-3 将用户wang的口令修改为gold。
+CONNECT system/huali1963
+ALTER USER wang IDENTIFIED BY gold;
+
+例6-4 将用户wang删除。
+CONNECT system/huali1963
+DROP USER wang;
+
+
+例6-5 授予用户xiaoli CREATE SESSION, CREATE USER, CREATE TABLE等权限。授予用户zhang zhao CREATE SESSION权限。
+CONNECT system/huali1963 
+GRANT CREATE SESSION, CREATE USER, CREATE TABLE TO xiaoli;
+
+GRANT CREATE SESSION TO zhang;
+GRANT CREATE SESSION TO zhao;
+
+例6-6 授予用户xiaoli EXECUTE ANY PROCEDURE权限。并WITH ADMIN OPTION。
+CONNECT system/huali1963 
+GRANT EXECUTE ANY PROCEDURE TO xiaoli WITH ADMIN OPTION;
+
+例6-7 通过用户xiaoli授予用户zhang EXECUTE ANY PROCEDURE权限。
+CONNECT xiaoli/finance
+GRANT EXECUTE ANY PROCEDURE TO zhang;
+
+例6-8 
+CONNECT system/huali1963
+GRANT CREATE SESSION, EXECUTE ANY PROCEDURE TO PUBLIC;
+
+
+例6-9 查看授予用户xiaoli的系统权限。
+CONNECT xiaoli/finance
+SELECT *
+  FROM user_sys_privs;
+
+例6-10 查看授予用户zhang的系统权限。
+CONNECT zhang/archives
+SELECT *
+  FROM user_sys_privs;
+
+
+例6-11 收回用户xiaoli CREATE TABLE的系统权限，之后再查看授予用户xiaoli的系统权限。
+CONNECT system/huali1963
+REVOKE CREATE TABLE FROM xiaoli;
+CONNECT xiaoli/finance
+SELECT *
+  FROM user_sys_privs;
+
+
+例6-12 授予用户xiaoli在表Departments上具有SELECT, INSERT, UPDATE对象权限。
+CONNECT system/huali1963
+GRANT SELECT, INSERT, UPDATE ON Departments TO xiaoli;
+
+例6-13 授予用户xiaoli在表Teachers的wage, bonus列上具有UPDATE对象权限。
+CONNECT system/huali1963
+GRANT UPDATE (wage, bonus) ON Teachers TO xiaoli;
+
+
+例6-14 查看用户xiaoli在表departments上所具有哪些对象权限
+CONNECT xiaoli/finance
+SELECT owner, table_name, grantor, privilege, grantable
+  FROM user_tab_privs_recd;
+
+例6-15 授予用户xiaoli在表Students上具有SELECT,对象权限。并WITH GRANT OPTION
+CONNECT system/huali1963
+GRANT SELECT ON Students TO xiaoli WITH GRANT OPTION;
+CONNECT xiaoli/finance
+SELECT * FROM system.Students;
+
+
+例6-16 收回用户xiaoli在表Departments上具有INSERT对象权限。
+CONNECT system/huali1963
+REVOKE INSERT ON Departments FROM xiaoli;
+
+例6-17 收回用户zhao在表Students上具有SELECT对象权限。
+CONNECT xiaoli/finance
+REVOKE SELECT ON system.Students FROM zhao;
+
+
+
+例6-18 建立表Departments1。其中department_id设为PRIMARY KEY，department_name设为NOT NULL。
+CONNECT system/huali1963
+CREATE TABLE Departments1(
+  department_id NUMBER(3)
+    CONSTRAINT d1_pk PRIMARY KEY,
+  department_name VARCHAR2(8) NOT NULL,
+  director_id NUMBER(5)
+);
+
+
+例6-19 建立表Teachers1，同时将Departments1的department_id设为外关键字。
+CREATE TABLE Teachers1(
+  teacher_id NUMBER(5)
+    CONSTRAINT t1_pk PRIMARY KEY,
+  name VARCHAR2(6) NOT NULL,
+  job_title  VARCHAR2(10),
+  hire_date DATE,
+  bonus NUMBER(4) DEFAULT 800,
+  wage NUMBER(5),
+  department_id NUMBER(3)
+    CONSTRAINT t1_fk_d1
+    REFERENCES Departments1(department_id)
+);
+
+
+例6-20 建立表Students1，同时使用CHECK子句约束sex列值，为register_date设置默认值，为phone_number设置Unique约束。
+CREATE TABLE Students1(
+  student_id NUMBER(5)
+    CONSTRAINT s1_pk PRIMARY KEY,
+  name VARCHAR2(10) NOT NULL,
+  sex VARCHAR2(6)
+  CONSTRAINT sex_chk1 CHECK(sex IN ('男','女')),
+  register_date DATE DEFAULT SYSDATE,
+  phone_number VARCHAR2(12) CONSTRAINT pnum_uq UNIQUE 
+);
+
+
+例6-21 由表Teachers复制生成表Teachers2。并且表Teachers2具有与表Teachers相同的结构和相同的数据记录。
+CREATE TABLE Teachers2 AS SELECT * FROM Teachers;
+
+例6-22 由表Students生成表Students2。并且表Students2复制表Students 的student_id和name两列，复制其中计算机专业的学生记录。（部分行，部分列）
+CREATE TABLE Students2 AS
+  SELECT student_id, name FROM Students
+    WHERE specialty='计算机';
+
+例6-23 由表Teachers 生成表Teachers3。通过UNION操作复制其中部门号为101和102的教师记录。
+CREATE TABLE Teachers3 AS (
+  SELECT * FROM Teachers WHERE department_id=101
+UNION
+  SELECT * FROM Teachers WHERE department_id=102);
+
+例6-24 由表Teachers和表Departments 生成表Teachers4。通过连接查询复制表Teachers中的teacher_id和name列，复制表Departments中的department_name，并复制连接条件匹配的教师记录。
+CREATE TABLE Teachers4 AS
+  SELECT t.teacher_id, t.name, department_name
+    FROM Teachers t, Departments d 
+      WHERE t.department_id=d.department_id;
+
+
+例6-25 在数据字典中，获取表DEPARTMENTS1、TEACHERS1、TEACHERS2、STUDENTS1、STUDENTS2、TEACHERS3、TEACHERS4的table_name、tablespace_name、 temporary的等信息。
+SELECT table_name, tablespace_name, temporary
+  FROM user_tables
+    WHERE table_name IN ('DEPARTMENTS1', 'TEACHERS1', 'TEACHERS2');
+
+SELECT table_name, tablespace_name, temporary FROM user_tables
+  WHERE table_name IN ('STUDENTS1', 'STUDENTS2', 'TEACHERS3', 'TEACHERS4');
+
+
+例6-26 使用SQL*PLUS的DESCRIBE命令显示表中列的信息。以表Teachers2为例。
+DESCRIBE Teachers2
+
+DESCRIBE Departments1
+DESCRIBE Teachers1
+DESCRIBE Students1
+DESCRIBE Students2
+DESCRIBE Teachers3
+DESCRIBE Teachers4
+
+例6-27 在数据字典中，获取表Teachers2中列的信息。
+COLUMN column_name FORMAT a15
+COLUMN data_type FORMAT a10
+SELECT column_name, data_type, data_length, data_precision, data_scale
+  FROM user_tab_columns
+    WHERE table_name = 'TEACHERS2';
+
+SELECT
+column_name, data_type, data_length, data_precision, data_scale
+FROM user_tab_columns
+WHERE table_name = 'DEPARTMENTS1';
+SELECT
+column_name, data_type, data_length, data_precision, data_scale
+FROM user_tab_columns
+WHERE table_name = 'TEACHERS1';
+SELECT
+column_name, data_type, data_length, data_precision, data_scale
+FROM user_tab_columns
+WHERE table_name = 'STUDENTS1';
+SELECT
+column_name, data_type, data_length, data_precision, data_scale
+FROM user_tab_columns
+WHERE table_name = 'STUDENTS2';
+SELECT
+column_name, data_type, data_length, data_precision, data_scale
+FROM user_tab_columns
+WHERE table_name = 'TEACHERS3';
+SELECT
+column_name, data_type, data_length, data_precision, data_scale
+FROM user_tab_columns
+WHERE table_name = 'TEACHERS4';
+
+
+例6-28 在表Students2中添加sex列，取字符型数据，）
+DESCRIBE Students2
+ALTER TABLE Students2
+  ADD sex VARCHAR2(6);
+DESCRIBE Students2
+
+例6-29 在表Students2中添加enrollment_grade列，取数字型数据
+
+ALTER TABLE Students2
+  ADD enrollment_grade NUMBER(3);
+DESCRIBE Students2
+
+例6-30在表Students2中添加register_date列，取日期型数据，并把系统日期作为默认值。
+
+ALTER TABLE Students2
+  ADD register_date DATE DEFAULT SYSDATE;
+DESCRIBE Students2
+
+
+例6-31 删除表Students2的sex列。
+
+ALTER TABLE Students2
+  DROP COLUMN sex;
+DESCRIBE Students2
+
+ALTER TABLE Students2
+DROP COLUMN enrollment_grade;
+DESCRIBE Students2
+
+ALTER TABLE Students2
+DROP COLUMN register_date;
+DESCRIBE Students2
+
+
+例6-32 修改Teachers1表wage列的数字精度，由原来的NUMBER(5)修改为NUMBER(7,2)。
+DESCRIBE Teachers1
+ALTER TABLE Teachers1
+  MODIFY wage NUMBER(7,2);
+DESCRIBE Teachers1
+
+例6-33 修改Teachers1表name列的字符宽度，由原来的VARCHAR2(6)修改为VARCHAR2(10)。
+ALTER TABLE Teachers1
+  MODIFY name VARCHAR2(10);
+DESCRIBE Teachers1
+
+例6-34 修改Teachers1表teacher_id列的数据类型，由原来的NUMBER(5)修改为VARCHAR2(5)。
+ALTER TABLE Teachers1
+  MODIFY teacher_id VARCHAR2(5);
+DESCRIBE Teachers1
+
+例6-35 将Teachers1表bonus列的默认值由800修改为1000。
+select DATA_DEFAULT from user_tab_columns   
+  where table_name = 'TEACHERS1' AND COLUMN_NAME='BONUS';
+ALTER TABLE Teachers1
+  MODIFY bonus DEFAULT 1000;
+select DATA_DEFAULT from user_tab_columns   
+  where table_name = 'TEACHERS1' AND COLUMN_NAME='BONUS';
+
+
+例6-36 给表Students1添加主关键字约束。主关键字为student_id，约束名字为s1_pk。
+ALTER TABLE Students1
+  ADD CONSTRAINT s1_pk PRIMARY KEY(student_id);
+
+例6-37 给表Teachers1添加外关键字约束。外关键字为department_id，参考Departments1表中的department_id，约束名字为t1_fk_d1。
+ALTER TABLE Teachers1 ADD CONSTRAINT t1_fk_d1
+  FOREIGN KEY(department_id) REFERENCES Departments1(department_id);
+
+例6-38 给表Students1的name列添加NOT NULL约束
+ALTER TABLE Students1
+  MODIFY name NOT NULL;
+
+例6-39 给表Students1的sex列添加CHECK约束，使其只能取男、女二字，约束名字为sex_chk。
+ALTER TABLE Students1
+  ADD CONSTRAINT sex_chk1
+    CHECK(sex IN ('男','女'));
+
+例6-40 给表Students1的phone_number列添加Unique约束，使其不能取重复值，约束名字为pnum_uq。
+ALTER TABLE Students1
+  ADD CONSTRAINT pnum_uq UNIQUE(phone_number);
+
+
+例6-41 删除表Students1的主关键字约束。
+ALTER TABLE Students1
+  DROP CONSTRAINT s1_pk;
+
+例6-42 删除表Teachers1的外关键字约束。
+ALTER TABLE Teachers1
+  DROP CONSTRAINT t1_fk_d1;
+
+例6-43 删除Students1表name列的NOT NULL约束。
+ALTER TABLE Students1
+  MODIFY name NULL;
+
+例6-44 删除Students1表sex 列的CHECK约束。 
+ALTER TABLE Students1
+  DROP CONSTRAINT sex_chk1;
+
+例6-45 删除Students1表phone_number 列的Unique约束。
+ALTER TABLE Students1
+  DROP CONSTRAINT pnum_uq;
+
+
+例6-46 在Students1表phone_number列上建立UNIQUE pnum_uq的同时，使用DISABLE禁止约束（新建约束时）
+（ALTER TABLE Students1
+DROP CONSTRAINT pnum_uq）
+ALTER TABLE Students1
+  ADD CONSTRAINT pnum_uq UNIQUE(phone_number) DISABLE;
+
+例6-47 将已建立的Students1表sex列的CHECK约束禁止。（已建约束时）
+ALTER TABLE Students1
+  DISABLE CONSTRAINT sex_chk1;
+
+例6-48 将表Students1的约束pnum_uq置为允许。
+ALTER TABLE Students1
+  ENABLE CONSTRAINT pnum_uq;
+
+
+例6-49 通过查询视图user_constraints，获取表teachers1的owner、constraint_name、constraint_type、status等信息。
+SELECT owner,constraint_name, constraint_type,status
+  FROM user_constraints
+    WHERE table_name = 'TEACHERS1';
+
+
+例6-50 将表Departments1的表名修改为Dep1。
+RENAME Departments1 TO Dep1;
+
+
+例6-51  使用TRUNCATE语句删除表Dep1中的所有记录。
+TRUNCATE TABLE Dep1;
+
+TRUNCATE TABLE Teachers1;
+TRUNCATE Teachers2
+TRUNCATE Teachers3
+TRUNCATE Teachers4
+TRUNCATE Students1
+TRUNCATE Students2
+
+例6-52 使用DROP TABLE语句删除表Dep1
+DROP TABLE Teachers2;
+
+
+例6-53 在Students1表name列上建立索引name_idx。
+CREATE INDEX name_idx ON Students1(name);
+
+例6-54 在Teachers1表wage列上建立索引wage_idx。
+CREATE INDEX wage_idx ON Teachers1(wage);
+
+例6-55 在Students1表register_date列上建立索引register_date_idx。
+CREATE INDEX register_date_idx ON Students1(register_date);
+
+例6-56 在Students1表phone_number列上建立索引phone_number_idx
+CREATE UNIQUE INDEX phone_number_idx ON Students1(phone_number);
+
+
+例6-57 利用数据字典获得表Students1 Teachers1索引的基本信息。其中包括index_name, table_name, uniqueness, status等。 
+SELECT index_name, table_name, uniqueness, status
+  FROM user_indexes
+    WHERE table_name IN ('STUDENTS1', 'TEACHERS1');
+
+
+例6-58 利用数据字典获得表Students1 Teachers1索引中列的信息。其中包括index_name, table_name, column_name等。获得索引中列的信息
+COLUMN table_name FORMAT a15
+COLUMN column_name FORMAT a15
+SELECT index_name, table_name, column_name
+  FROM user_ind_columns
+    WHERE table_name IN ('STUDENTS1', 'TEACHERS1');
+
+
+例6-59  将索引name_idx的名字修改为Students1_name_idx。
+ALTER INDEX name_idx RENAME TO Students1_name_idx;
+
+
+
+例6-60  删除索引Students1_name_idx。
+DROP INDEX Students1_name_idx;
+
+DROP INDEX wage_idx;
+DROP INDEX register_date_idx;
+DROP INDEX phone_number_idx;
+
+例6-61： 监视STATS表索引的空间使用。
+SQL> SELECT PCT_USED FROM SYS.INDEX_STATS
+  2  WHERE NAME='PK_EMP';
+
+  PCT_USED
+------------------
+           6
+例6-62：在dba_indexes中查询表名、索引名以及索引所在表空间等信息。
+
+SQL>col table_name for a20
+SQL>col tablespace_name for a18
+SQL>col index_name for a26
+SQL>select table_name,index_name,UNIQUENESS,tablespace_name
+2    from dba_indexes where owner=’SCOTT’ order by table_name;
+
+
+例6-63：在Departments表上建立视图Departments_view，视图Departments_view映射表Departments 的全部行列。
+CREATE VIEW Departments_view AS
+  SELECT * FROM Departments;
+
+例6-64： 在Students表上建立视图Students_view，视图Students_view映射表Students 的全部列和其中男生的记录行。
+CREATE VIEW Students_view AS
+  SELECT * FROM Students
+    WHERE sex='男';
+
+例6-65：在Teachers表上建立视图Teachers_view，视图Teachers_view映射表Teachers 的teacher_id、name、bonus、wage等列和其中职称为教授的记录行。
+CREATE VIEW Teachers_view AS
+  SELECT teacher_id, name, bonus, wage
+    FROM Teachers
+      WHERE title='教授';
+
+例6-66 在Teachers表上建立视图Teachers_view1，视图Teachers_view1映射表Teachers 的全部列和其中部门号为101和102的记录行。
+CREATE VIEW Teachers_view1 AS (
+  SELECT * FROM Teachers WHERE department_id=101
+UNION
+  SELECT * FROM Teachers WHERE department_id=102);
+
+例6-67 在Teachers和Departments表上建立视图Teachers_view2，视图Teachers_view2映射表Teachers 的teacher_id, name列，表Departments 的department_name列。
+CREATE VIEW Teachers_view2 AS
+  SELECT t.teacher_id, t.name, d.department_name
+    FROM Teachers t, Departments d 
+      WHERE t.department_id=d.department_id;
+
+
+例6-68  在视图Departments_view上查询其中的所有行列。
+SELECT * FROM Departments_view;
+
+例6-69 在视图Students_view上查询其中的student_id、name、dob列和全部行。
+SELECT student_id, name, dob
+  FROM Students_view;
+
+例6-70 在视图Teachers_view1上查询职称为讲师的教师信息，其中包括teacher_id, name、title、department_id列。
+SELECT teacher_id, name, title, department_id
+  FROM Teachers_view1 WHERE title='讲师';
+
+例6-71 在视图Teachers_view2上查询其中的所有行列。
+SELECT * FROM Teachers_view2;
+
+
+例6-72 利用视图Students_view插入李石强同学的记录。
+INSERT INTO Students_view 
+  VALUES(10177,NULL,'李石强', '男', '07-1月-1989','计算机');
+
+SELECT * FROM Students；
+
+
+例6-73 利用视图Teachers_view插入教师孔夫之记录。
+INSERT INTO Teachers_view VALUES (10168, '孔夫之', 1000, 3000);
+
+SELECT * FROM Teachers;
+
+
+例6-74 利用视图Students_view修改学号为10177的学生出生日期。
+UPDATE Students_view 
+  SET dob = '07-2月-1989' WHERE student_id = 10177;
+
+
+例6-75  利用视图Students_view删除学号为   的学生信息。
+DELETE FROM Students_view WHERE student_id = 10177;
+ 
+DELETE FROM Teachers_view WHERE teacher_id = 10168;
+
+
+例6-76  显示视图students_view的结构。
+DESCRIBE students_view;
+
+例6-77  通过查询数据字典中的user_views视图，获得student_view视图的视图名（view_name）、定义视图子查询的字符个数（text_length）以及定义视图子查询的正文（text）。
+SELECT view_name, text_length, text FROM user_views;
+
+
+例6-78  修改视图Student_view。
+CREATE OR REPLACE VIEW Student_view AS
+  SELECT student_id, name, specialty
+    FROM Students WHERE sex='男';
+
+
+例6-79 删除视图Departments_view。 
+DROP VIEW Departments_view;
+
+DROP VIEW Students_view;
+DROP VIEW Teachers_view;
+DROP VIEW Teachers_view1;
+DROP VIEW Teachers_view2;
+
+
+例6-80：使用REPLACE 子句修改视图。
+
+SQL> CREATE OR REPLACE view sales_staff  AS 
+2 SELECT empno,ename ,deptno
+3  FROM EMP
+4   WHERE deptno=30
+5     With check option constraints sales_staff_cnst;
+

@@ -1,0 +1,432 @@
+
+例9-1 最简单的PL/SQL块A bare minimum anonymous block:
+    SET SERVEROUTPUT ON
+    BEGIN
+       DBMS_OUTPUT.PUT_LINE('This a minimum anonymous block');
+    END;
+/
+例9-2 
+
+    DECLARE
+       v_sname VARCHAR2(10);
+    BEGIN
+       SELECT name INTO v_sname
+         FROM Students WHERE student_id = 10318;
+       DBMS_OUTPUT.PUT_LINE ('学生姓名：'||v_sname);
+    END;
+/
+例9-3 
+    DECLARE
+       v_sname VARCHAR2(10);
+    BEGIN
+       SELECT name INTO v_sname
+         FROM Students WHERE student_id = &student_id;
+       DBMS_OUTPUT.PUT_LINE ('学生姓名：'||v_sname);
+    EXCEPTION
+      WHEN NO_DATA_FOUND THEN
+         DBMS_OUTPUT.PUT_LINE ('输入的学号不存在！');
+    END;
+/
+
+例9-4：通过一个简单的PL/SQL程序，并通过运行该程序和得到结构来描述PL/SQL程序的执行过程。
+
+DECLARE
+  v_Number  sales.prod_id%TYPE;
+  v_Comment VARCHAR2(35);
+  v_Test VARCHAR2(10):=’See Here’;
+BEGIN
+  SELECT Min(prod_id)
+    INTO v_Number
+    FROM sales;
+	CASE
+  WHEN v_Number < 500 THEN
+    v_Comment := 'Too small';
+    INSERT INTO temp_table (my_com , vcomment)  
+      VALUES ('This is too cazy' , v_Comment);		
+  WHEN v_Number < 1000 THEN
+    v_Comment := 'A little bigger';
+    INSERT INTO temp_table (my_com , vcomment)
+      VALUES ('This is only luck' , v_Comment);
+  WHEN v_Test:=’See Here’ THEN
+    v_Comment := 'Test Model';
+    INSERT INTO temp_table (my_com , vcomment)
+      VALUES ('This is Test' , v_Comment);
+  ELSE
+    v_Comment := 'That enough';
+    INSERT INTO temp_table (my_com , vcomment)
+      VALUES ('Maybe good' , v_Comment);
+  END IF;
+END;
+
+
+
+
+例9-5 
+   DECLARE
+     v_id Departments.department_id%type;
+     v_name Departments.department_name%type;
+     v_address Departments.address%type;
+   BEGIN
+       SELECT * INTO v_id,v_name,v_address
+         FROM Departments WHERE department_id = 101;
+       DBMS_OUTPUT.PUT_LINE ('系部名称：'||v_name);
+       DBMS_OUTPUT.PUT_LINE ('系部地址：'||v_address);
+    END;
+/
+
+例9-6
+   DECLARE
+     v_student Students%ROWTYPE;
+    BEGIN
+       SELECT * INTO v_student
+         FROM Students WHERE student_id = 10212;
+       DBMS_OUTPUT.PUT_LINE ('姓名  性别  出生日期');
+       DBMS_OUTPUT.PUT_LINE (v_student.name
+         ||v_student.sex||v_student.dob);
+    END;
+/
+
+例9-7
+   DECLARE
+      v_student students%ROWTYPE;
+   BEGIN
+      SELECT * INTO v_student FROM students WHERE name LIKE '王%';
+      DBMS_OUTPUT.PUT_LINE ('姓名  性别  出生日期');
+      DBMS_OUTPUT.PUT_LINE (v_student.name
+        ||v_student.sex||v_student.dob);
+   END;
+/
+
+例9-8
+   DECLARE
+      v_student students%ROWTYPE;
+   BEGIN
+      SELECT * INTO v_student
+        FROM students WHERE dob = '31-12月-1989';
+      DBMS_OUTPUT.PUT_LINE ('姓名  性别  出生日期');
+      DBMS_OUTPUT.PUT_LINE (v_student.name
+        ||v_student.sex||v_student.dob);
+   END;
+/
+
+
+例9-9 使用常量
+    BEGIN
+       INSERT INTO students
+         VALUES(10188,NULL,'王一', '女', '07-5月-1988','计算机');
+    END;
+
+例9-10 使用变量
+ DECLARE
+   v_id students.student_id%TYPE := 10199;
+   v_monitorid students.monitor_id%TYPE := NULL;
+   v_name students.name%TYPE:='张三';
+   v_sex students.sex%TYPE:='女';
+   v_dob students.dob%TYPE:='07-5月-1988';
+   v_specialty students.specialty%TYPE:='计算机';
+   BEGIN
+     INSERT INTO students
+       VALUES(v_id,v_monitorid,v_name,v_sex,v_dob,v_specialty);
+   END;
+
+例9-11 使用子查询
+    BEGIN
+       INSERT INTO students_computer
+         (SELECT * FROM students WHERE specialty='计算机');
+    END;
+
+
+例9-12 使用常量    
+    BEGIN
+       UPDATE students
+          SET student_id = 10288,
+              dob = '07-5月-1988',
+              specialty ='自动化'
+       WHERE student_id = 10188;
+    END;
+
+例9-13 使用变量
+DECLARE
+   v_id students.student_id%TYPE := 10188;
+   v_monitorid students.monitor_id%TYPE := NULL;
+   v_dob students.dob%TYPE := '17-5月-1988';
+   v_specialty students.specialty%TYPE := '计算机';
+   BEGIN
+     UPDATE students
+          SET student_id = v_id,
+              dob = v_dob,
+              specialty = v_specialty
+       WHERE student_id = 10288;
+   END;
+
+例9-14 
+BEGIN
+  UPDATE teachers 
+    SET bonus =
+        (SELECT AVG(bonus)
+  FROM teachers)
+  WHERE bonus IS NULL;
+END;
+
+
+例9-15 使用常量
+BEGIN
+   DELETE FROM students
+     WHERE student_id = 10188;
+END;
+
+例9-16 使用变量
+DECLARE
+   v_specialty students.specialty%TYPE := '计算机';
+   BEGIN
+     DELETE FROM students
+       WHERE specialty = v_specialty;
+   END;
+
+例9-17 使用子查询
+BEGIN
+  DELETE FROM teachers 
+    WHERE wage >
+      (SELECT 1.1*AVG(wage)
+        FROM teachers);
+END;
+
+
+例9-18
+BEGIN
+   INSERT INTO students 
+     VALUES(10101,NULL,'王晓芳', '女', '07-5月-1988','计算机');
+   COMMIT;
+   DELETE FROM students
+     WHERE specialty = '计算机';
+   ROLLBACK;
+  UPDATE students
+     SET student_id = 10288,
+         dob = '07-5月-1988',
+         specialty ='自动化'
+   WHERE student_id = 10101; 
+   SAVEPOINT sp1;
+   DELETE FROM students
+     WHERE student_id = 10101;
+   SAVEPOINT sp2;
+   ROLLBACK TO sp1;
+ COMMIT;
+END;
+
+
+例9-19
+   DECLARE
+     v_student students%ROWTYPE;
+    BEGIN
+       SELECT * INTO v_student
+         FROM students WHERE student_id = 10213;
+       DBMS_OUTPUT.PUT_LINE ('姓名：'||v_student.name);
+       DBMS_OUTPUT.PUT_LINE ('性别：'||v_student.sex);
+       DBMS_OUTPUT.PUT_LINE ('出生日期：'||v_student.dob);
+       DBMS_OUTPUT.PUT_LINE ('专业：'||v_student.specialty);
+    END;
+/
+ 
+例9-20 
+DECLARE
+   v_id teachers.teacher_id%TYPE;
+   v_title teachers.title%TYPE;
+BEGIN
+   v_id := &teacher_id; 
+   SELECT title INTO v_title
+     FROM Teachers
+     WHERE teacher_id = v_id; 
+   IF v_title = '讲师' THEN
+      UPDATE Teachers
+        SET wage = 1.1*wage
+        WHERE teacher_id = v_id;
+   END IF;
+END;
+
+（2）IF—THEN—ELSE—END IF;
+
+例9-21 
+DECLARE
+   v_id Teachers.teacher_id%TYPE;
+   v_title Teachers.title%TYPE;
+BEGIN
+  v_id := &teacher_id; 
+  SELECT title INTO v_title
+    FROM Teachers WHERE teacher_id = v_id; 
+  IF v_title = '教授' THEN
+     UPDATE Teachers 
+       SET wage = 1.1*wage WHERE teacher_id = v_id;
+  ELSE
+     UPDATE Teachers
+       SET wage = wage+100 WHERE teacher_id = v_id;
+  END IF;
+END;
+
+（3）IF—THEN—ELSIF—THEN—ELSE—END IF;
+
+例9-22 
+DECLARE
+   v_id Teachers.teacher_id%TYPE;
+   v_title Teachers.title%TYPE;
+BEGIN
+  v_id := &teacher_id; 
+  SELECT title INTO v_title
+    FROM Teachers WHERE teacher_id = v_id; 
+  IF v_title = '教授' THEN
+     UPDATE Teachers
+       SET wage = 1.1*wage WHERE teacher_id=v_id;
+  ELSIF v_title = '高工' OR v_title= '副教授' THEN
+     UPDATE Teachers
+       SET wage = 1.05*wage WHERE teacher_id = v_id;
+  ELSE
+     UPDATE Teachers
+       SET wage = wage+100 WHERE teacher_id = v_id;
+  END IF;
+END;
+
+例9-23
+DECLARE
+   v_id Teachers.teacher_id%TYPE;
+   v_title Teachers.title%TYPE;
+BEGIN
+  v_id := &teacher_id; 
+  SELECT title INTO v_title
+    FROM Teachers WHERE teacher_id = v_id; 
+  CASE v_title
+    WHEN '教授' THEN
+       UPDATE Teachers
+         SET wage = 1.15*wage WHERE teacher_id = v_id;
+    WHEN '高工' THEN
+       UPDATE Teachers
+         SET wage = 1.05*wage WHERE teacher_id = v_id;
+    WHEN '副教授' THEN
+       UPDATE Teachers
+         SET wage = 1.1*wage WHERE teacher_id = v_id;
+    ELSE
+       UPDATE Teachers
+         SET wage = wage+100 WHERE teacher_id = v_id;
+  END CASE;
+END;
+
+
+例9-24
+DECLARE
+   v_id Teachers.teacher_id%TYPE;
+   v_title Teachers.title%TYPE;
+BEGIN
+  v_id := &teacher_id; 
+  SELECT title INTO v_title
+    FROM Teachers WHERE teacher_id = v_id; 
+  CASE
+    WHEN v_title = '教授' THEN
+       UPDATE Teachers
+         SET wage = 1.1*wage WHERE teacher_id = v_id;
+    WHEN v_title = '高工' OR v_title= '副教授' THEN
+       UPDATE Teachers
+         SET wage = 1.05*wage WHERE teacher_id = v_id;
+    ELSE
+       UPDATE Teachers
+         SET wage = wage+100 WHERE teacher_id = v_id;
+  END CASE;
+END;
+
+例9-25
+DECLARE
+   v_id teachers.teacher_id%TYPE;
+   v_bonus teachers.bonus%TYPE;
+   v_wage teachers.wage%TYPE;
+   v_income NUMBER(7,2);
+BEGIN
+  v_id := &teacher_id; 
+  SELECT bonus, wage INTO v_bonus, v_wage
+     FROM teachers WHERE teacher_id = v_id;
+  v_income := v_bonus + v_wage; 
+  CASE
+    WHEN v_income <= 1000 THEN
+       DBMS_OUTPUT.PUT_LINE ('个人所得税：0');
+    WHEN v_income >1000 AND v_income < 3000 THEN
+       DBMS_OUTPUT.PUT_LINE ('个人所得税：'||v_income*0.03);
+    WHEN v_income >= 3000 THEN
+       DBMS_OUTPUT.PUT_LINE ('个人所得税：'||v_income*0.05);
+  END CASE;
+END;
+
+
+
+例9-26
+DECLARE
+   v_i INT:=1;
+   v_sum INT:=0;
+BEGIN
+   LOOP  
+     v_sum := v_sum + v_i;
+     INSERT INTO TOTAL VALUES(v_i, v_sum);
+     EXIT WHEN v_i = 10;
+     v_i := v_i+1;
+   END LOOP;
+END;
+
+
+例9-27 
+DECLARE
+   v_i INT:=1;
+   v_sum INT:=0;
+BEGIN
+  WHILE v_i <= 10  LOOP
+     v_sum := v_sum + v_i*v_i;
+     INSERT INTO TOTAL VALUES(v_i,v_sum);
+     v_i := v_i+1;
+  END LOOP;
+END;
+
+
+例9-28 
+DECLARE
+   v_i INT:=1;
+   v_factorial INT:=1;
+BEGIN
+  FOR v_i IN 1..10 LOOP
+     v_factorial := v_factorial*v_i;
+     INSERT INTO TOTAL VALUES(v_i,v_factorial);
+  END LOOP;
+END;
+
+
+例9-28 
+SET SERVEROUTPUT ON 
+DECLARE
+   v_i INT:=1;
+   v_sum INT:=0;
+BEGIN
+   LOOP  
+     v_sum := v_sum + v_i;
+     INSERT INTO TOTAL VALUES(v_i,v_sum);
+     IF v_i = 10 THEN
+        GOTO output; 
+     END IF;    
+     v_i := v_i+1;
+   END LOOP;
+<<output>>
+DBMS_OUTPUT.PUT_LINE ('v_sum = '||v_sum);
+END;
+
+
+例9-29
+DECLARE
+   v_i INT:=1;
+   v_sum INT:=0;
+BEGIN
+   LOOP  
+     v_sum := v_sum + v_i;
+     INSERT INTO TOTAL VALUES(v_i,v_sum);
+     IF v_i = 10 THEN
+        GOTO output; 
+     END IF;    
+     v_i := v_i+1;
+   END LOOP;
+<<output>>
+   NULL;
+END;
+
+
+
