@@ -1,0 +1,13 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project version="4">
+  <component name="Encoding">
+    <file url="file://$PROJECT_DIR$/designpatterns/visitor/Department.java" charset="GBK" />
+    <file url="file://$PROJECT_DIR$/designpatterns/visitor/Employee.java" charset="GBK" />
+    <file url="file://$PROJECT_DIR$/designpatterns/visitor/EmployeeList.java" charset="GBK" />
+    <file url="file://$PROJECT_DIR$/designpatterns/visitor/FADepartment.java" charset="GBK" />
+    <file url="file://$PROJECT_DIR$/designpatterns/visitor/FulltimeEmployee.java" charset="GBK" />
+    <file url="file://$PROJECT_DIR$/designpatterns/visitor/HRDepartment.java" charset="GBK" />
+    <file url="file://$PROJECT_DIR$/designpatterns/visitor/ParttimeEmployee.java" charset="GBK" />
+    <file url="file://$PROJECT_DIR$/designpatterns/visitor/XMLUtil.java" charset="GBK" />
+  </component>
+</project>

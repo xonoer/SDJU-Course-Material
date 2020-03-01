@@ -1,0 +1,261 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="13196" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" useSafeAreas="YES" colorMatched="YES" initialViewController="BYZ-38-t0r">
+    <device id="retina4_7" orientation="portrait">
+        <adaptation id="fullscreen"/>
+    </device>
+    <dependencies>
+        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="13173"/>
+        <capability name="Safe area layout guides" minToolsVersion="9.0"/>
+        <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
+    </dependencies>
+    <scenes>
+        <!--View Controller-->
+        <scene sceneID="tne-QT-ifu">
+            <objects>
+                <viewController id="BYZ-38-t0r" customClass="ViewController" sceneMemberID="viewController">
+                    <view key="view" contentMode="scaleToFill" id="8bC-Xf-vdC">
+                        <rect key="frame" x="0.0" y="0.0" width="375" height="667"/>
+                        <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                        <subviews>
+                            <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" image="IMG_0851" translatesAutoresizingMaskIntoConstraints="NO" id="ppU-9M-h3c">
+                                <rect key="frame" x="0.0" y="0.0" width="375" height="182"/>
+                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                            </imageView>
+                            <button opaque="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="PMs-Io-EMM">
+                                <rect key="frame" x="86" y="0.0" width="69" height="82"/>
+                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                                <state key="normal" title="Button" image="屏幕快照 2019-05-08 下午3.51.12"/>
+                                <connections>
+                                    <action selector="goForward" destination="ftK-wA-Swb" eventType="touchUpInside" id="3xs-Io-WvN"/>
+                                </connections>
+                            </button>
+                            <button opaque="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="gGK-v3-TcG">
+                                <rect key="frame" x="0.0" y="0.0" width="66" height="82"/>
+                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                                <state key="normal" title="Button" image="屏幕快照 2019-05-08 下午3.51.30"/>
+                                <connections>
+                                    <action selector="goBack" destination="ftK-wA-Swb" eventType="touchUpInside" id="h4b-qQ-293"/>
+                                </connections>
+                            </button>
+                            <textField opaque="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="left" contentVerticalAlignment="center" borderStyle="roundedRect" textAlignment="natural" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="IR5-xa-4u3">
+                                <rect key="frame" x="171" y="20" width="97" height="30"/>
+                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                                <nil key="textColor"/>
+                                <fontDescription key="fontDescription" type="system" pointSize="14"/>
+                                <textInputTraits key="textInputTraits"/>
+                                <connections>
+                                    <outlet property="delegate" destination="BYZ-38-t0r" id="Qmp-kF-88V"/>
+                                </connections>
+                            </textField>
+                            <button opaque="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="n9Y-hv-d1q">
+                                <rect key="frame" x="298" y="0.0" width="61" height="73"/>
+                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                                <fontDescription key="fontDescription" type="system" pointSize="27"/>
+                                <state key="normal" title="GO">
+                                    <color key="titleColor" red="0.1215686275" green="0.12941176469999999" blue="0.14117647059999999" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                                </state>
+                                <connections>
+                                    <action selector="load:" destination="BYZ-38-t0r" eventType="touchUpInside" id="og4-O7-O5E"/>
+                                    <action selector="sendar:" destination="BYZ-38-t0r" eventType="touchUpInside" id="CLz-gz-Grk"/>
+                                </connections>
+                            </button>
+                            <webView contentMode="scaleToFill" fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="ftK-wA-Swb">
+                                <rect key="frame" x="0.0" y="183" width="375" height="484"/>
+                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                                <color key="backgroundColor" red="0.36078431370000003" green="0.38823529410000002" blue="0.4039215686" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                            </webView>
+                            <view contentMode="scaleToFill" fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="3v9-8i-TR3" userLabel="View1">
+                                <rect key="frame" x="0.0" y="190" width="375" height="95"/>
+                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                                <subviews>
+                                    <button opaque="NO" tag="102" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="33i-jW-tDu">
+                                        <rect key="frame" x="146" y="1" width="46" height="36"/>
+                                        <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                                        <fontDescription key="fontDescription" type="system" pointSize="17"/>
+                                        <state key="normal" title="新浪">
+                                            <color key="titleColor" red="0.1215686275" green="0.12941176469999999" blue="0.14117647059999999" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                                        </state>
+                                        <connections>
+                                            <action selector="loadWithButton:" destination="BYZ-38-t0r" eventType="touchUpInside" id="00m-tS-LhE"/>
+                                        </connections>
+                                    </button>
+                                    <button opaque="NO" tag="104" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="Pdg-MM-Yb7">
+                                        <rect key="frame" x="47" y="47" width="55" height="45"/>
+                                        <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                                        <fontDescription key="fontDescription" type="system" pointSize="17"/>
+                                        <state key="normal" title="腾讯">
+                                            <color key="titleColor" red="0.1215686275" green="0.12941176469999999" blue="0.14117647059999999" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                                        </state>
+                                        <connections>
+                                            <action selector="loadWithButton:" destination="BYZ-38-t0r" eventType="touchUpInside" id="RIe-bh-KKa"/>
+                                        </connections>
+                                    </button>
+                                    <button opaque="NO" tag="105" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="CkJ-1F-Hzf">
+                                        <rect key="frame" x="146" y="53" width="50" height="33"/>
+                                        <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                                        <fontDescription key="fontDescription" type="system" pointSize="17"/>
+                                        <state key="normal" title="网易">
+                                            <color key="titleColor" red="0.1215686275" green="0.12941176469999999" blue="0.14117647059999999" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                                        </state>
+                                        <connections>
+                                            <action selector="loadWithButton:" destination="BYZ-38-t0r" eventType="touchUpInside" id="vPL-Sx-0iX"/>
+                                        </connections>
+                                    </button>
+                                    <button opaque="NO" tag="106" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="Arq-ys-C73">
+                                        <rect key="frame" x="242" y="50" width="50" height="38"/>
+                                        <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                                        <fontDescription key="fontDescription" type="system" pointSize="17"/>
+                                        <state key="normal" title="优酷">
+                                            <color key="titleColor" red="0.1215686275" green="0.12941176469999999" blue="0.14117647059999999" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                                        </state>
+                                        <connections>
+                                            <action selector="loadWithButton:" destination="BYZ-38-t0r" eventType="touchUpInside" id="Mh5-Rc-Lwk"/>
+                                        </connections>
+                                    </button>
+                                    <button opaque="NO" tag="103" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="L3f-xx-h4M">
+                                        <rect key="frame" x="246" y="4" width="42" height="33"/>
+                                        <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                                        <fontDescription key="fontDescription" type="system" pointSize="17"/>
+                                        <state key="normal" title="搜狐">
+                                            <color key="titleColor" red="0.1215686275" green="0.12941176469999999" blue="0.14117647059999999" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                                        </state>
+                                        <connections>
+                                            <action selector="loadWithButton:" destination="BYZ-38-t0r" eventType="touchUpInside" id="a3K-CN-1Fk"/>
+                                        </connections>
+                                    </button>
+                                    <button opaque="NO" tag="101" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="p6S-Lo-gZu">
+                                        <rect key="frame" x="50" y="-2" width="49" height="39"/>
+                                        <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                                        <fontDescription key="fontDescription" type="system" pointSize="17"/>
+                                        <state key="normal" title="百度">
+                                            <color key="titleColor" red="0.1215686275" green="0.12941176469999999" blue="0.14117647059999999" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                                        </state>
+                                        <connections>
+                                            <action selector="loadWithButton:" destination="BYZ-38-t0r" eventType="touchUpInside" id="Yb4-tz-iWV"/>
+                                            <action selector="sendar:" destination="BYZ-38-t0r" eventType="touchUpInside" id="L8D-KW-YlM"/>
+                                        </connections>
+                                    </button>
+                                </subviews>
+                                <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                            </view>
+                            <view contentMode="scaleToFill" fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="Ho6-xs-8iw">
+                                <rect key="frame" x="0.0" y="273" width="375" height="65"/>
+                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                                <subviews>
+                                    <button opaque="NO" tag="107" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="Sth-6c-7aa">
+                                        <rect key="frame" x="56" y="14" width="114" height="31"/>
+                                        <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                                        <fontDescription key="fontDescription" type="system" pointSize="17"/>
+                                        <state key="normal" title="4399游戏">
+                                            <color key="titleColor" red="0.1215686275" green="0.12941176469999999" blue="0.14117647059999999" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                                        </state>
+                                        <connections>
+                                            <action selector="loadWithButton:" destination="BYZ-38-t0r" eventType="touchUpInside" id="1HX-4u-sV1"/>
+                                        </connections>
+                                    </button>
+                                    <button opaque="NO" tag="201" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="snL-cC-5HD">
+                                        <rect key="frame" x="0.0" y="33" width="375" height="46"/>
+                                        <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                                        <state key="normal" title="Button">
+                                            <color key="titleColor" red="0.1215686275" green="0.12941176469999999" blue="0.14117647059999999" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                                        </state>
+                                        <connections>
+                                            <action selector="hiddenView:" destination="BYZ-38-t0r" eventType="touchUpInside" id="vMo-c3-Oo5"/>
+                                        </connections>
+                                    </button>
+                                    <button opaque="NO" tag="108" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="VdP-Si-8hz">
+                                        <rect key="frame" x="178" y="15" width="133" height="30"/>
+                                        <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                                        <fontDescription key="fontDescription" type="system" pointSize="17"/>
+                                        <state key="normal" title="17173">
+                                            <color key="titleColor" red="0.1215686275" green="0.12941176469999999" blue="0.14117647059999999" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                                        </state>
+                                        <connections>
+                                            <action selector="loadWithButton:" destination="BYZ-38-t0r" eventType="touchUpInside" id="qKV-Xd-d8L"/>
+                                        </connections>
+                                    </button>
+                                </subviews>
+                                <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                            </view>
+                            <view contentMode="scaleToFill" fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="z08-R1-qOP">
+                                <rect key="frame" x="0.0" y="551" width="375" height="116"/>
+                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                                <subviews>
+                                    <button opaque="NO" tag="301" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="5zE-5L-3hA">
+                                        <rect key="frame" x="27" y="43" width="31" height="30"/>
+                                        <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                                        <state key="normal" title="默认">
+                                            <color key="titleColor" red="0.1215686275" green="0.12941176469999999" blue="0.14117647059999999" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                                        </state>
+                                        <connections>
+                                            <action selector="changeImage:" destination="BYZ-38-t0r" eventType="touchUpInside" id="C5K-TS-2XQ"/>
+                                        </connections>
+                                    </button>
+                                    <button opaque="NO" tag="302" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="wZx-SW-a3T">
+                                        <rect key="frame" x="80" y="8" width="46" height="30"/>
+                                        <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                                        <state key="normal" title="Button"/>
+                                    </button>
+                                    <button opaque="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="cu4-u1-Ysu">
+                                        <rect key="frame" x="155" y="8" width="46" height="30"/>
+                                        <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                                        <state key="normal" title="Button"/>
+                                    </button>
+                                    <button opaque="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="ull-yf-QbE">
+                                        <rect key="frame" x="238" y="8" width="46" height="30"/>
+                                        <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                                        <state key="normal" title="Button"/>
+                                    </button>
+                                    <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" image="IMG_1255" translatesAutoresizingMaskIntoConstraints="NO" id="cs5-ce-zlx">
+                                        <rect key="frame" x="238" y="43" width="55" height="73"/>
+                                        <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                                    </imageView>
+                                    <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" image="IMG_1254" translatesAutoresizingMaskIntoConstraints="NO" id="hvP-sq-J6b">
+                                        <rect key="frame" x="155" y="43" width="58" height="73"/>
+                                        <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                                    </imageView>
+                                    <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" image="IMG_1256" translatesAutoresizingMaskIntoConstraints="NO" id="aO5-J2-LxI">
+                                        <rect key="frame" x="73" y="46" width="63" height="70"/>
+                                        <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                                    </imageView>
+                                </subviews>
+                                <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                            </view>
+                            <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" image="IMG_0870" translatesAutoresizingMaskIntoConstraints="NO" id="2az-qN-ALw">
+                                <rect key="frame" x="0.0" y="346" width="375" height="321"/>
+                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                            </imageView>
+                            <activityIndicatorView opaque="NO" contentMode="scaleToFill" horizontalHuggingPriority="750" verticalHuggingPriority="750" fixedFrame="YES" style="whiteLarge" translatesAutoresizingMaskIntoConstraints="NO" id="LYH-ac-fd3">
+                                <rect key="frame" x="161" y="368" width="37" height="37"/>
+                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                                <color key="color" red="1" green="0.13527440780364153" blue="0.16311966902887842" alpha="1" colorSpace="custom" customColorSpace="displayP3"/>
+                            </activityIndicatorView>
+                        </subviews>
+                        <color key="backgroundColor" red="1" green="1" blue="1" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                        <viewLayoutGuide key="safeArea" id="6Tk-OE-BBY"/>
+                    </view>
+                    <connections>
+                        <outlet property="activityIndicatorView" destination="LYH-ac-fd3" id="XOz-MI-klX"/>
+                        <outlet property="imageview" destination="2az-qN-ALw" id="kiN-8n-keM"/>
+                        <outlet property="textfield" destination="IR5-xa-4u3" id="5DZ-RU-ejh"/>
+                        <outlet property="view1" destination="3v9-8i-TR3" id="JDR-xk-IMY"/>
+                        <outlet property="view2" destination="Ho6-xs-8iw" id="z4u-X6-tcG"/>
+                        <outlet property="view3" destination="z08-R1-qOP" id="o7N-K7-cgf"/>
+                        <outlet property="webview" destination="ftK-wA-Swb" id="xfM-F7-hzp"/>
+                    </connections>
+                </viewController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="dkx-z0-nzr" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="116" y="117.39130434782609"/>
+        </scene>
+    </scenes>
+    <resources>
+        <image name="IMG_0851" width="828" height="1344"/>
+        <image name="IMG_0870" width="800" height="1280"/>
+        <image name="IMG_1254" width="960" height="1178"/>
+        <image name="IMG_1255" width="960" height="2555"/>
+        <image name="IMG_1256" width="724" height="1024"/>
+        <image name="屏幕快照 2019-05-08 下午3.51.12" width="254" height="244"/>
+        <image name="屏幕快照 2019-05-08 下午3.51.30" width="270" height="238"/>
+    </resources>
+</document>

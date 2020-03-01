@@ -1,0 +1,4 @@
+<?xml version="1.0"?>
+<config>
+	<className>designpatterns.templatemethod.SavingAccount</className>
+</config>

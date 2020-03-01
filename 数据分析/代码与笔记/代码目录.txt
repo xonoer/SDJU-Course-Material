@@ -1,0 +1,27 @@
+CHAPTER 1：Preliminaries（预备知识）
+
+Chapter 2: Python Language Basics, IPython, and Jupyter Notebooks (Python语言基础，Ipython和Jupyter Notebooks)
+
+Chapter 3: Built-in Data Structures, Functions, and Files (内建数据结构，函数和文件)
+
+Chapter 4: NumPy Basics: Arrays and Vectorized Computation（NumPy基础：数组和向量化计算）
+
+Chapter 5: Getting Started with pandas（开始使用pandas）
+
+Chapter 6: Data Loading, Storage, and File Formats（数据加载，存储，文件格式）
+
+Chapter 7: Data Cleaning and Preparation（数据清洗和准备）
+
+Chapter 8: Data Wrangling: Join, Combine, and Reshape（数据加工：加入, 结合, 变型）
+
+Chapter 9: Plotting and Visualization（绘图和可视化）
+
+Chapter 10: Data Aggregation and Group Operations（数据汇总和组操作）
+
+Chapter 11: Time Series（时间序列）
+
+Chapter 12: Advanced pandas（高级pandas用法）
+
+Chapter 13: Introduction to Modeling Libraries in Python（Python中建模库的介绍）
+
+Chapter 14: Data Analysis Examples（数据分析实例）

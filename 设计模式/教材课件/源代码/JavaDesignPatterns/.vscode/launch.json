@@ -1,0 +1,231 @@
+{
+    // 使用 IntelliSense 了解相关属性。 
+    // 悬停以查看现有属性的描述。
+    // 欲了解更多信息，请访问: https://go.microsoft.com/fwlink/?linkid=830387
+    "version": "0.2.0",
+    "configurations": [
+        {
+            "type": "java",
+            "name": "Debug (Launch) - Current File",
+            "request": "launch",
+            "mainClass": "${file}"
+        },
+        {
+            "type": "java",
+            "name": "Debug (Launch)-Client<JavaDesignPatterns>",
+            "request": "launch",
+            "mainClass": "designpatterns.abstractfactory.Client",
+            "projectName": "JavaDesignPatterns"
+        },
+        {
+            "type": "java",
+            "name": "Debug (Launch)-Client<JavaDesignPatterns>(1)",
+            "request": "launch",
+            "mainClass": "designpatterns.adapter.Client",
+            "projectName": "JavaDesignPatterns"
+        },
+        {
+            "type": "java",
+            "name": "Debug (Launch)-Client<JavaDesignPatterns>(2)",
+            "request": "launch",
+            "mainClass": "designpatterns.bridge.Client",
+            "projectName": "JavaDesignPatterns"
+        },
+        {
+            "type": "java",
+            "name": "Debug (Launch)-Client<JavaDesignPatterns>(3)",
+            "request": "launch",
+            "mainClass": "designpatterns.builder.Client",
+            "projectName": "JavaDesignPatterns"
+        },
+        {
+            "type": "java",
+            "name": "Debug (Launch)-Client<JavaDesignPatterns>(4)",
+            "request": "launch",
+            "mainClass": "designpatterns.command.Client",
+            "projectName": "JavaDesignPatterns"
+        },
+        {
+            "type": "java",
+            "name": "Debug (Launch)-Client<JavaDesignPatterns>(5)",
+            "request": "launch",
+            "mainClass": "designpatterns.command.calculator.Client",
+            "projectName": "JavaDesignPatterns"
+        },
+        {
+            "type": "java",
+            "name": "Debug (Launch)-Client<JavaDesignPatterns>(6)",
+            "request": "launch",
+            "mainClass": "designpatterns.composite.Client",
+            "projectName": "JavaDesignPatterns"
+        },
+        {
+            "type": "java",
+            "name": "Debug (Launch)-Client<JavaDesignPatterns>(7)",
+            "request": "launch",
+            "mainClass": "designpatterns.cor.Client",
+            "projectName": "JavaDesignPatterns"
+        },
+        {
+            "type": "java",
+            "name": "Debug (Launch)-Client<JavaDesignPatterns>(8)",
+            "request": "launch",
+            "mainClass": "designpatterns.decorator.Client",
+            "projectName": "JavaDesignPatterns"
+        },
+        {
+            "type": "java",
+            "name": "Debug (Launch)-Client<JavaDesignPatterns>(9)",
+            "request": "launch",
+            "mainClass": "designpatterns.facade.Client",
+            "projectName": "JavaDesignPatterns"
+        },
+        {
+            "type": "java",
+            "name": "Debug (Launch)-Client<JavaDesignPatterns>(10)",
+            "request": "launch",
+            "mainClass": "designpatterns.factorymethod.Client",
+            "projectName": "JavaDesignPatterns"
+        },
+        {
+            "type": "java",
+            "name": "Debug (Launch)-Client<JavaDesignPatterns>(11)",
+            "request": "launch",
+            "mainClass": "designpatterns.flyweight.extend.Client",
+            "projectName": "JavaDesignPatterns"
+        },
+        {
+            "type": "java",
+            "name": "Debug (Launch)-Client<JavaDesignPatterns>(12)",
+            "request": "launch",
+            "mainClass": "designpatterns.flyweight.simple.Client",
+            "projectName": "JavaDesignPatterns"
+        },
+        {
+            "type": "java",
+            "name": "Debug (Launch)-Client<JavaDesignPatterns>(13)",
+            "request": "launch",
+            "mainClass": "designpatterns.interpreter.Client",
+            "projectName": "JavaDesignPatterns"
+        },
+        {
+            "type": "java",
+            "name": "Debug (Launch)-Client<JavaDesignPatterns>(14)",
+            "request": "launch",
+            "mainClass": "designpatterns.iterator.Client",
+            "projectName": "JavaDesignPatterns"
+        },
+        {
+            "type": "java",
+            "name": "Debug (Launch)-Client<JavaDesignPatterns>(15)",
+            "request": "launch",
+            "mainClass": "designpatterns.mediator.Client",
+            "projectName": "JavaDesignPatterns"
+        },
+        {
+            "type": "java",
+            "name": "Debug (Launch)-Client<JavaDesignPatterns>(16)",
+            "request": "launch",
+            "mainClass": "designpatterns.memento.Client",
+            "projectName": "JavaDesignPatterns"
+        },
+        {
+            "type": "java",
+            "name": "Debug (Launch)-Client<JavaDesignPatterns>(17)",
+            "request": "launch",
+            "mainClass": "designpatterns.observer.Client",
+            "projectName": "JavaDesignPatterns"
+        },
+        {
+            "type": "java",
+            "name": "Debug (Launch)-Client<JavaDesignPatterns>(18)",
+            "request": "launch",
+            "mainClass": "designpatterns.prototype.deepclone.Client",
+            "projectName": "JavaDesignPatterns"
+        },
+        {
+            "type": "java",
+            "name": "Debug (Launch)-Client<JavaDesignPatterns>(19)",
+            "request": "launch",
+            "mainClass": "designpatterns.prototype.shallowclone.Client",
+            "projectName": "JavaDesignPatterns"
+        },
+        {
+            "type": "java",
+            "name": "Debug (Launch)-Client<JavaDesignPatterns>(20)",
+            "request": "launch",
+            "mainClass": "designpatterns.proxy.Client",
+            "projectName": "JavaDesignPatterns"
+        },
+        {
+            "type": "java",
+            "name": "Debug (Launch)-Client<JavaDesignPatterns>(21)",
+            "request": "launch",
+            "mainClass": "designpatterns.proxy.dynamic.Client",
+            "projectName": "JavaDesignPatterns"
+        },
+        {
+            "type": "java",
+            "name": "Debug (Launch)-Client<JavaDesignPatterns>(22)",
+            "request": "launch",
+            "mainClass": "designpatterns.simplefactory.Client",
+            "projectName": "JavaDesignPatterns"
+        },
+        {
+            "type": "java",
+            "name": "Debug (Launch)-Client<JavaDesignPatterns>(23)",
+            "request": "launch",
+            "mainClass": "designpatterns.singleton.Client",
+            "projectName": "JavaDesignPatterns"
+        },
+        {
+            "type": "java",
+            "name": "Debug (Launch)-Client<JavaDesignPatterns>(24)",
+            "request": "launch",
+            "mainClass": "designpatterns.state.Client",
+            "projectName": "JavaDesignPatterns"
+        },
+        {
+            "type": "java",
+            "name": "Debug (Launch)-Client<JavaDesignPatterns>(25)",
+            "request": "launch",
+            "mainClass": "designpatterns.state.screen.Client",
+            "projectName": "JavaDesignPatterns"
+        },
+        {
+            "type": "java",
+            "name": "Debug (Launch)-Client<JavaDesignPatterns>(26)",
+            "request": "launch",
+            "mainClass": "designpatterns.state.switchstate.Client",
+            "projectName": "JavaDesignPatterns"
+        },
+        {
+            "type": "java",
+            "name": "Debug (Launch)-Client<JavaDesignPatterns>(27)",
+            "request": "launch",
+            "mainClass": "designpatterns.strategy.Client",
+            "projectName": "JavaDesignPatterns"
+        },
+        {
+            "type": "java",
+            "name": "Debug (Launch)-Client<JavaDesignPatterns>(28)",
+            "request": "launch",
+            "mainClass": "designpatterns.templatemethod.Client",
+            "projectName": "JavaDesignPatterns"
+        },
+        {
+            "type": "java",
+            "name": "Debug (Launch)-Client<JavaDesignPatterns>(29)",
+            "request": "launch",
+            "mainClass": "designpatterns.templatemethod.hookmethod.Client",
+            "projectName": "JavaDesignPatterns"
+        },
+        {
+            "type": "java",
+            "name": "Debug (Launch)-Client<JavaDesignPatterns>(30)",
+            "request": "launch",
+            "mainClass": "designpatterns.visitor.designpatterns.visitor.Client",
+            "projectName": "JavaDesignPatterns"
+        }
+    ]
+}
