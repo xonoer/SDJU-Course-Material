@@ -1,0 +1,1052 @@
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+<HTML><HEAD><TITLE>程序自动评测系统</TITLE>
+<META http-equiv="Content-Type" content="text/html; charset=GBK">
+<meta http-equiv="Expires" CONTENT="0"> 
+<meta http-equiv="Cache-Control" CONTENT="no-cache"> 
+<meta http-equiv="Pragma" CONTENT="no-cache"> 
+<link rel="shortcut icon" href="/images/cgicon.png">
+<LINK href="/css/indexstyle.css" type="text/css" rel="stylesheet">
+<link href="/css/managelayout.css" rel="stylesheet" type="text/css">
+<script>
+    window.history.forward();
+</script>
+</HEAD>
+<BODY topmargin="3" marginheight="3">
+
+      <TABLE cellSpacing=0 cellPadding=2 width="95%" align=center border=0>
+        <TBODY>
+        <TR>
+          <TD width="20%" rowSpan=2 align=center>
+            
+            <A href="/main.jsp">
+                <img src="/userfiles/skin/logo.jpg" border="0" width="90" height="88">
+            </A>
+          </TD>
+          <TD vAlign=top width="80%" height=30><table width="100%"  border="0" cellspacing="0" cellpadding="0">
+              <tr>
+                <td width="57%" align="center" class="font_bold"><span class="welcome_blue">面向对象程序设计（Java）</span></td>
+                <td width="43%" align="left" class="font_bold">欢迎你，陈洁琳！
+                ［<a href="../includes/redirect.jsp?tab=-6"><span class="font_blue">个人信息</span></a>］
+  				［<a href="/login/loginproc.jsp?logout=true"><span class="font_blue">注销</span></a>］
+                </td>
+                </tr>
+            </table></TD></TR>
+        <TR>
+          <TD vAlign=bottom align=left><table width="100%"  border="0" cellspacing="0" cellpadding="0">
+            <tr>
+              <td width="57%">
+                  <A class="noline" href="/includes/redirect.jsp?tab=0">首页</A><b> | </b>
+                  <A class="noline" href="/includes/redirect.jsp?tab=-1">课程信息</A><b> | </b>
+                  <A class="noline" href="/includes/redirect.jsp?tab=-2">在线作业</A><b> | </b> 
+                  <A class="red13b" href="/includes/redirect.jsp?tab=-3">在线考试</A><b> | </b>
+                  
+                  <A class="noline" href="/includes/redirect.jsp?tab=-4">在线答疑</A><b> | </b>
+                  <A class="noline" href="/includes/redirect.jsp?tab=-5">成绩查询</A>
+            
+            </td>
+              <td width="43%">
+                  <form name="courseForm" method="post" action="">
+               <span class="font_blue"> 切换课程：</span>
+  <input type=hidden name="doChangeCourse" value="true">
+  <select name="changeCourse" onchange="document.courseForm.submit()">
+  	
+        <option value="4" >高级语言程序设计</option>
+        
+        <option value="5" selected>面向对象程序设计（Java）</option>
+                
+       
+  </select>
+          </form></td>
+            </tr>
+          </table></TD>
+        </TR>
+        <TR>
+<TD bgColor=#2a98c9 colSpan=2 
+  height=2></TD>
+        </TR></TBODY></TABLE>
+
+
+<style>
+    
+    .styled-option {
+        font-size: 16px;
+        padding: 5px;       
+    }
+
+
+    .styled-select {
+        font-size: 20px;
+        border-radius: 0;
+        border: none;
+    }
+
+</style>
+<SCRIPT language=JavaScript src="../includes/common.js"></SCRIPT>
+
+    
+    
+    <table width="95%" border="0" align="center" cellpadding="3" cellspacing="0" class="tableline">
+          
+        <tr>
+            <td align="center">
+                <form name="histExamSwitchFORM" method="post" action="index_history.jsp">
+                    <select name="examID" class="styled-select" onchange="this.form.submit();">
+                
+                    <option value="226" class="styled-option" selected>18192-18级测验W16</option>
+                
+               
+                </select>
+                </form>
+                
+                 
+                    <strong>试卷：</strong>1819（2）《面向对象（Java）》测验02<span style="padding:16px"></span><strong>得分：</strong>62.50
+                   
+                   
+                 <br> <br>
+            </td>
+        </tr>
+        
+        <tr>
+            <td height="22" valign="bottom" bgcolor="#F5F8FB">
+                <table width="100%" border="0" cellpadding="0" cellspacing="0">
+                  <tr> 
+                    <td height="22"><img src="images/requirement.gif" >
+                            <b><font color=#10358F>1、每道编程题的代码放在一个.java文件中，直接提交.java文件，尽量不要放在压缩包中；如果.java文件上传失败，则将其压缩为.rar或者.zip格式后上传。<br />
+2、本在线测试系统的编程题不支持中文，因此在最终提交的.java文件中，不要出现任何中文字符（注释中也不行）。<br />
+3、编程题请严格按照题目要求编写代码，不按题目要求的代码，即使系统判定正确，人工阅卷阶段也将会判定为错误。<br />
+4、编程题即使没有完成题目的所有要求，也一定要提交未完成的.java文件，最终阅卷人员将根据部分代码的得分点，来修正系统判分！<br />
+5、务必使用Chrome浏览器访问本系统答题，若因使用其它浏览器造成答案丢失等异常情况，责任自负！</font></b>
+                    </td>
+                  </tr>
+
+                  <tr> 
+                    <td align="left" valign="top" bgcolor="#EFF1F7"></td>
+                  </tr>
+                </table>
+
+            </td>
+        </tr>
+        <tr>
+          <td valign="top">
+		  
+
+                            
+
+
+
+<style type="text/css">
+<!--
+.cloze {BORDER-RIGHT: rgb(0,0,0) 0px solid; BORDER-TOP: rgb(0,0,0) 0px solid; FONT-SIZE: 10pt; BORDER-LEFT: rgb(0,0,0) 0px solid; WIDTH: 250px; BORDER-BOTTOM: rgb(0,0,0) 1px solid; HEIGHT: 20px}
+-->
+</style><br>
+<table width="96%" border="0" align="center" cellpadding="0" cellspacing="0">
+<tr> 
+  <td height="22" class=sectiontitle><img src="images/directory.gif"><b> 填空题</b></td>
+</tr>
+</table><br>
+<table width="96%" border="0" align="center" cellpadding="0" cellspacing="0" class="tableline2">
+ <tr bgcolor="#336699" class="tabletitle">
+   <td width="36" align="center">#</td>
+   <td>题目</td>   
+   
+ </tr>
+			  
+   
+    <tr class="formtext" style="background-color:#EFF1F7" valign="top">
+        <td align="center"><b>1.</b></td>
+        <td><div style="position:relative"><div id="saveTip2940" style="z-index: 100;position: absolute;right:10;"></div></div>
+            <form method="post" name="answerForm2940" action="stuAnswerHandler.jsp" target="frame_problemhandler" autocomplete="off">
+            <table width="100%" border="0"><tr valign="top"><td>首次提交时间:2019-06-13 20:11:43 &nbsp;&nbsp;&nbsp;最后一次提交时间:2019-06-13 20:13:11<br><hr size=0><p style="margin-left:28px"><span style="font-family: 宋体">下面的程序完成从</span><span style="font-family: &#39;Times New Roman&#39;, serif">D:\Hello.txt</span><span style="font-family: 宋体">中读取文本并显示在屏幕上，请将下面的程序填写完整。</span></p><p style="margin-left:28px"><span style="font-family: &#39;Times New Roman&#39;, serif">class ReadFile{</span></p><p style="margin-left:28px"><span style="font-family: &#39;Times New Roman&#39;, serif">&nbsp;&nbsp;&nbsp; public static void main ( String[] args ) {</span></p><p style="margin-left:28px"><span style="font-family: &#39;Times New Roman&#39;, serif">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; String fileName = &quot;D:/Hello.txt&quot;, line;</span></p><p style="margin-left:28px"><span style="font-family: &#39;Times New Roman&#39;, serif">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; try {</span></p><p style="margin-left:28px"><span style="font-family: &#39;Times New Roman&#39;, serif">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; BufferedReader in = new BufferedReader(&nbsp; <input name="answer" type=text readonly value="fileName" class=cloze> 【<strong>正确答案: new&nbsp;FileReader(fileName)</strong>】 &nbsp;);</span></p><p style="margin-left:28px"><span style="font-family: &#39;Times New Roman&#39;, serif">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; line = in.readLine();&nbsp;&nbsp; </span></p><p style="margin-left:28px"><span style="font-family: &#39;Times New Roman&#39;, serif">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; while (&nbsp; <input name="answer" type=text readonly value="line!=null" class=cloze> 【<strong>正确答案: line!=null</strong>】 &nbsp;) { </span></p><p style="margin-left:28px"><span style="font-family: &#39;Times New Roman&#39;, serif">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;System.out.println( line );</span></p><p style="margin-left:28px"><span style="font-family: &#39;Times New Roman&#39;, serif">&nbsp;&nbsp; &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;line = &nbsp;<input name="answer" type=text readonly value="in.readLine()" class=cloze> 【<strong>正确答案: in.readLine()</strong>】 &nbsp;;</span></p><p style="margin-left:28px"><span style="font-family: &#39;Times New Roman&#39;, serif">&nbsp;&nbsp; &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;}</span></p><p style="margin-left:28px"><span style="font-family: &#39;Times New Roman&#39;, serif">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; in.close(); </span></p><p style="margin-left:28px"><span style="font-family: &#39;Times New Roman&#39;, serif">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; }</span></p><p style="margin-left:28px"><span style="font-family: &#39;Times New Roman&#39;, serif">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; catch (IOException e) { </span></p><p style="margin-left:28px"><span style="font-family: &#39;Times New Roman&#39;, serif">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; System.out.println(&quot;Problem reading &quot; + fileName );&nbsp; </span></p><p style="margin-left:28px"><span style="font-family: &#39;Times New Roman&#39;, serif">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; }</span></p><p style="margin-left:28px"><span style="font-family: &#39;Times New Roman&#39;, serif">&nbsp;&nbsp;&nbsp;&nbsp; }</span></p><p><span style="font-size: 14px;font-family: &#39;Times New Roman&#39;, serif">}&nbsp;&nbsp;</span></p><p><br/></p></td><td width="80">得分：4.00<br></td><tr></table>
+            <input type="hidden" name="problemID" value="2940">      	
+            <input type="hidden" name="examID" value="226">  
+            <input type="hidden" name="examPaperID" value="125">  
+            </form>
+        </td>
+        
+    </tr>  
+		 
+    
+    <tr class="formtext" style="" valign="top">
+        <td align="center"><b>2.</b></td>
+        <td><div style="position:relative"><div id="saveTip2941" style="z-index: 100;position: absolute;right:10;"></div></div>
+            <form method="post" name="answerForm2941" action="stuAnswerHandler.jsp" target="frame_problemhandler" autocomplete="off">
+            <table width="100%" border="0"><tr valign="top"><td>首次提交时间:2019-06-13 20:15:47 &nbsp;&nbsp;&nbsp;最后一次提交时间:2019-06-13 20:18:10<br><hr size=0><p style="margin-left:28px"><span style="font-family: 宋体">下面的程序使用</span><span style="font-family: &#39;Times New Roman&#39;, serif">BufferedWriter</span><span style="font-family: 宋体">类向</span><span style="font-family: &#39;Times New Roman&#39;, serif">D:\Hello.txt</span><span style="font-family: 宋体">文件中写入</span><span style="font-family: &#39;Times New Roman&#39;, serif">10</span><span style="font-family: 宋体">万个数并输出所用的时间，请将程序填写完整。</span></p><p style="margin-left:28px"><span style="font-family: &#39;Times New Roman&#39;, serif">import java.io.*;</span></p><p style="margin-left:28px"><span style="font-family: &#39;Times New Roman&#39;, serif">public class Demo{</span></p><p style="margin-left:28px"><span style="font-family: &#39;Times New Roman&#39;, serif">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; public static void main(String[] args) throws IOException{</span></p><p style="margin-left:28px"><span style="font-family: &#39;Times New Roman&#39;, serif">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; long t = System.currentTimeMillis();</span></p><p style="margin-left:28px"><span style="font-family: &#39;Times New Roman&#39;, serif">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; BufferedWriter fw =new BufferedWriter(&nbsp; <input name="answer" type=text readonly value="new FileReader(&#34;D:\Hello.txt&#34;)" class=cloze> 【<strong>正确答案: new&nbsp;FileWriter("D:\\Hello.txt")</strong>】 &nbsp;);</span></p><p style="margin-left:28px"><span style="font-family: &#39;Times New Roman&#39;, serif">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; for (int i=1; i&lt;=100000; i++){</span></p><p style="margin-left:28px"><span style="font-family: &#39;Times New Roman&#39;, serif">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; &nbsp; <input name="answer" type=text readonly value="t++;" class=cloze> 【<strong>正确答案: fw.write</strong>】 &nbsp;( i + &quot;\n&quot; );</span></p><p style="margin-left:28px"><span style="font-family: &#39;Times New Roman&#39;, serif">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; }</span></p><p style="margin-left:28px"><span style="font-family: &#39;Times New Roman&#39;, serif">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; fw.close();</span></p><p style="margin-left:28px"><span style="font-family: &#39;Times New Roman&#39;, serif">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; t = System.currentTimeMillis() - t;</span></p><p style="margin-left:28px"><span style="font-family: &#39;Times New Roman&#39;, serif">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; System.out.println(&quot;Time elapsed: &quot; + t + &quot;ms&quot;);</span></p><p style="margin-left:28px"><span style="font-family: &#39;Times New Roman&#39;, serif">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; }</span></p><p><span style="font-size: 14px;font-family: &#39;Times New Roman&#39;, serif">}</span></p><p><br/></p></td><td width="80">得分：0.00<br></td><tr></table>
+            <input type="hidden" name="problemID" value="2941">      	
+            <input type="hidden" name="examID" value="226">  
+            <input type="hidden" name="examPaperID" value="125">  
+            </form>
+        </td>
+        
+    </tr>  
+		 
+    
+    <tr class="formtext" style="background-color:#EFF1F7" valign="top">
+        <td align="center"><b>3.</b></td>
+        <td><div style="position:relative"><div id="saveTip2946" style="z-index: 100;position: absolute;right:10;"></div></div>
+            <form method="post" name="answerForm2946" action="stuAnswerHandler.jsp" target="frame_problemhandler" autocomplete="off">
+            <table width="100%" border="0"><tr valign="top"><td>首次提交时间:2019-06-13 20:21:17 &nbsp;&nbsp;&nbsp;最后一次提交时间:2019-06-13 20:22:59<br><hr size=0><p class="MsoListParagraph" style="margin-left:28px;text-indent:0"><span style="font-family:宋体;color:black">以下程序的输出结果为：</span><span style="font-family:&#39;Times New Roman&#39;,serif;color:black">1 2 3 4 5 </span><span style=";font-family:&#39;Times New Roman&#39;,serif;color:black">0 8 9 </span><span style=";font-family:&#39;Times New Roman&#39;,serif;color:black">0 8 9</span><span style=";font-family:宋体;color:black">，</span><span style=";font-family:宋体">根据输出结果，将下面的程序填写完整。</span></p><p style="margin-left:28px"><span style="font-family:&#39;Times New Roman&#39;,serif;color:black">public class Test {</span></p><p style="margin-left:28px"><span style="font-family:&#39;Times New Roman&#39;,serif;color:black">&nbsp;&nbsp;&nbsp; protected int a[] = {1, 2, 3, 4, 5};</span></p><p style="margin-left:28px"><span style="font-family:&#39;Times New Roman&#39;,serif;color:black">&nbsp;&nbsp;&nbsp; public Test() {</span></p><p style="margin-left:28px"><span style="font-family:&#39;Times New Roman&#39;,serif;color:black">&nbsp;&nbsp;&nbsp; }</span></p><p style="margin-left:28px"><span style="font-family:&#39;Times New Roman&#39;,serif;color:black">&nbsp;&nbsp;&nbsp; public Test(int b[]) {</span></p><p style="margin-left:28px"><span style="font-family:&#39;Times New Roman&#39;,serif;color:black">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; a = b;</span></p><p style="margin-left:28px"><span style="font-family:&#39;Times New Roman&#39;,serif;color:black">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; &nbsp;&nbsp;<input name="answer" type=text readonly value="return b" class=cloze> 【<strong>正确答案: a[0]&nbsp;=&nbsp;0</strong>】 &nbsp;; &nbsp;</span></p><p style="margin-left:28px"><span style="font-family:&#39;Times New Roman&#39;,serif;color:black">&nbsp;&nbsp;&nbsp; }</span></p><p style="margin-left:28px"><span style="font-family:&#39;Times New Roman&#39;,serif;color:black">&nbsp;&nbsp;&nbsp; public void out() {</span></p><p style="margin-left:28px"><span style="font-family:&#39;Times New Roman&#39;,serif;color:black">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; for (int j = 0; j &lt;&nbsp; <input name="answer" type=text readonly value="a.length" class=cloze> 【<strong>正确答案: a.length</strong>】 &nbsp;; j++) {</span></p><p style="margin-left:28px"><span style="font-family:&#39;Times New Roman&#39;,serif;color:black">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; System.out.print(a[j] + &quot; &quot;);</span></p><p style="margin-left:28px"><span style="font-family:&#39;Times New Roman&#39;,serif;color:black">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; }</span></p><p style="margin-left:28px"><span style="font-family:&#39;Times New Roman&#39;,serif;color:black">&nbsp;&nbsp;&nbsp; }</span></p><p style="margin-left:28px"><span style="font-family:&#39;Times New Roman&#39;,serif;color:black">&nbsp;&nbsp;&nbsp; public static void main(String[] args) {</span></p><p style="margin-left:28px"><span style="font-family:&#39;Times New Roman&#39;,serif;color:black">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; new Test().out();</span></p><p style="margin-left:28px"><span style="font-family:&#39;Times New Roman&#39;,serif;color:black">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; int t[] = {7, 8, 9};</span></p><p style="margin-left:28px"><span style="font-family:&#39;Times New Roman&#39;,serif;color:black">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; Test my = &nbsp;<input name="answer" type=text readonly value="new Text" class=cloze> 【<strong>正确答案: new&nbsp;Test(t)</strong>】 &nbsp;;</span></p><p style="margin-left:28px"><span style="font-family:&#39;Times New Roman&#39;,serif;color:black">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; my.out();</span></p><p style="margin-left:28px"><span style="font-family:&#39;Times New Roman&#39;,serif;color:black">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; for (int j = 0; j &lt; t.length; j++) {</span></p><p style="margin-left:28px"><span style="font-family:&#39;Times New Roman&#39;,serif;color:black">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; </span><span style="font-family:&#39;Times New Roman&#39;,serif;color:black">System.out.print(t[j] + &quot; &quot;);</span></p><p style="margin-left:28px"><span style="font-family:&#39;Times New Roman&#39;,serif;color:black">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; }</span></p><p style="margin-left:28px"><span style="font-family:&#39;Times New Roman&#39;,serif;color:black">&nbsp;&nbsp;&nbsp; }</span></p><p style="margin-left:28px"><span style="font-family:&#39;Times New Roman&#39;,serif;color:black">}</span></p><p><br/></p></td><td width="80">得分：2.00<br></td><tr></table>
+            <input type="hidden" name="problemID" value="2946">      	
+            <input type="hidden" name="examID" value="226">  
+            <input type="hidden" name="examPaperID" value="125">  
+            </form>
+        </td>
+        
+    </tr>  
+		 
+    
+    <tr class="formtext" style="" valign="top">
+        <td align="center"><b>4.</b></td>
+        <td><div style="position:relative"><div id="saveTip2945" style="z-index: 100;position: absolute;right:10;"></div></div>
+            <form method="post" name="answerForm2945" action="stuAnswerHandler.jsp" target="frame_problemhandler" autocomplete="off">
+            <table width="100%" border="0"><tr valign="top"><td>首次提交时间:2019-06-13 20:24:11 &nbsp;&nbsp;&nbsp;最后一次提交时间:2019-06-13 20:27:36<br><hr size=0><p style="margin-left:28px"><span style="font-family:宋体;color:black">根据程序注释提示，将下面的程序填写完整。</span></p><p style="margin-left:28px"><span style="font-family:&#39;Times New Roman&#39;,serif;color:black">class StringExample{</span></p><p style="margin-left:28px"><span style="font-family:&#39;Times New Roman&#39;,serif;color:black">&nbsp;&nbsp; &nbsp;public static void main(String args[]) {</span></p><p style="margin-left:28px"><span style="font-family:&#39;Times New Roman&#39;,serif;color:black">&nbsp;&nbsp; &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;String s1=new String(&quot;2012&quot;);</span></p><p style="margin-left:28px"><span style="font-family:&#39;Times New Roman&#39;,serif;color:black">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; &nbsp;String s2=new String(&quot;100.50&quot;);</span></p><p style="margin-left:28px"><span style="font-family:&#39;Times New Roman&#39;,serif;color:black">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; &nbsp;&nbsp;int x = &nbsp;&nbsp;<input name="answer" type=text readonly value="Integer.parseInt(s1)" class=cloze> 【<strong>正确答案: Integer.parseInt(s1)</strong>】 &nbsp;;&nbsp;&nbsp;&nbsp; &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;// </span><span style="font-family:宋体;color:black">将</span><span style="font-family: &#39;Times New Roman&#39;,serif;color:black">s1</span><span style="font-family:宋体;color:black">转换为</span><span style="font-family:&#39;Times New Roman&#39;,serif;color:black">int</span><span style="font-family:宋体;color:black">类型</span></p><p style="margin-left:28px"><span style="font-family:&#39;Times New Roman&#39;,serif;color:black">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; double y = &nbsp;&nbsp;<input name="answer" type=text readonly value="Double.parseDouble(s2)" class=cloze> 【<strong>正确答案: Double.parseDouble(s2)</strong>】 &nbsp;; &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;// </span><span style="font-family:宋体;color:black">将</span><span style="font-family:&#39;Times New Roman&#39;,serif;color:black">s2</span><span style="font-family:宋体;color:black">转换为</span><span style="font-family: &#39;Times New Roman&#39;,serif;color:black">double</span><span style="font-family:宋体;color:black">类型</span></p><p style="margin-left:28px"><span style="font-family:&#39;Times New Roman&#39;,serif;color:black">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; double z = x + y;</span></p><p style="margin-left:28px"><span style="font-family:&#39;Times New Roman&#39;,serif;color:black">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; String s3 = &nbsp;&nbsp;<input name="answer" type=text readonly value="&#34; &#34;+z" class=cloze> 【<strong>正确答案: new&nbsp;String(z);&nbsp;或&nbsp;String.valueOf(z);&nbsp;或&nbsp;z+""&nbsp;或&nbsp;""+z</strong>】 &nbsp;; &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;// </span><span style="font-family:宋体;color:black">将</span><span style="font-family:&#39;Times New Roman&#39;,serif;color:black">z</span><span style="font-family:宋体;color:black">转换为字符串</span></p><p style="margin-left:28px"><span style="font-family:&#39;Times New Roman&#39;,serif;color:black">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; StringBuffer sbr = new StringBuffer(&quot;Thingking&quot;);</span></p><p style="margin-left:28px"><span style="font-family:&#39;Times New Roman&#39;,serif;color:black">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; &nbsp;&nbsp;String s4 = new String(&quot;in Java&quot;);</span></p><p style="margin-left:28px"><span style="font-family:&#39;Times New Roman&#39;,serif;color:black">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; &nbsp;&nbsp;&nbsp;&nbsp;<input name="answer" type=text readonly value="sbr=sbr+s4" class=cloze> 【<strong>正确答案: sbr.append(s4)</strong>】 &nbsp;;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;// </span><span style="font-family:宋体;color:black">将</span><span style="font-family: &#39;Times New Roman&#39;,serif;color:black">s4</span><span style="font-family:宋体;color:black">连接在</span><span style="font-family:&#39;Times New Roman&#39;,serif;color:black">sbr</span><span style="font-family:宋体;color:black">的后面</span></p><p style="margin-left:28px"><span style="font-family:&#39;Times New Roman&#39;,serif;color:black">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; System.out.println(sbr.toString()); &nbsp;&nbsp;&nbsp;// </span><span style="font-family:宋体;color:black">显示为</span><span style="font-family: &#39;Times New Roman&#39;,serif;color:black"> Thingking in Java</span></p><p style="margin-left:28px"><span style="font-family:&#39;Times New Roman&#39;,serif;color:black">&nbsp;&nbsp;&nbsp; }</span></p><p style="margin-left:28px"><span style="font-family:&#39;Times New Roman&#39;,serif;color:black">}</span></p><p><br/></p></td><td width="80">得分：4.50<br></td><tr></table>
+            <input type="hidden" name="problemID" value="2945">      	
+            <input type="hidden" name="examID" value="226">  
+            <input type="hidden" name="examPaperID" value="125">  
+            </form>
+        </td>
+        
+    </tr>  
+		 
+    
+    <tr class="formtext" style="background-color:#EFF1F7" valign="top">
+        <td align="center"><b>5.</b></td>
+        <td><div style="position:relative"><div id="saveTip2947" style="z-index: 100;position: absolute;right:10;"></div></div>
+            <form method="post" name="answerForm2947" action="stuAnswerHandler.jsp" target="frame_problemhandler" autocomplete="off">
+            <table width="100%" border="0"><tr valign="top"><td>首次提交时间:2019-06-13 20:35:18 &nbsp;&nbsp;&nbsp;最后一次提交时间:2019-06-13 20:40:48<br><hr size=0><p class="MsoListParagraph" style="margin-left:28px;text-indent:0"><span style=";font-family:宋体">根据注释，将下面的程序填写完整。</span></p><p style="margin-left:28px"><span style=";font-family:&#39;Times New Roman&#39;,serif;color:black">class Father {</span></p><p style="margin-left:28px"><span style=";font-family:&#39;Times New Roman&#39;,serif;color:black">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; public void out(double i) {</span></p><p style="margin-left:28px"><span style=";font-family:&#39;Times New Roman&#39;,serif;color:black">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; System.out.println(i * 2);</span></p><p style="margin-left:28px"><span style=";font-family:&#39;Times New Roman&#39;,serif;color:black">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; }</span></p><p style="margin-left:28px"><span style=";font-family:&#39;Times New Roman&#39;,serif;color:black">}</span></p><p style="margin-left:28px"><span style=";font-family:&#39;Times New Roman&#39;,serif;color:black">&nbsp;</span></p><p style="margin-left:28px"><span style=";font-family:&#39;Times New Roman&#39;,serif;color:black">class Child extends Father {</span></p><p style="margin-left:28px"><span style=";font-family:&#39;Times New Roman&#39;,serif;color:black">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; // </span><span style=";font-family:宋体;color:black">重载</span><span style=";font-family:&#39;Times New Roman&#39;,serif;color:black">——</span><span style=";font-family:宋体;color:black">让</span><span style=";font-family:&#39;Times New Roman&#39;,serif;color:black">Child</span><span style=";font-family:宋体;color:black">可以输出字符串</span></p><p style="margin-left:28px"><span style=";font-family:&#39;Times New Roman&#39;,serif;color:black">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; &nbsp; <input name="answer" type=text readonly value="public void out(String s)" class=cloze> 【<strong>正确答案: public&nbsp;void&nbsp;out(String&nbsp;i)</strong>】 &nbsp;{ </span></p><p style="margin-left:28px"><span style=";font-family:&#39;Times New Roman&#39;,serif;color:black">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; System.out.println(s);</span></p><p style="margin-left:28px"><span style=";font-family:&#39;Times New Roman&#39;,serif;color:black">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; }</span></p><p style="margin-left:28px"><span style=";font-family:&#39;Times New Roman&#39;,serif;color:black">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; </span></p><p style="margin-left:28px"><span style=";font-family:&#39;Times New Roman&#39;,serif;color:black">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; // </span><span style=";font-family:宋体;color:black">重载</span><span style=";font-family:&#39;Times New Roman&#39;,serif;color:black">——</span><span style=";font-family:宋体;color:black">在</span><span style=";font-family:&#39;Times New Roman&#39;,serif;color:black">Child</span><span style=";font-family:宋体;color:black">中调用父类中的方法</span></p><p style="margin-left:28px"><span style=";font-family:&#39;Times New Roman&#39;,serif;color:black">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; &nbsp; <input name="answer" type=text readonly value="public void out()" class=cloze> 【<strong>正确答案: public&nbsp;void&nbsp;out()</strong>】 &nbsp;{</span></p><p style="margin-left:28px"><span style=";font-family:&#39;Times New Roman&#39;,serif;color:black">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; double b=3.28;</span></p><p style="margin-left:28px"><span style=";font-family:&#39;Times New Roman&#39;,serif;color:black">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; &nbsp; <input name="answer" type=text readonly value="Father" class=cloze> 【<strong>正确答案: super</strong>】 &nbsp;.out(b);</span></p><p style="margin-left:28px"><span style=";font-family:&#39;Times New Roman&#39;,serif;color:black">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; }</span></p><p style="margin-left:28px"><span style=";font-family:&#39;Times New Roman&#39;,serif;color:black">&nbsp;</span></p><p style="margin-left:28px"><span style=";font-family:&#39;Times New Roman&#39;,serif;color:black">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; // </span><span style=";font-family:宋体;color:black">重写</span><span style=";font-family:&#39;Times New Roman&#39;,serif;color:black">——</span><span style=";font-family:宋体;color:black">让</span><span style=";font-family:&#39;Times New Roman&#39;,serif;color:black">Child</span><span style=";font-family:宋体;color:black">改写其父类方法的方法体</span></p><p style="margin-left:28px"><span style=";font-family:&#39;Times New Roman&#39;,serif;color:black">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; &nbsp; <input name="answer" type=text readonly value="public void out(double i)" class=cloze> 【<strong>正确答案: public&nbsp;void&nbsp;out(double&nbsp;i)</strong>】 &nbsp;{</span></p><p style="margin-left:28px"><span style=";font-family:&#39;Times New Roman&#39;,serif;color:black">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; System.out.println(i * 5);</span></p><p style="margin-left:28px"><span style=";font-family:&#39;Times New Roman&#39;,serif;color:black">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; }</span></p><p style="margin-left:28px"><span style=";font-family:&#39;Times New Roman&#39;,serif;color:black">}</span></p><p style="margin-left:28px"><span style=";font-family:&#39;Times New Roman&#39;,serif;color:black">&nbsp;</span></p><p style="margin-left:28px"><span style=";font-family:&#39;Times New Roman&#39;,serif;color:black">public class OverrideOverloadTest {</span></p><p style="margin-left:28px"><span style=";font-family:&#39;Times New Roman&#39;,serif;color:black">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; public static void main(String[] args) {</span></p><p style="margin-left:28px"><span style=";font-family:&#39;Times New Roman&#39;,serif;color:black">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; Child c = new Child();</span></p><p style="margin-left:28px"><span style=";font-family:&#39;Times New Roman&#39;,serif;color:black">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; c.out();</span></p><p style="margin-left:28px"><span style=";font-family:&#39;Times New Roman&#39;,serif;color:black">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; c.out(10.0);</span></p><p style="margin-left:28px"><span style=";font-family:&#39;Times New Roman&#39;,serif;color:black">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; c.out(&quot;siend&quot;);</span></p><p style="margin-left:28px"><span style=";font-family:&#39;Times New Roman&#39;,serif;color:black">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; }</span></p><p style="margin-left:28px"><span style=";font-family:&#39;Times New Roman&#39;,serif;color:black">}</span></p><p><br/></p></td><td width="80">得分：4.00<br></td><tr></table>
+            <input type="hidden" name="problemID" value="2947">      	
+            <input type="hidden" name="examID" value="226">  
+            <input type="hidden" name="examPaperID" value="125">  
+            </form>
+        </td>
+        
+    </tr>  
+		 
+    
+    <tr class="formtext" style="" valign="top">
+        <td align="center"><b>6.</b></td>
+        <td><div style="position:relative"><div id="saveTip2943" style="z-index: 100;position: absolute;right:10;"></div></div>
+            <form method="post" name="answerForm2943" action="stuAnswerHandler.jsp" target="frame_problemhandler" autocomplete="off">
+            <table width="100%" border="0"><tr valign="top"><td>首次提交时间:2019-06-13 20:38:56 &nbsp;&nbsp;&nbsp;最后一次提交时间:2019-06-13 20:42:25<br><hr size=0><p style="margin-left:28px"><span style=";font-family:宋体">以下程序运行时输入</span><span style=";font-family:&#39;Times New Roman&#39;,serif">1 2 3 a b c 1 2 3 -1</span><span style=";font-family:宋体">后按回车键，运行结果为：</span></p><p style="margin-left:28px"><span style=";font-family:&#39;Times New Roman&#39;,serif">Sum: 12</span><span style=";font-family: 宋体">，</span><span style=";font-family:&#39;Times New Roman&#39;,serif">Error: 3</span><span style=";font-family: 宋体">，</span><span style=";font-family:&#39;Times New Roman&#39;,serif">Total: 10</span></p><p style="margin-left:28px"><span style=";font-family:宋体">请填空。</span></p><p style="margin-left:28px"><span style=";font-family:&#39;Times New Roman&#39;,serif">public class Test {</span></p><p style="margin-left:28px"><span style=";font-family:&#39;Times New Roman&#39;,serif">&nbsp;&nbsp;&nbsp; public static void main(String args[]) {</span></p><p style="margin-left:28px"><span style=";font-family:&#39;Times New Roman&#39;,serif">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; Scanner scan = new Scanner(System.in);</span></p><p style="margin-left:28px"><span style=";font-family:&#39;Times New Roman&#39;,serif">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; int i = 0, sum = 0, errNum = 0, totalNum = 0;</span></p><p style="margin-left:28px"><span style=";font-family:&#39;Times New Roman&#39;,serif">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; while (i &gt;= 0) {</span></p><p style="margin-left:28px"><span style=";font-family:&#39;Times New Roman&#39;,serif">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; sum += i;</span></p><p style="margin-left:28px"><span style=";font-family:&#39;Times New Roman&#39;,serif">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; <input name="answer" type=text readonly value="try" class=cloze> 【<strong>正确答案: try</strong>】 { &nbsp;&nbsp;&nbsp;&nbsp;</span></p><p style="margin-left:28px"><span style=";font-family:&#39;Times New Roman&#39;,serif">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; // </span><span style=";font-family:宋体">输入一个字符串，并将其解析成</span><span style=";font-family:&#39;Times New Roman&#39;,serif">int</span><span style=";font-family:宋体">类型的数据</span><span style=";font-family:&#39;Times New Roman&#39;,serif"> &nbsp;</span></p><p style="margin-left:28px"><span style=";font-family:&#39;Times New Roman&#39;,serif">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; i = <input name="answer" type=text readonly value="Integer.parseInt(scan.next())" class=cloze> 【<strong>正确答案: Integer.parseInt(scan.next())</strong>】;&nbsp;&nbsp; </span></p><p style="margin-left:28px"><span style=";font-family:&#39;Times New Roman&#39;,serif">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; } catch (Exception e) {</span></p><p style="margin-left:28px"><span style=";font-family:&#39;Times New Roman&#39;,serif">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; ++errNum;</span></p><p style="margin-left:28px"><span style=";font-family:&#39;Times New Roman&#39;,serif">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; i = 0;</span></p><p style="margin-left:28px"><span style=";font-family:&#39;Times New Roman&#39;,serif">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; } <input name="answer" type=text readonly value="finally" class=cloze> 【<strong>正确答案: finally</strong>】 { &nbsp;&nbsp;&nbsp;</span></p><p style="margin-left:28px"><span style=";font-family:&#39;Times New Roman&#39;,serif">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; ++totalNum;</span></p><p style="margin-left:28px"><span style=";font-family:&#39;Times New Roman&#39;,serif">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; }</span></p><p style="margin-left:28px"><span style=";font-family:&#39;Times New Roman&#39;,serif">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; }</span></p><p style="margin-left:28px"><span style=";font-family:&#39;Times New Roman&#39;,serif">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; System.out.print(&quot;Sum: &quot; + sum + &quot;</span><span style=";font-family:宋体">，</span><span style=";font-family:&#39;Times New Roman&#39;,serif">&quot;);</span></p><p style="margin-left:28px"><span style=";font-family:&#39;Times New Roman&#39;,serif">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; System.out.print(&quot;Error: &quot; + errNum + &quot;</span><span style=";font-family:宋体">，</span><span style=";font-family:&#39;Times New Roman&#39;,serif">&quot;);</span></p><p style="margin-left:28px"><span style=";font-family:&#39;Times New Roman&#39;,serif">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; System.out.print(&quot;Total: &quot; + totalNum);</span></p><p style="margin-left:28px"><span style=";font-family:&#39;Times New Roman&#39;,serif">&nbsp;&nbsp;&nbsp; }</span></p><p style="margin-left:28px"><span style=";font-family:&#39;Times New Roman&#39;,serif">}</span></p><p><br/></p></td><td width="80">得分：6.00<br></td><tr></table>
+            <input type="hidden" name="problemID" value="2943">      	
+            <input type="hidden" name="examID" value="226">  
+            <input type="hidden" name="examPaperID" value="125">  
+            </form>
+        </td>
+        
+    </tr>  
+		 
+     
+  
+</table>
+                            
+                            
+
+
+
+<style type="text/css">
+<!--
+
+.option {BORDER-RIGHT: rgb(0,0,0) 0px solid; BORDER-TOP: rgb(0,0,0) 0px solid; FONT-SIZE: 10pt; BORDER-LEFT: rgb(0,0,0) 0px solid; WIDTH: 60px; BORDER-BOTTOM: rgb(0,0,0) 1px solid; HEIGHT: 20px}
+-->
+</style><br>
+<table width="96%" border="0" align="center" cellpadding="0" cellspacing="0">
+<tr> 
+  <td height="22" class=sectiontitle><img src="images/directory.gif"><b> 选择题</b></td>
+</tr>
+</table><br>
+<table width="96%" border="0" align="center" cellpadding="0" cellspacing="0" class="tableline2">
+ <tr bgcolor="#336699" class="tabletitle">
+   <td width="36" align="center">#</td>
+   <td>题目</td> 
+   
+ </tr>
+			  
+   
+   
+   <tr class="formtext" style="background-color:#EFF1F7" valign="top">
+      <td align="center"><b>1.</b></td>
+      <td><div style="position:relative"><div id="saveTip2419" style="z-index: 100;position: absolute;right:10;"></div></div>
+      <form method="post" name="answerForm2419" action="stuAnswerHandler.jsp" target="frame_problemhandler" autocomplete="off">
+      	<table width="100%" border="0"><tr valign="top"><td>首次提交时间:2019-06-13 19:37:43 &nbsp;&nbsp;&nbsp;最后一次提交时间:2019-06-13 19:37:43<br><hr size=0>能够创建由5个空字符串构成的数组的语句是(&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;)<input name="answer" type="text" readonly value="A" class="option"> 【<strong>正确答案: A</strong>】<br>A&nbsp;String&nbsp;a[]=new&nbsp;String[5];<br>B&nbsp;String&nbsp;5[a];<br>C&nbsp;String[5]&nbsp;a;<br>D&nbsp;String&nbsp;a[5];</td><td width="80">得分：1.00<br></td><tr></table>
+      	
+      	<input type="hidden" name="problemID" value="2419">      	
+      	<input type="hidden" name="examID" value="226">
+      	<input type="hidden" name="examPaperID" value="125">    
+      </form></td>
+      
+   </tr>
+    
+		 
+		   
+   
+   <tr class="formtext" style="" valign="top">
+      <td align="center"><b>2.</b></td>
+      <td><div style="position:relative"><div id="saveTip2428" style="z-index: 100;position: absolute;right:10;"></div></div>
+      <form method="post" name="answerForm2428" action="stuAnswerHandler.jsp" target="frame_problemhandler" autocomplete="off">
+      	<table width="100%" border="0"><tr valign="top"><td>首次提交时间:2019-06-13 19:37:53 &nbsp;&nbsp;&nbsp;最后一次提交时间:2019-06-13 19:37:53<br><hr size=0>下列能够正确定义三个整型数组a1、a2、a3的语句是(&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;)<input name="answer" type="text" readonly value="B" class="option"> 【<strong>正确答案: B</strong>】<br>A&nbsp;int&nbsp;a1[],&nbsp;a2;&nbsp;int&nbsp;a3[]={1,&nbsp;2,&nbsp;3,&nbsp;4,&nbsp;5};<br>B&nbsp;int[]&nbsp;a1,&nbsp;a2;&nbsp;int&nbsp;a3[]={1,&nbsp;2,&nbsp;3,&nbsp;4,&nbsp;5};<br>C&nbsp;int&nbsp;a1,&nbsp;a2[];&nbsp;int&nbsp;a3={1,&nbsp;2,&nbsp;3,&nbsp;4,&nbsp;5};<br>D&nbsp;int[]a1,&nbsp;a2;&nbsp;int&nbsp;a3=(1,&nbsp;2,&nbsp;3,&nbsp;4,&nbsp;5);</td><td width="80">得分：1.00<br></td><tr></table>
+      	
+      	<input type="hidden" name="problemID" value="2428">      	
+      	<input type="hidden" name="examID" value="226">
+      	<input type="hidden" name="examPaperID" value="125">    
+      </form></td>
+      
+   </tr>
+    
+		 
+		   
+   
+   <tr class="formtext" style="background-color:#EFF1F7" valign="top">
+      <td align="center"><b>3.</b></td>
+      <td><div style="position:relative"><div id="saveTip2608" style="z-index: 100;position: absolute;right:10;"></div></div>
+      <form method="post" name="answerForm2608" action="stuAnswerHandler.jsp" target="frame_problemhandler" autocomplete="off">
+      	<table width="100%" border="0"><tr valign="top"><td>首次提交时间:2019-06-13 19:38:26 &nbsp;&nbsp;&nbsp;最后一次提交时间:2019-06-13 19:38:26<br><hr size=0>下列选项中，用于在定义子类时声明父类名的关键字是(&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;)<input name="answer" type="text" readonly value="C" class="option"> 【<strong>正确答案: C</strong>】<br>A&nbsp;interface<br>B&nbsp;package<br>C&nbsp;extends<br>D&nbsp;class</td><td width="80">得分：1.00<br></td><tr></table>
+      	
+      	<input type="hidden" name="problemID" value="2608">      	
+      	<input type="hidden" name="examID" value="226">
+      	<input type="hidden" name="examPaperID" value="125">    
+      </form></td>
+      
+   </tr>
+    
+		 
+		   
+   
+   <tr class="formtext" style="" valign="top">
+      <td align="center"><b>4.</b></td>
+      <td><div style="position:relative"><div id="saveTip2714" style="z-index: 100;position: absolute;right:10;"></div></div>
+      <form method="post" name="answerForm2714" action="stuAnswerHandler.jsp" target="frame_problemhandler" autocomplete="off">
+      	<table width="100%" border="0"><tr valign="top"><td>首次提交时间:2019-06-13 19:38:49 &nbsp;&nbsp;&nbsp;最后一次提交时间:2019-06-13 19:38:49<br><hr size=0>自定义的异常类通常继承(&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;)<input name="answer" type="text" readonly value="B" class="option"> 【<strong>正确答案: A</strong>】<br>A&nbsp;Exception<br>B&nbsp;Throwable<br>C&nbsp;Error<br>D&nbsp;RuntimeException</td><td width="80">得分：0.00<br></td><tr></table>
+      	
+      	<input type="hidden" name="problemID" value="2714">      	
+      	<input type="hidden" name="examID" value="226">
+      	<input type="hidden" name="examPaperID" value="125">    
+      </form></td>
+      
+   </tr>
+    
+		 
+		   
+   
+   <tr class="formtext" style="background-color:#EFF1F7" valign="top">
+      <td align="center"><b>5.</b></td>
+      <td><div style="position:relative"><div id="saveTip2417" style="z-index: 100;position: absolute;right:10;"></div></div>
+      <form method="post" name="answerForm2417" action="stuAnswerHandler.jsp" target="frame_problemhandler" autocomplete="off">
+      	<table width="100%" border="0"><tr valign="top"><td>首次提交时间:2019-06-13 19:39:54 &nbsp;&nbsp;&nbsp;最后一次提交时间:2019-06-13 19:39:54<br><hr size=0>若已定义char&nbsp;a[]=new&nbsp;char[5]则a.length的值是(&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;)<input name="answer" type="text" readonly value="D" class="option"> 【<strong>正确答案: D</strong>】<br>A&nbsp;0<br>B&nbsp;10<br>C&nbsp;4<br>D&nbsp;5</td><td width="80">得分：1.00<br></td><tr></table>
+      	
+      	<input type="hidden" name="problemID" value="2417">      	
+      	<input type="hidden" name="examID" value="226">
+      	<input type="hidden" name="examPaperID" value="125">    
+      </form></td>
+      
+   </tr>
+    
+		 
+		   
+   
+   <tr class="formtext" style="" valign="top">
+      <td align="center"><b>6.</b></td>
+      <td><div style="position:relative"><div id="saveTip2475" style="z-index: 100;position: absolute;right:10;"></div></div>
+      <form method="post" name="answerForm2475" action="stuAnswerHandler.jsp" target="frame_problemhandler" autocomplete="off">
+      	<table width="100%" border="0"><tr valign="top"><td>首次提交时间:2019-06-13 19:40:07 &nbsp;&nbsp;&nbsp;最后一次提交时间:2019-06-13 19:40:07<br><hr size=0>当成员变量与局部变量同名时，若要在方法内使用成员变量，要使用关键字(&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;)<input name="answer" type="text" readonly value="C" class="option"> 【<strong>正确答案: C</strong>】<br>A&nbsp;super<br>B&nbsp;import<br>C&nbsp;this<br>D&nbsp;return</td><td width="80">得分：1.00<br></td><tr></table>
+      	
+      	<input type="hidden" name="problemID" value="2475">      	
+      	<input type="hidden" name="examID" value="226">
+      	<input type="hidden" name="examPaperID" value="125">    
+      </form></td>
+      
+   </tr>
+    
+		 
+		   
+   
+   <tr class="formtext" style="background-color:#EFF1F7" valign="top">
+      <td align="center"><b>7.</b></td>
+      <td><div style="position:relative"><div id="saveTip2503" style="z-index: 100;position: absolute;right:10;"></div></div>
+      <form method="post" name="answerForm2503" action="stuAnswerHandler.jsp" target="frame_problemhandler" autocomplete="off">
+      	<table width="100%" border="0"><tr valign="top"><td>首次提交时间:2019-06-13 19:40:35 &nbsp;&nbsp;&nbsp;最后一次提交时间:2019-06-13 19:40:35<br><hr size=0>下列关于静态方法和实例方法的描述中错误的是(&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;)<input name="answer" type="text" readonly value="B" class="option"> 【<strong>正确答案: B</strong>】<br>A&nbsp;静态方法可以通过成员名直接访问同类静态成员<br>B&nbsp;静态方法可以通过成员名直接访问同类实例成员<br>C&nbsp;实例方法可以通过成员名直接访问同类静态成员<br>D&nbsp;实例方法可以通过成员名直接访问同类实例成员</td><td width="80">得分：1.00<br></td><tr></table>
+      	
+      	<input type="hidden" name="problemID" value="2503">      	
+      	<input type="hidden" name="examID" value="226">
+      	<input type="hidden" name="examPaperID" value="125">    
+      </form></td>
+      
+   </tr>
+    
+		 
+		   
+   
+   <tr class="formtext" style="" valign="top">
+      <td align="center"><b>8.</b></td>
+      <td><div style="position:relative"><div id="saveTip2595" style="z-index: 100;position: absolute;right:10;"></div></div>
+      <form method="post" name="answerForm2595" action="stuAnswerHandler.jsp" target="frame_problemhandler" autocomplete="off">
+      	<table width="100%" border="0"><tr valign="top"><td>首次提交时间:2019-06-13 19:43:23 &nbsp;&nbsp;&nbsp;最后一次提交时间:2019-06-13 19:43:23<br><hr size=0>若以下代码运行时输入3↙abc↙，其中↙代表按回车键，则运行结果是(&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;)。<br>Scanner&nbsp;scan&nbsp;=&nbsp;new&nbsp;Scanner(System.in);<br>int&nbsp;a&nbsp;=&nbsp;scan.nextInt();<br>String&nbsp;s&nbsp;=&nbsp;scan.nextLine();<br>System.out.println(a&nbsp;+&nbsp;"&nbsp;"&nbsp;+&nbsp;s);<input name="answer" type="text" readonly value="A" class="option"> 【<strong>正确答案: D</strong>】<br>A&nbsp;3&nbsp;abc<br>B&nbsp;abc<br>C&nbsp;无输出<br>D&nbsp;在输入abc之前程序已结束，输出3</td><td width="80">得分：0.00<br></td><tr></table>
+      	
+      	<input type="hidden" name="problemID" value="2595">      	
+      	<input type="hidden" name="examID" value="226">
+      	<input type="hidden" name="examPaperID" value="125">    
+      </form></td>
+      
+   </tr>
+    
+		 
+		   
+   
+   <tr class="formtext" style="background-color:#EFF1F7" valign="top">
+      <td align="center"><b>9.</b></td>
+      <td><div style="position:relative"><div id="saveTip2421" style="z-index: 100;position: absolute;right:10;"></div></div>
+      <form method="post" name="answerForm2421" action="stuAnswerHandler.jsp" target="frame_problemhandler" autocomplete="off">
+      	<table width="100%" border="0"><tr valign="top"><td>首次提交时间:2019-06-13 19:41:05 &nbsp;&nbsp;&nbsp;最后一次提交时间:2019-06-13 19:41:05<br><hr size=0>以下能够定义并将数组初始化为true的语句是(&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;)<input name="answer" type="text" readonly value="D" class="option"> 【<strong>正确答案: B</strong>】<br>A&nbsp;boolean[]&nbsp;b&nbsp;=&nbsp;new&nbsp;boolean[3];<br>B&nbsp;boolean[]&nbsp;b&nbsp;=&nbsp;{true,true,true};<br>C&nbsp;boolean[3]&nbsp;b&nbsp;=&nbsp;{true,true,true};<br>D&nbsp;boolean[]&nbsp;b&nbsp;=&nbsp;new&nbsp;boolean[3];b&nbsp;=&nbsp;{true,true,true};</td><td width="80">得分：0.00<br></td><tr></table>
+      	
+      	<input type="hidden" name="problemID" value="2421">      	
+      	<input type="hidden" name="examID" value="226">
+      	<input type="hidden" name="examPaperID" value="125">    
+      </form></td>
+      
+   </tr>
+    
+		 
+		   
+   
+   <tr class="formtext" style="" valign="top">
+      <td align="center"><b>10.</b></td>
+      <td><div style="position:relative"><div id="saveTip2593" style="z-index: 100;position: absolute;right:10;"></div></div>
+      <form method="post" name="answerForm2593" action="stuAnswerHandler.jsp" target="frame_problemhandler" autocomplete="off">
+      	<table width="100%" border="0"><tr valign="top"><td>首次提交时间:2019-06-13 19:44:28 &nbsp;&nbsp;&nbsp;最后一次提交时间:2019-06-13 19:44:28<br><hr size=0>关于String类字符串，以下说法错误的是(&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;)。<input name="answer" type="text" readonly value="C" class="option"> 【<strong>正确答案: B</strong>】<br>A&nbsp;成员方法如concat()和replace()都是在原串的副本上操作，返回操作后结果的引用<br>B&nbsp;成员变量length记录字符串的长度，即字符数<br>C&nbsp;可以直接访问一个字符串常量的成员变量和成员方法<br>D&nbsp;调用任意对象的toString()方法都将生成对象的字符串表示</td><td width="80">得分：0.00<br></td><tr></table>
+      	
+      	<input type="hidden" name="problemID" value="2593">      	
+      	<input type="hidden" name="examID" value="226">
+      	<input type="hidden" name="examPaperID" value="125">    
+      </form></td>
+      
+   </tr>
+    
+		 
+		   
+   
+   <tr class="formtext" style="background-color:#EFF1F7" valign="top">
+      <td align="center"><b>11.</b></td>
+      <td><div style="position:relative"><div id="saveTip2474" style="z-index: 100;position: absolute;right:10;"></div></div>
+      <form method="post" name="answerForm2474" action="stuAnswerHandler.jsp" target="frame_problemhandler" autocomplete="off">
+      	<table width="100%" border="0"><tr valign="top"><td>首次提交时间:2019-06-13 19:44:31 &nbsp;&nbsp;&nbsp;最后一次提交时间:2019-06-13 19:44:31<br><hr size=0>构造方法在(&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;)时被调用。<input name="answer" type="text" readonly value="B" class="option"> 【<strong>正确答案: B</strong>】<br>A&nbsp;类定义时<br>B&nbsp;创建对象时<br>C&nbsp;调用对象方法时<br>D&nbsp;使用对象的变量时</td><td width="80">得分：1.00<br></td><tr></table>
+      	
+      	<input type="hidden" name="problemID" value="2474">      	
+      	<input type="hidden" name="examID" value="226">
+      	<input type="hidden" name="examPaperID" value="125">    
+      </form></td>
+      
+   </tr>
+    
+		 
+		   
+   
+   <tr class="formtext" style="" valign="top">
+      <td align="center"><b>12.</b></td>
+      <td><div style="position:relative"><div id="saveTip2672" style="z-index: 100;position: absolute;right:10;"></div></div>
+      <form method="post" name="answerForm2672" action="stuAnswerHandler.jsp" target="frame_problemhandler" autocomplete="off">
+      	<table width="100%" border="0"><tr valign="top"><td>首次提交时间:2019-06-13 19:45:30 &nbsp;&nbsp;&nbsp;最后一次提交时间:2019-06-13 19:45:30<br><hr size=0>以下抽象类定义中合法的是(&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;)<input name="answer" type="text" readonly value="C" class="option"> 【<strong>正确答案: C</strong>】<br>A&nbsp;abstract&nbsp;Animal{<br>&nbsp;&nbsp;&nbsp;&nbsp;abstract&nbsp;void&nbsp;growl();<br>}<br>B&nbsp;class&nbsp;abstract&nbsp;Animal{<br>&nbsp;&nbsp;&nbsp;&nbsp;abstract&nbsp;void&nbsp;growl();<br>}<br>C&nbsp;abstract&nbsp;class&nbsp;Animal&nbsp;{<br>&nbsp;&nbsp;&nbsp;&nbsp;abstract&nbsp;void&nbsp;growl();<br>}<br>D&nbsp;abstract&nbsp;class&nbsp;Animal&nbsp;{<br>&nbsp;&nbsp;&nbsp;&nbsp;abstract&nbsp;void&nbsp;growl()&nbsp;{<br>&nbsp;&nbsp;&nbsp;&nbsp;}<br>}</td><td width="80">得分：1.00<br></td><tr></table>
+      	
+      	<input type="hidden" name="problemID" value="2672">      	
+      	<input type="hidden" name="examID" value="226">
+      	<input type="hidden" name="examPaperID" value="125">    
+      </form></td>
+      
+   </tr>
+    
+		 
+		   
+   
+   <tr class="formtext" style="background-color:#EFF1F7" valign="top">
+      <td align="center"><b>13.</b></td>
+      <td><div style="position:relative"><div id="saveTip2668" style="z-index: 100;position: absolute;right:10;"></div></div>
+      <form method="post" name="answerForm2668" action="stuAnswerHandler.jsp" target="frame_problemhandler" autocomplete="off">
+      	<table width="100%" border="0"><tr valign="top"><td>首次提交时间:2019-06-13 19:49:01 &nbsp;&nbsp;&nbsp;最后一次提交时间:2019-06-13 19:49:01<br><hr size=0>下列关于接口的方法的描述中，正确的是(&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;)<input name="answer" type="text" readonly value="B" class="option"> 【<strong>正确答案: A</strong>】<br>A&nbsp;即使没有指定修饰符，也将被自动限定为public&nbsp;abstract<br>B&nbsp;可以用public、protected及private修饰符限定<br>C&nbsp;可以不指定返回值类型<br>D&nbsp;可以是非抽象方法</td><td width="80">得分：0.00<br></td><tr></table>
+      	
+      	<input type="hidden" name="problemID" value="2668">      	
+      	<input type="hidden" name="examID" value="226">
+      	<input type="hidden" name="examPaperID" value="125">    
+      </form></td>
+      
+   </tr>
+    
+		 
+		   
+   
+   <tr class="formtext" style="" valign="top">
+      <td align="center"><b>14.</b></td>
+      <td><div style="position:relative"><div id="saveTip2543" style="z-index: 100;position: absolute;right:10;"></div></div>
+      <form method="post" name="answerForm2543" action="stuAnswerHandler.jsp" target="frame_problemhandler" autocomplete="off">
+      	<table width="100%" border="0"><tr valign="top"><td>首次提交时间:2019-06-13 19:49:56 &nbsp;&nbsp;&nbsp;最后一次提交时间:2019-06-13 19:49:56<br><hr size=0>执行语句int&nbsp;arr[][]=new&nbsp;int[5][6];后，以下说法错误的是(&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;)。<input name="answer" type="text" readonly value="A" class="option"> 【<strong>正确答案: A</strong>】<br>A&nbsp;arr[0]的空间存储6个整型数据<br>B&nbsp;arr[0]存储的是第0行元素构成的数组的引用<br>C&nbsp;arr存储的是二维数组的引用<br>D&nbsp;arr[0][0]的空间存储1个整型数据</td><td width="80">得分：1.00<br></td><tr></table>
+      	
+      	<input type="hidden" name="problemID" value="2543">      	
+      	<input type="hidden" name="examID" value="226">
+      	<input type="hidden" name="examPaperID" value="125">    
+      </form></td>
+      
+   </tr>
+    
+		 
+		   
+   
+   <tr class="formtext" style="background-color:#EFF1F7" valign="top">
+      <td align="center"><b>15.</b></td>
+      <td><div style="position:relative"><div id="saveTip2533" style="z-index: 100;position: absolute;right:10;"></div></div>
+      <form method="post" name="answerForm2533" action="stuAnswerHandler.jsp" target="frame_problemhandler" autocomplete="off">
+      	<table width="100%" border="0"><tr valign="top"><td>首次提交时间:2019-06-13 19:50:04 &nbsp;&nbsp;&nbsp;最后一次提交时间:2019-06-13 19:50:04<br><hr size=0>成员的访问限定符不包括(&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;)<input name="answer" type="text" readonly value="C" class="option"> 【<strong>正确答案: D</strong>】<br>A&nbsp;public<br>B&nbsp;private<br>C&nbsp;default<br>D&nbsp;final</td><td width="80">得分：0.00<br></td><tr></table>
+      	
+      	<input type="hidden" name="problemID" value="2533">      	
+      	<input type="hidden" name="examID" value="226">
+      	<input type="hidden" name="examPaperID" value="125">    
+      </form></td>
+      
+   </tr>
+    
+		 
+		   
+   
+   <tr class="formtext" style="" valign="top">
+      <td align="center"><b>16.</b></td>
+      <td><div style="position:relative"><div id="saveTip2708" style="z-index: 100;position: absolute;right:10;"></div></div>
+      <form method="post" name="answerForm2708" action="stuAnswerHandler.jsp" target="frame_problemhandler" autocomplete="off">
+      	<table width="100%" border="0"><tr valign="top"><td>首次提交时间:2019-06-13 19:50:08 &nbsp;&nbsp;&nbsp;最后一次提交时间:2019-06-13 19:50:08<br><hr size=0>调用异常类对象的(&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;)方法可以获取异常信息字符串。<input name="answer" type="text" readonly value="D" class="option"> 【<strong>正确答案: D</strong>】<br>A&nbsp;toString()<br>B&nbsp;getMessage()<br>C&nbsp;getLocalizedMessage()<br>D&nbsp;以上方法都可以</td><td width="80">得分：1.00<br></td><tr></table>
+      	
+      	<input type="hidden" name="problemID" value="2708">      	
+      	<input type="hidden" name="examID" value="226">
+      	<input type="hidden" name="examPaperID" value="125">    
+      </form></td>
+      
+   </tr>
+    
+		 
+		   
+   
+   <tr class="formtext" style="background-color:#EFF1F7" valign="top">
+      <td align="center"><b>17.</b></td>
+      <td><div style="position:relative"><div id="saveTip2487" style="z-index: 100;position: absolute;right:10;"></div></div>
+      <form method="post" name="answerForm2487" action="stuAnswerHandler.jsp" target="frame_problemhandler" autocomplete="off">
+      	<table width="100%" border="0"><tr valign="top"><td>首次提交时间:2019-06-13 19:50:29 &nbsp;&nbsp;&nbsp;最后一次提交时间:2019-06-13 19:50:29<br><hr size=0>关于一个有返回值的方法，以下说法不正确的是(&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;)<input name="answer" type="text" readonly value="A" class="option"> 【<strong>正确答案: A</strong>】<br>A&nbsp;方法体里不能出现一条以上return语句<br>B&nbsp;即使有return语句，也可能有编译错误<br>C&nbsp;return后只能是一个常量、变量或表达式<br>D&nbsp;方法体里只能有一条return语句被执行</td><td width="80">得分：1.00<br></td><tr></table>
+      	
+      	<input type="hidden" name="problemID" value="2487">      	
+      	<input type="hidden" name="examID" value="226">
+      	<input type="hidden" name="examPaperID" value="125">    
+      </form></td>
+      
+   </tr>
+    
+		 
+		   
+   
+   <tr class="formtext" style="" valign="top">
+      <td align="center"><b>18.</b></td>
+      <td><div style="position:relative"><div id="saveTip2530" style="z-index: 100;position: absolute;right:10;"></div></div>
+      <form method="post" name="answerForm2530" action="stuAnswerHandler.jsp" target="frame_problemhandler" autocomplete="off">
+      	<table width="100%" border="0"><tr valign="top"><td>首次提交时间:2019-06-13 20:05:25 &nbsp;&nbsp;&nbsp;最后一次提交时间:2019-06-13 20:05:25<br><hr size=0>以下关于final和static关键字的说法正确的是(&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;)<input name="answer" type="text" readonly value="A" class="option"> 【<strong>正确答案: C</strong>】<br>A&nbsp;都可以修饰成员方法、成员变量和构造方法<br>B&nbsp;都可以修饰局部变量<br>C&nbsp;用static&nbsp;final同时修饰的成员变量不能在构造方法中初始化<br>D&nbsp;不可以使用static&nbsp;final同时修饰成员方法或成员变量</td><td width="80">得分：0.00<br></td><tr></table>
+      	
+      	<input type="hidden" name="problemID" value="2530">      	
+      	<input type="hidden" name="examID" value="226">
+      	<input type="hidden" name="examPaperID" value="125">    
+      </form></td>
+      
+   </tr>
+    
+		 
+		   
+   
+   <tr class="formtext" style="background-color:#EFF1F7" valign="top">
+      <td align="center"><b>19.</b></td>
+      <td><div style="position:relative"><div id="saveTip2510" style="z-index: 100;position: absolute;right:10;"></div></div>
+      <form method="post" name="answerForm2510" action="stuAnswerHandler.jsp" target="frame_problemhandler" autocomplete="off">
+      	<table width="100%" border="0"><tr valign="top"><td>首次提交时间:2019-06-13 20:06:10 &nbsp;&nbsp;&nbsp;最后一次提交时间:2019-06-13 20:06:10<br><hr size=0>定义类属性或类方法使用修饰符(&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;)<input name="answer" type="text" readonly value="D" class="option"> 【<strong>正确答案: A</strong>】<br>A&nbsp;static<br>B&nbsp;package<br>C&nbsp;private<br>D&nbsp;public</td><td width="80">得分：0.00<br></td><tr></table>
+      	
+      	<input type="hidden" name="problemID" value="2510">      	
+      	<input type="hidden" name="examID" value="226">
+      	<input type="hidden" name="examPaperID" value="125">    
+      </form></td>
+      
+   </tr>
+    
+		 
+		   
+   
+   <tr class="formtext" style="" valign="top">
+      <td align="center"><b>20.</b></td>
+      <td><div style="position:relative"><div id="saveTip2393" style="z-index: 100;position: absolute;right:10;"></div></div>
+      <form method="post" name="answerForm2393" action="stuAnswerHandler.jsp" target="frame_problemhandler" autocomplete="off">
+      	<table width="100%" border="0"><tr valign="top"><td>首次提交时间:2019-06-13 20:06:22 &nbsp;&nbsp;&nbsp;最后一次提交时间:2019-06-13 20:06:22<br><hr size=0>当char型变量m是0-9的数字字符时才为true的表达式是(&nbsp;)。<input name="answer" type="text" readonly value="B" class="option"> 【<strong>正确答案: B</strong>】<br>A&nbsp;m&gt;=0&nbsp;&&&nbsp;m&lt;=9<br>B&nbsp;m&gt;='0'&nbsp;&&&nbsp;m&lt;='9'<br>C&nbsp;m&gt;="0"&nbsp;&&&nbsp;m&lt;="9"<br>D&nbsp;m&gt;=0&nbsp;||&nbsp;m&lt;=9</td><td width="80">得分：1.00<br></td><tr></table>
+      	
+      	<input type="hidden" name="problemID" value="2393">      	
+      	<input type="hidden" name="examID" value="226">
+      	<input type="hidden" name="examPaperID" value="125">    
+      </form></td>
+      
+   </tr>
+    
+		 
+		   
+   
+   <tr class="formtext" style="background-color:#EFF1F7" valign="top">
+      <td align="center"><b>21.</b></td>
+      <td><div style="position:relative"><div id="saveTip2686" style="z-index: 100;position: absolute;right:10;"></div></div>
+      <form method="post" name="answerForm2686" action="stuAnswerHandler.jsp" target="frame_problemhandler" autocomplete="off">
+      	<table width="100%" border="0"><tr valign="top"><td>首次提交时间:2019-06-13 20:06:38 &nbsp;&nbsp;&nbsp;最后一次提交时间:2019-06-13 20:06:38<br><hr size=0>下列关于抛出异常的描述中错误的是(&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;)<input name="answer" type="text" readonly value="D" class="option"> 【<strong>正确答案: D</strong>】<br>A&nbsp;Throwable的任意子类的对象都可以用throw抛出<br>B&nbsp;Exception和Error是Throwable的直接子类<br>C&nbsp;如果没有处理异常则异常抛出点后的代码不会执行<br>D&nbsp;只有方法调用才可能产生异常</td><td width="80">得分：1.00<br></td><tr></table>
+      	
+      	<input type="hidden" name="problemID" value="2686">      	
+      	<input type="hidden" name="examID" value="226">
+      	<input type="hidden" name="examPaperID" value="125">    
+      </form></td>
+      
+   </tr>
+    
+		 
+		   
+   
+   <tr class="formtext" style="" valign="top">
+      <td align="center"><b>22.</b></td>
+      <td><div style="position:relative"><div id="saveTip2535" style="z-index: 100;position: absolute;right:10;"></div></div>
+      <form method="post" name="answerForm2535" action="stuAnswerHandler.jsp" target="frame_problemhandler" autocomplete="off">
+      	<table width="100%" border="0"><tr valign="top"><td>首次提交时间:2019-06-13 20:03:43 &nbsp;&nbsp;&nbsp;最后一次提交时间:2019-06-13 20:03:43<br><hr size=0>this关键字的含义是表示(&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;)<input name="answer" type="text" readonly value="B" class="option"> 【<strong>正确答案: B</strong>】<br>A&nbsp;当前变量<br>B&nbsp;当前对象<br>C&nbsp;当前类<br>D&nbsp;当前方法</td><td width="80">得分：1.00<br></td><tr></table>
+      	
+      	<input type="hidden" name="problemID" value="2535">      	
+      	<input type="hidden" name="examID" value="226">
+      	<input type="hidden" name="examPaperID" value="125">    
+      </form></td>
+      
+   </tr>
+    
+		 
+		   
+   
+   <tr class="formtext" style="background-color:#EFF1F7" valign="top">
+      <td align="center"><b>23.</b></td>
+      <td><div style="position:relative"><div id="saveTip2489" style="z-index: 100;position: absolute;right:10;"></div></div>
+      <form method="post" name="answerForm2489" action="stuAnswerHandler.jsp" target="frame_problemhandler" autocomplete="off">
+      	<table width="100%" border="0"><tr valign="top"><td>首次提交时间:2019-06-13 20:01:55 &nbsp;&nbsp;&nbsp;最后一次提交时间:2019-06-13 20:01:55<br><hr size=0>下列关于内存回收的说明正确的是(&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;)。<input name="answer" type="text" readonly value="B" class="option"> 【<strong>正确答案: B</strong>】<br>A&nbsp;程序员必须创建一个线程来释放内存<br>B&nbsp;内存回收程序负责释放无用内存<br>C&nbsp;内存回收程序允许程序员直接释放内存<br>D&nbsp;内存回收程序不能释放内存对象</td><td width="80">得分：1.00<br></td><tr></table>
+      	
+      	<input type="hidden" name="problemID" value="2489">      	
+      	<input type="hidden" name="examID" value="226">
+      	<input type="hidden" name="examPaperID" value="125">    
+      </form></td>
+      
+   </tr>
+    
+		 
+		   
+   
+   <tr class="formtext" style="" valign="top">
+      <td align="center"><b>24.</b></td>
+      <td><div style="position:relative"><div id="saveTip2356" style="z-index: 100;position: absolute;right:10;"></div></div>
+      <form method="post" name="answerForm2356" action="stuAnswerHandler.jsp" target="frame_problemhandler" autocomplete="off">
+      	<table width="100%" border="0"><tr valign="top"><td>首次提交时间:2019-06-13 20:03:09 &nbsp;&nbsp;&nbsp;最后一次提交时间:2019-06-13 20:03:09<br><hr size=0>以下关于加号+的作用叙述不正确的是(&nbsp;&nbsp;)。<input name="answer" type="text" readonly value="A" class="option"> 【<strong>正确答案: A</strong>】<br>A&nbsp;只要左右两侧有一个操作数是字符，则实现字符串连接<br>B&nbsp;可以用于算术运算做加法<br>C&nbsp;可以用于常量前表示数值大于零<br>D&nbsp;只要左右两侧有一个操作数是字符串，则实现字符串连接</td><td width="80">得分：1.00<br></td><tr></table>
+      	
+      	<input type="hidden" name="problemID" value="2356">      	
+      	<input type="hidden" name="examID" value="226">
+      	<input type="hidden" name="examPaperID" value="125">    
+      </form></td>
+      
+   </tr>
+    
+		 
+		   
+   
+   <tr class="formtext" style="background-color:#EFF1F7" valign="top">
+      <td align="center"><b>25.</b></td>
+      <td><div style="position:relative"><div id="saveTip2423" style="z-index: 100;position: absolute;right:10;"></div></div>
+      <form method="post" name="answerForm2423" action="stuAnswerHandler.jsp" target="frame_problemhandler" autocomplete="off">
+      	<table width="100%" border="0"><tr valign="top"><td>首次提交时间:2019-06-13 20:01:10 &nbsp;&nbsp;&nbsp;最后一次提交时间:2019-06-13 20:01:10<br><hr size=0>语句(&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;)正确地声明了一个字符串数组。<input name="answer" type="text" readonly value="C" class="option"> 【<strong>正确答案: C</strong>】<br>A&nbsp;char&nbsp;str[];<br>B&nbsp;char&nbsp;str[][];<br>C&nbsp;String&nbsp;str[];<br>D&nbsp;String&nbsp;str[10];</td><td width="80">得分：1.00<br></td><tr></table>
+      	
+      	<input type="hidden" name="problemID" value="2423">      	
+      	<input type="hidden" name="examID" value="226">
+      	<input type="hidden" name="examPaperID" value="125">    
+      </form></td>
+      
+   </tr>
+    
+		 
+		   
+   
+   <tr class="formtext" style="" valign="top">
+      <td align="center"><b>26.</b></td>
+      <td><div style="position:relative"><div id="saveTip2353" style="z-index: 100;position: absolute;right:10;"></div></div>
+      <form method="post" name="answerForm2353" action="stuAnswerHandler.jsp" target="frame_problemhandler" autocomplete="off">
+      	<table width="100%" border="0"><tr valign="top"><td>首次提交时间:2019-06-13 20:00:57 &nbsp;&nbsp;&nbsp;最后一次提交时间:2019-06-13 20:00:57<br><hr size=0>以下不是基本类型的数据是(&nbsp;&nbsp;&nbsp;)。<input name="answer" type="text" readonly value="B" class="option"> 【<strong>正确答案: B</strong>】<br>A&nbsp;'a'<br>B&nbsp;"a"<br>C&nbsp;1<br>D&nbsp;5L</td><td width="80">得分：1.00<br></td><tr></table>
+      	
+      	<input type="hidden" name="problemID" value="2353">      	
+      	<input type="hidden" name="examID" value="226">
+      	<input type="hidden" name="examPaperID" value="125">    
+      </form></td>
+      
+   </tr>
+    
+		 
+		   
+   
+   <tr class="formtext" style="background-color:#EFF1F7" valign="top">
+      <td align="center"><b>27.</b></td>
+      <td><div style="position:relative"><div id="saveTip2538" style="z-index: 100;position: absolute;right:10;"></div></div>
+      <form method="post" name="answerForm2538" action="stuAnswerHandler.jsp" target="frame_problemhandler" autocomplete="off">
+      	<table width="100%" border="0"><tr valign="top"><td>首次提交时间:2019-06-13 20:00:07 &nbsp;&nbsp;&nbsp;最后一次提交时间:2019-06-13 20:00:07<br><hr size=0>语句final&nbsp;int[]&nbsp;a&nbsp;=&nbsp;{1,2,3};后可以出现的语句是(&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;)。<input name="answer" type="text" readonly value="D" class="option"> 【<strong>正确答案: A</strong>】<br>A&nbsp;a[0]&nbsp;=&nbsp;6;<br>B&nbsp;a&nbsp;=&nbsp;new&nbsp;int[5];<br>C&nbsp;A和B都可以出现<br>D&nbsp;A和B都不可以出现</td><td width="80">得分：0.00<br></td><tr></table>
+      	
+      	<input type="hidden" name="problemID" value="2538">      	
+      	<input type="hidden" name="examID" value="226">
+      	<input type="hidden" name="examPaperID" value="125">    
+      </form></td>
+      
+   </tr>
+    
+		 
+		   
+   
+   <tr class="formtext" style="" valign="top">
+      <td align="center"><b>28.</b></td>
+      <td><div style="position:relative"><div id="saveTip2671" style="z-index: 100;position: absolute;right:10;"></div></div>
+      <form method="post" name="answerForm2671" action="stuAnswerHandler.jsp" target="frame_problemhandler" autocomplete="off">
+      	<table width="100%" border="0"><tr valign="top"><td>首次提交时间:2019-06-13 19:59:50 &nbsp;&nbsp;&nbsp;最后一次提交时间:2019-06-13 19:59:50<br><hr size=0>若A是抽象类，B是其子类且A和B都有默认构造方法，则以下语句非法的是(&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;)<input name="answer" type="text" readonly value="A" class="option"> 【<strong>正确答案: B</strong>】<br>A&nbsp;A&nbsp;a;<br>B&nbsp;A&nbsp;a&nbsp;=&nbsp;new&nbsp;A();<br>C&nbsp;A&nbsp;a[]&nbsp;=&nbsp;new&nbsp;A[4];<br>D&nbsp;A&nbsp;a&nbsp;=&nbsp;new&nbsp;B();</td><td width="80">得分：0.00<br></td><tr></table>
+      	
+      	<input type="hidden" name="problemID" value="2671">      	
+      	<input type="hidden" name="examID" value="226">
+      	<input type="hidden" name="examPaperID" value="125">    
+      </form></td>
+      
+   </tr>
+    
+		 
+		   
+   
+   <tr class="formtext" style="background-color:#EFF1F7" valign="top">
+      <td align="center"><b>29.</b></td>
+      <td><div style="position:relative"><div id="saveTip2332" style="z-index: 100;position: absolute;right:10;"></div></div>
+      <form method="post" name="answerForm2332" action="stuAnswerHandler.jsp" target="frame_problemhandler" autocomplete="off">
+      	<table width="100%" border="0"><tr valign="top"><td>首次提交时间:2019-06-13 19:59:12 &nbsp;&nbsp;&nbsp;最后一次提交时间:2019-06-13 19:59:12<br><hr size=0>编译一个包含类H1，H2和H3的源程序A.java产生的字节码文件是(&nbsp;&nbsp;&nbsp;&nbsp;)。<input name="answer" type="text" readonly value="B" class="option"> 【<strong>正确答案: B</strong>】<br>A&nbsp;H1.class<br>B&nbsp;H1.class，H2.class，H3.class<br>C&nbsp;H1.class，H1$H2.class，H1$H3.class<br>D&nbsp;A.class</td><td width="80">得分：1.00<br></td><tr></table>
+      	
+      	<input type="hidden" name="problemID" value="2332">      	
+      	<input type="hidden" name="examID" value="226">
+      	<input type="hidden" name="examPaperID" value="125">    
+      </form></td>
+      
+   </tr>
+    
+		 
+		   
+   
+   <tr class="formtext" style="" valign="top">
+      <td align="center"><b>30.</b></td>
+      <td><div style="position:relative"><div id="saveTip2627" style="z-index: 100;position: absolute;right:10;"></div></div>
+      <form method="post" name="answerForm2627" action="stuAnswerHandler.jsp" target="frame_problemhandler" autocomplete="off">
+      	<table width="100%" border="0"><tr valign="top"><td>首次提交时间:2019-06-13 19:58:59 &nbsp;&nbsp;&nbsp;最后一次提交时间:2019-06-13 19:58:59<br><hr size=0>已知C类和B类都继承A类，且已定义B&nbsp;b&nbsp;=&nbsp;new&nbsp;B();&nbsp;C&nbsp;c&nbsp;=&nbsp;new&nbsp;C();，则以下语句中错误的是(&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;)。<input name="answer" type="text" readonly value="D" class="option"> 【<strong>正确答案: D</strong>】<br>A&nbsp;A&nbsp;a&nbsp;=&nbsp;new&nbsp;B();&nbsp;a=b;<br>B&nbsp;b=c;<br>C&nbsp;b=(B)(c);<br>D&nbsp;B和C都有错误</td><td width="80">得分：1.00<br></td><tr></table>
+      	
+      	<input type="hidden" name="problemID" value="2627">      	
+      	<input type="hidden" name="examID" value="226">
+      	<input type="hidden" name="examPaperID" value="125">    
+      </form></td>
+      
+   </tr>
+    
+		 
+		   
+   
+   <tr class="formtext" style="background-color:#EFF1F7" valign="top">
+      <td align="center"><b>31.</b></td>
+      <td><div style="position:relative"><div id="saveTip2384" style="z-index: 100;position: absolute;right:10;"></div></div>
+      <form method="post" name="answerForm2384" action="stuAnswerHandler.jsp" target="frame_problemhandler" autocomplete="off">
+      	<table width="100%" border="0"><tr valign="top"><td>首次提交时间:2019-06-13 19:58:05 &nbsp;&nbsp;&nbsp;最后一次提交时间:2019-06-13 19:58:05<br><hr size=0>不是合法的条件语句的一项是(&nbsp;&nbsp;&nbsp;)。<input name="answer" type="text" readonly value="B" class="option"> 【<strong>正确答案: B</strong>】<br>A&nbsp;if&nbsp;(a&gt;b){…}<br>B&nbsp;if&nbsp;(1){…}<br>C&nbsp;if&nbsp;(a&gt;b&nbsp;&&&nbsp;b&gt;c){…}<br>D&nbsp;if&nbsp;(3&gt;2){…}</td><td width="80">得分：1.00<br></td><tr></table>
+      	
+      	<input type="hidden" name="problemID" value="2384">      	
+      	<input type="hidden" name="examID" value="226">
+      	<input type="hidden" name="examPaperID" value="125">    
+      </form></td>
+      
+   </tr>
+    
+		 
+		   
+   
+   <tr class="formtext" style="" valign="top">
+      <td align="center"><b>32.</b></td>
+      <td><div style="position:relative"><div id="saveTip2635" style="z-index: 100;position: absolute;right:10;"></div></div>
+      <form method="post" name="answerForm2635" action="stuAnswerHandler.jsp" target="frame_problemhandler" autocomplete="off">
+      	<table width="100%" border="0"><tr valign="top"><td>首次提交时间:2019-06-13 19:57:59 &nbsp;&nbsp;&nbsp;最后一次提交时间:2019-06-13 19:57:59<br><hr size=0>以下类定义的横线处必须填写的是(&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;)。<br>class&nbsp;Base&nbsp;{<br>&nbsp;&nbsp;&nbsp;&nbsp;public&nbsp;int&nbsp;b;<br>}<br>class&nbsp;Derived&nbsp;extends&nbsp;Base&nbsp;{<br>&nbsp;&nbsp;&nbsp;&nbsp;public&nbsp;String&nbsp;b;<br>&nbsp;&nbsp;&nbsp;&nbsp;public&nbsp;void&nbsp;setB(String&nbsp;b)&nbsp;{&nbsp;&nbsp;//用参数b修改成员变量b<br>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;______b&nbsp;=&nbsp;b;<br>&nbsp;&nbsp;&nbsp;&nbsp;}<br>}<input name="answer" type="text" readonly value="B" class="option"> 【<strong>正确答案: B</strong>】<br>A&nbsp;super.<br>B&nbsp;this.<br>C&nbsp;不用写<br>D&nbsp;A和B都可以</td><td width="80">得分：1.00<br></td><tr></table>
+      	
+      	<input type="hidden" name="problemID" value="2635">      	
+      	<input type="hidden" name="examID" value="226">
+      	<input type="hidden" name="examPaperID" value="125">    
+      </form></td>
+      
+   </tr>
+    
+		 
+		   
+   
+   <tr class="formtext" style="background-color:#EFF1F7" valign="top">
+      <td align="center"><b>33.</b></td>
+      <td><div style="position:relative"><div id="saveTip2551" style="z-index: 100;position: absolute;right:10;"></div></div>
+      <form method="post" name="answerForm2551" action="stuAnswerHandler.jsp" target="frame_problemhandler" autocomplete="off">
+      	<table width="100%" border="0"><tr valign="top"><td>首次提交时间:2019-06-13 19:57:41 &nbsp;&nbsp;&nbsp;最后一次提交时间:2019-06-13 19:57:41<br><hr size=0>关于方法的参数，以下说法正确的是(&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;)<input name="answer" type="text" readonly value="C" class="option"> 【<strong>正确答案: C</strong>】<br>A&nbsp;形式参数如果是引用类型，方法体不能改变实际参数引用的对象的成员变量<br>B&nbsp;形式参数如果是基本类型，方法体能够改变实际参数的值<br>C&nbsp;无论方法的形式参数是何种类型，方法体都不能改变实际参数的值<br>D&nbsp;无论方法的形式参数是何种类型，方法体都可以改变实际参数的值</td><td width="80">得分：1.00<br></td><tr></table>
+      	
+      	<input type="hidden" name="problemID" value="2551">      	
+      	<input type="hidden" name="examID" value="226">
+      	<input type="hidden" name="examPaperID" value="125">    
+      </form></td>
+      
+   </tr>
+    
+		 
+		   
+   
+   <tr class="formtext" style="" valign="top">
+      <td align="center"><b>34.</b></td>
+      <td><div style="position:relative"><div id="saveTip2649" style="z-index: 100;position: absolute;right:10;"></div></div>
+      <form method="post" name="answerForm2649" action="stuAnswerHandler.jsp" target="frame_problemhandler" autocomplete="off">
+      	<table width="100%" border="0"><tr valign="top"><td>首次提交时间:2019-06-13 19:56:44 &nbsp;&nbsp;&nbsp;最后一次提交时间:2019-06-13 19:56:44<br><hr size=0>下列关于包的描述中错误的是(&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;)<input name="answer" type="text" readonly value="D" class="option"> 【<strong>正确答案: D</strong>】<br>A&nbsp;使用包的原因之一是避免类名重复<br>B&nbsp;包是由.class文件组成的一个集合，是一个文件夹<br>C&nbsp;功能相同或者相关的类一般组织在一个包中<br>D&nbsp;包只能定义一层，即包中不能再有包</td><td width="80">得分：1.00<br></td><tr></table>
+      	
+      	<input type="hidden" name="problemID" value="2649">      	
+      	<input type="hidden" name="examID" value="226">
+      	<input type="hidden" name="examPaperID" value="125">    
+      </form></td>
+      
+   </tr>
+    
+		 
+		   
+   
+   <tr class="formtext" style="background-color:#EFF1F7" valign="top">
+      <td align="center"><b>35.</b></td>
+      <td><div style="position:relative"><div id="saveTip2548" style="z-index: 100;position: absolute;right:10;"></div></div>
+      <form method="post" name="answerForm2548" action="stuAnswerHandler.jsp" target="frame_problemhandler" autocomplete="off">
+      	<table width="100%" border="0"><tr valign="top"><td>首次提交时间:2019-06-13 19:57:12 &nbsp;&nbsp;&nbsp;最后一次提交时间:2019-06-13 19:57:12<br><hr size=0>调用方法时，若形式参数是一维数组，以下说法正确的是(&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;)。<input name="answer" type="text" readonly value="C" class="option"> 【<strong>正确答案: A</strong>】<br>A&nbsp;形式参数的类型说明符需包含[]<br>B&nbsp;形式参数的类型说明符需包含[数组大小]<br>C&nbsp;实际参数如果是变量，标识符后需包含[]<br>D&nbsp;实际参数如果是变量，标志符后需要包含[数组大小]</td><td width="80">得分：0.00<br></td><tr></table>
+      	
+      	<input type="hidden" name="problemID" value="2548">      	
+      	<input type="hidden" name="examID" value="226">
+      	<input type="hidden" name="examPaperID" value="125">    
+      </form></td>
+      
+   </tr>
+    
+		 
+		   
+   
+   <tr class="formtext" style="" valign="top">
+      <td align="center"><b>36.</b></td>
+      <td><div style="position:relative"><div id="saveTip2606" style="z-index: 100;position: absolute;right:10;"></div></div>
+      <form method="post" name="answerForm2606" action="stuAnswerHandler.jsp" target="frame_problemhandler" autocomplete="off">
+      	<table width="100%" border="0"><tr valign="top"><td>首次提交时间:2019-06-13 19:56:17 &nbsp;&nbsp;&nbsp;最后一次提交时间:2019-06-13 19:56:17<br><hr size=0>关于Object类，以下说法错误的是(&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;)<input name="answer" type="text" readonly value="A" class="option"> 【<strong>正确答案: A</strong>】<br>A&nbsp;定义类时经常重载Object的public&nbsp;String&nbsp;toString()方法以生成对象的字符串表示<br>B&nbsp;定义类时经常重载或重写Object类public&nbsp;boolean&nbsp;equals(Object&nbsp;obj)方法以对比两个同类对象的属性是否相同<br>C&nbsp;如果一个类的声明没有用extends指名父类，则默认继承Object类<br>D&nbsp;所有类都是Object类的直接或间接子类</td><td width="80">得分：1.00<br></td><tr></table>
+      	
+      	<input type="hidden" name="problemID" value="2606">      	
+      	<input type="hidden" name="examID" value="226">
+      	<input type="hidden" name="examPaperID" value="125">    
+      </form></td>
+      
+   </tr>
+    
+		 
+		   
+   
+   <tr class="formtext" style="background-color:#EFF1F7" valign="top">
+      <td align="center"><b>37.</b></td>
+      <td><div style="position:relative"><div id="saveTip2565" style="z-index: 100;position: absolute;right:10;"></div></div>
+      <form method="post" name="answerForm2565" action="stuAnswerHandler.jsp" target="frame_problemhandler" autocomplete="off">
+      	<table width="100%" border="0"><tr valign="top"><td>首次提交时间:2019-06-13 19:55:02 &nbsp;&nbsp;&nbsp;最后一次提交时间:2019-06-13 19:55:02<br><hr size=0>下列关于基本类型包装类的说法中正确的是(&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;)。<input name="answer" type="text" readonly value="B" class="option"> 【<strong>正确答案: C</strong>】<br>A&nbsp;每种包装类都有parseXXX()方法将一个完整字符串解析为基本类型数据<br>B&nbsp;如果方法的形式参数是基本类型，则调用方法时的实际参数不可以是与之对应的包装类型<br>C&nbsp;如果方法的形式参数是包装类型，则调用方法时的实际参数可以是与之对应的基本类型<br>D&nbsp;包装类的parseXXX()方法可以从字符串中间提取基本类型数据</td><td width="80">得分：0.00<br></td><tr></table>
+      	
+      	<input type="hidden" name="problemID" value="2565">      	
+      	<input type="hidden" name="examID" value="226">
+      	<input type="hidden" name="examPaperID" value="125">    
+      </form></td>
+      
+   </tr>
+    
+		 
+		   
+   
+   <tr class="formtext" style="" valign="top">
+      <td align="center"><b>38.</b></td>
+      <td><div style="position:relative"><div id="saveTip2429" style="z-index: 100;position: absolute;right:10;"></div></div>
+      <form method="post" name="answerForm2429" action="stuAnswerHandler.jsp" target="frame_problemhandler" autocomplete="off">
+      	<table width="100%" border="0"><tr valign="top"><td>首次提交时间:2019-06-13 19:52:29 &nbsp;&nbsp;&nbsp;最后一次提交时间:2019-06-13 19:52:29<br><hr size=0>下列数组声明中错误的是(&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;)<input name="answer" type="text" readonly value="B" class="option"> 【<strong>正确答案: B</strong>】<br>A&nbsp;double&nbsp;a[];<br>B&nbsp;double&nbsp;a[5];<br>C&nbsp;int&nbsp;a[]=new&nbsp;int[5];<br>D&nbsp;boolean[]&nbsp;c;</td><td width="80">得分：1.00<br></td><tr></table>
+      	
+      	<input type="hidden" name="problemID" value="2429">      	
+      	<input type="hidden" name="examID" value="226">
+      	<input type="hidden" name="examPaperID" value="125">    
+      </form></td>
+      
+   </tr>
+    
+		 
+		   
+   
+   <tr class="formtext" style="background-color:#EFF1F7" valign="top">
+      <td align="center"><b>39.</b></td>
+      <td><div style="position:relative"><div id="saveTip2586" style="z-index: 100;position: absolute;right:10;"></div></div>
+      <form method="post" name="answerForm2586" action="stuAnswerHandler.jsp" target="frame_problemhandler" autocomplete="off">
+      	<table width="100%" border="0"><tr valign="top"><td>首次提交时间:2019-06-13 19:52:24 &nbsp;&nbsp;&nbsp;最后一次提交时间:2019-06-13 19:52:24<br><hr size=0>以下代码将创建(&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;)个对象。<br>String&nbsp;s1&nbsp;=&nbsp;"bc";<br>String&nbsp;s2&nbsp;=&nbsp;new&nbsp;Sting("s1");<input name="answer" type="text" readonly value="C" class="option"> 【<strong>正确答案: C</strong>】<br>A&nbsp;0<br>B&nbsp;1<br>C&nbsp;2<br>D&nbsp;3</td><td width="80">得分：1.00<br></td><tr></table>
+      	
+      	<input type="hidden" name="problemID" value="2586">      	
+      	<input type="hidden" name="examID" value="226">
+      	<input type="hidden" name="examPaperID" value="125">    
+      </form></td>
+      
+   </tr>
+    
+		 
+		   
+   
+   <tr class="formtext" style="" valign="top">
+      <td align="center"><b>40.</b></td>
+      <td><div style="position:relative"><div id="saveTip2389" style="z-index: 100;position: absolute;right:10;"></div></div>
+      <form method="post" name="answerForm2389" action="stuAnswerHandler.jsp" target="frame_problemhandler" autocomplete="off">
+      	<table width="100%" border="0"><tr valign="top"><td>首次提交时间:2019-06-13 19:50:43 &nbsp;&nbsp;&nbsp;最后一次提交时间:2019-06-13 19:50:43<br><hr size=0>若已定义Scanner&nbsp;scan=new&nbsp;Scanner(System.in);以下语句有错误的是(&nbsp;&nbsp;)。<input name="answer" type="text" readonly value="D" class="option"> 【<strong>正确答案: D</strong>】<br>A&nbsp;int&nbsp;a=scan.nextInt();<br>B&nbsp;double&nbsp;b=scan.nextDouble();<br>C&nbsp;String&nbsp;s=scan.nextLine();<br>D&nbsp;char&nbsp;c=scan.nextChar();</td><td width="80">得分：1.00<br></td><tr></table>
+      	
+      	<input type="hidden" name="problemID" value="2389">      	
+      	<input type="hidden" name="examID" value="226">
+      	<input type="hidden" name="examPaperID" value="125">    
+      </form></td>
+      
+   </tr>
+    
+		 
+		    
+ 
+</table>
+                            
+                            
+
+
+
+<a name="An_Program" id="An_Program"></a>
+<br>
+<table width="96%" border="0" align="center" cellpadding="0" cellspacing="0">
+   <tr> 
+      <td height="22" class=sectiontitle><img src="images/directory.gif"><b> 编程题</b></td>
+   </tr>
+</table><br>
+<table width="96%" border="0" align="center" cellpadding="0" cellspacing="0" class="tableline2">
+ <tr bgcolor="#336699" class="tabletitle"> 
+    <td width="36" align="center">#</td>
+    <td width="40%">题目简述</td>
+    <td>批阅信息</td>             
+ </tr>
+	 
+              <tr class="formtext" style="background-color:#EFF1F7" valign="top"> 
+                <td align="center"><b>1.</b></td>
+                <td>
+                    
+                        <p><strong>完善复数类Complex。</strong></p>
+                        <p>【问题描述】完善如下复数类Complex，要求实现复数的下列操作：<br/>（1）一个有两个参数的构造函数，用于初始化复数成员。<br/>（2）一个不带参数的构造函数，调用有参数的构造函数完成对复数成员的初始化。<br/>（3）添加两个get和两个set方法，分别获取和设置复数的实部和虚部。<br/>（4）添加getModulus()方法，求复数的模。<br/>（5）实现两个复数对象的加法，减法，乘法和除法，这四个方法中凡是用到复数模的地方，要求调用getModulus()方法。<br/>（6）重写toString()方法，以标准的(x+yi)形式输出复数对象（当实部或虚部为零时，须按所给输出样例的形式输出）。<br/>（7）重写equals()方法，判断两个复数对象是否相等。<br/>在ComplexDemo类的main()方法中，构造三个复数对象c1、c2和c3并从键盘分别输入其值，输出c1、c2的和差积商；并比较c1和c2是否相等，c1和c3是否相等，c2和c3是否相等。程序的输入输出格式如样例所示，其中：红色文字为真正的程序输入，蓝色文字为输入提示。<br/>复数的加减乘除及求模运算公式如下：<br/>(a+bi)+(c+di)=(a+c)+(b+d)i <br/>(a+bi)-(c+di)=(a-c)+(b-d)i <br/>(a+bi)*(c+di)=(a*c-b*d)+(b*c+a*d)i <br/>(a+bi)/(c+di)=(a*c+b*d)/(c*c+d*d) +((b*c-a*d)/(c*c+d*d))i <br/><br/></p><p style="line-height: 16px;"><img style="vertical-align: middle; margin-right: 2px;" src="/admin/third/ueditor/dialogs/attachment/fileTypeImages/icon_txt.gif"/><a style="font-size:16px; color:#0066cc;" href="/userfiles/file/1546932207752037210.java" title="ComplexDemo.java" target="_blank">点击下载代码框架ComplexDemo.java</a></p><p><br/>【样例输入1】<br/>1 2<br/>2 3<br/>1 2<br/>【样例输出1】<br/><span style="color: rgb(0, 0, 255);">Enter complex c1: </span><br/><span style="color: rgb(255, 0, 0);">1 2</span><br/><span style="color: rgb(0, 0, 255);">Enter complex c2: </span><br/><span style="color: rgb(255, 0, 0);">2 3</span><br/><span style="color: rgb(0, 0, 255);">Enter complex c3: </span><br/><span style="color: rgb(255, 0, 0);">1 2</span><br/>(1.0+2.0i) + (2.0+3.0i) = (3.0+5.0i) <br/>(1.0+2.0i) - (2.0+3.0i) = (-1.0-1.0i) <br/>(1.0+2.0i) * (2.0+3.0i) = (-4.0+7.0i) <br/>(1.0+2.0i) / (2.0+3.0i) = (2.2188007849009166+0.2773500981126146i) <br/>(1.0+2.0i) == (2.0+3.0i) ? false<br/>(1.0+2.0i) == (1.0+2.0i) ? true<br/>(2.0+3.0i) == (1.0+2.0i) ? false<br/><br/>【样例输入2】<br/>2 0<br/>0 -5<br/>0 -5<br/>【样例输出2】<br/><span style="color: rgb(0, 0, 255);">Enter complex c1: </span><br/><span style="color: rgb(255, 0, 0);">2 0</span><br/><span style="color: rgb(0, 0, 255);">Enter complex c2: </span><br/><span style="color: rgb(255, 0, 0);">0 -5</span><br/><span style="color: rgb(0, 0, 255);">Enter complex c3: </span><br/><span style="color: rgb(255, 0, 0);">0 -5</span><br/>(2.0) + (-5.0i) = (2.0-5.0i) <br/>(2.0) - (-5.0i) = (2.0+5.0i) <br/>(2.0) * (-5.0i) = (-10.0i) <br/>(2.0) / (-5.0i) = (2.0i) <br/>(2.0) == (-5.0i) ? false<br/>(2.0) == (-5.0i) ? false<br/>(-5.0i) == (-5.0i) ? true<br/><br/>【样例输入3】<br/>0 0<br/>2 -4<br/>2 3<br/>【样例输出3】<br/><span style="color: rgb(0, 0, 255);">Enter complex c1: </span><br/><span style="color: rgb(255, 0, 0);">0 0</span><br/><span style="color: rgb(0, 0, 255);">Enter complex c2: </span><br/><span style="color: rgb(255, 0, 0);">2 -4</span><br/><span style="color: rgb(0, 0, 255);">Enter complex c3: </span><br/><span style="color: rgb(255, 0, 0);">2 3</span><br/>(0.0) + (2.0-4.0i) = (2.0-4.0i) <br/>(0.0) - (2.0-4.0i) = (-2.0+4.0i) <br/>(0.0) * (2.0-4.0i) = (0.0) <br/>(0.0) / (2.0-4.0i) = (0.0) <br/>(0.0) == (2.0-4.0i) ? false<br/>(0.0) == (2.0+3.0i) ? false<br/>(2.0-4.0i) == (2.0+3.0i) ? false<br/><br/>【样例输入4】<br/>4 3<br/>0 0<br/>0 0<br/>【样例输出4】<br/><span style="color: rgb(0, 0, 255);">Enter complex c1: </span><br/><span style="color: rgb(255, 0, 0);">4 3</span><br/><span style="color: rgb(0, 0, 255);">Enter complex c2: </span><br/><span style="color: rgb(255, 0, 0);">0 0</span><br/><span style="color: rgb(0, 0, 255);">Enter complex c3: </span><br/><span style="color: rgb(255, 0, 0);">0 0</span><br/>(4.0+3.0i) + (0.0) = (4.0+3.0i) <br/>(4.0+3.0i) - (0.0) = (4.0+3.0i) <br/>(4.0+3.0i) * (0.0) = (0.0) <br/>(4.0+3.0i) / (0.0) = (NaN) <br/>(4.0+3.0i) == (0.0) ? false<br/>(4.0+3.0i) == (0.0) ? false<br/>(0.0) == (0.0) ? true<br/></p>
+                    
+                </td>
+                <td>
+                    
+                                <a href="/downloadFile?filename=tziSQrhpBc3YjnrlneEsYh6OAEKU13UgTG7-3PegQ-svrMqv3Nl7_pHmdK-8MtCbFMXaNbokye5n%0D%0AKl_XIRiKNhZvAAEZJs3QvFTWFbB4X4U%0D%0A">下载源文件</a>
+                                <hr>
+                       
+                    已经成功提交, 编译通过
+                </td>            
+                
+              </tr>
+          
+              <tr class="formtext" style="" valign="top"> 
+                <td align="center"><b>2.</b></td>
+                <td>
+                    
+                        <p><strong>定义并测试Person类。</strong></p>
+                        <p>【问题描述】定义Person和TestPerson类：<br/>（1）Person类<br/>①属性全部为私有<br/>name：String 对象，表示姓名<br/>gender：boolean类型，表示性别，默认为男性<br/>phone：String对象，表示联系电话<br/>email：String对象，表示E-mail地址<br/>②方法<br/>Person(String name, boolean gender)：两个参数的构造方法<br/>Person(String name)：一个参数的构造方法，默认性别男<br/>Person()：无参构造方法，默认姓名null，默认性别男<br/>void setEmail(String email)：设置E-mail地址<br/>void setPhone(String phone)：设置联系电话<br/>public String getContact()：返回联系信息，包括电话和E-mail<br/>public String toString()：返回个人信息，包括姓名和性别<br/><br/>（2）TestPerson类为主类，在main()方法中完成如下测试：<br/>①调用Person类一个参数的构造方法，用以下信息生成一个Person类的对象aPerson。<br/>姓名：John<br/>性别：Male<br/>②调用setEmail方法，将aPerson的E-mail设置为：john@163.com<br/>③输入并设置aPerson的联系电话。<br/>④输出对象aPerson的各项信息（个人信息+联系信息）。<br/><span style="color: rgb(255, 0, 0);">输入输出格式如样例所示，其中：红色文字为真正的程序输入，蓝色文字为输入提示。</span><br/><br/>【样例输入】<br/>15821343789<br/>【样例输出】<br/><span style="color: rgb(0, 0, 255);">Enter John&#39;s phone: </span><br/><span style="color: rgb(255, 0, 0);"> 15821343789</span><br/>John;Male;john@163.com;15821343789<br/><br/></p>
+                    
+                </td>
+                <td>
+                    
+                                <a href="/downloadFile?filename=tziSQrhpBc3YjnrlneEsYh6OAEKU13UgTG7-3PegQ-svrMqv3Nl7_pHmdK-8MtCbFMXaNbokye6A%0D%0AyZL6rGAlQapAJ3jJYCWs7xIsft6GkI8%0D%0A">下载源文件</a>
+                                <hr>
+                       
+                    已经成功提交, 编译通过
+                </td>            
+                
+              </tr>
+          
+            </table>
+                             
+           
+		
+	 
+			
+            </td>
+        </tr>
+        <tr>
+          <td bgcolor="#F5F8FB">&nbsp;</td>
+        </tr>
+      </table>
+      <br>
+    
+
+    
+    <table width="100%" border="0" align="center" cellpadding="0" cellspacing="0" class="tab">   
+      <tr> 
+
+        <td><IFRAME name=frame_problemhandler frameBorder=0 height=0 marginHeight=0 marginWidth=0 width=0></IFRAME></td>
+      </tr>
+    </table>
+    
+
+
+
+
+
+
+
+
+
+
+
+  
+<TABLE cellSpacing=0 cellPadding=0 width=777 align=center border=0>
+  <TBODY>
+  <TR>
+    <TD>
+      <BR>
+      <TABLE cellSpacing=0 cellPadding=4 width="100%" align=center border=0>
+        <TBODY>
+        <TR>
+          <TD bgColor=#2a98c9 colSpan=2 height=3></TD></TR>
+        <TR>
+          <TD align=middle bgColor=#fafaef colSpan=2>
+              
+              <p>上海电机学院 电子信息学院</p><p><br/></p><p><br/></p>
+          </TD>
+        </TR>
+        <TR>
+          <TD align=middle bgColor=#fafaef colSpan=2>&nbsp;            </TD>
+        </TR></TBODY></TABLE>      </TD></TR></TBODY></TABLE>
+  
+  <IFRAME src="/includes/stayalive.jsp"  frameBorder=0 height=0 marginHeight=0 marginWidth=0 width=0></IFRAME>
+  
+  
+
+
+</body>
+</html>
+               
