@@ -1,0 +1,14 @@
+import factoryMethod.IImageFactory;
+import factoryMethod.IImageReader;
+import factoryMethod.JpgReader;
+
+public class GifFactory implements IImageFactory {
+
+	@Override
+	public IImageReader createReader() {
+		IImageReader iimageReader = null;
+		iimageReader = new GifReader();
+		return iimageReader;
+	}
+
+}

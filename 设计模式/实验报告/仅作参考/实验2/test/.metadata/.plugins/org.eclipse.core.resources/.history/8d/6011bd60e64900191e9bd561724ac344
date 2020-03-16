@@ -1,0 +1,9 @@
+package test_2_1;
+
+public class UnsupportedShapeException extends Exception{
+	String s;
+	public UnsupportedShapeException(String s){
+		super(s);
+	}
+	
+}

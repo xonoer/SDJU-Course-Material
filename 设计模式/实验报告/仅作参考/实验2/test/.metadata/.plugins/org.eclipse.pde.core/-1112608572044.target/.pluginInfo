@@ -1,0 +1,200 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<map>
+	<bundle bundleID="79" class="org.eclipse.ui.internal.views.ViewsPlugin" name="%pluginName" provider="%providerName">
+		<library name="."/>
+	</bundle>
+	<bundle bundleID="78" class="org.eclipse.ui.internal.presentations.r21.R21PresentationPlugin" name="%pluginName" provider="%providerName">
+		<library name="."/>
+	</bundle>
+	<bundle bundleID="77" class="org.eclipse.ui.internal.intro.impl.IntroPlugin" name="%plugin_name" provider="%provider_name"/>
+	<bundle bundleID="35" name="%pluginName" provider="%providerName"/>
+	<bundle bundleID="36" name="%pluginName" provider="%providerName">
+		<library name="."/>
+	</bundle>
+	<bundle bundleID="33" class="org.eclipse.jdt.internal.ui.JavaPlugin" name="%pluginName" provider="%providerName"/>
+	<bundle bundleID="34" name="%pluginName" provider="%providerName"/>
+	<bundle bundleID="39" name="%osgiServices" provider="%eclipse.org"/>
+	<bundle bundleID="37" class="org.eclipse.ltk.internal.core.refactoring.RefactoringCorePlugin" name="%pluginName" provider="%providerName"/>
+	<bundle bundleID="38" class="org.eclipse.ltk.internal.ui.refactoring.RefactoringUIPlugin" name="%pluginName" provider="%providerName"/>
+	<bundle bundleID="43" class="org.eclipse.pde.internal.core.PDECore" name="%name" provider="%provider-name"/>
+	<bundle bundleID="42" class="org.eclipse.pde.internal.build.BuildActivator" name="%pluginName" provider="%providerName">
+		<library name="pdebuild.jar"/>
+	</bundle>
+	<bundle bundleID="41" class="org.eclipse.osgi.framework.internal.core.SystemBundleActivator" hasExtensibleAPI="true" name="%systemBundle" provider="%eclipse.org"/>
+	<bundle bundleID="40" name="%osgiUtil" provider="%eclipse.org"/>
+	<bundle bundleID="82" class="org.eclipse.ui.internal.texteditor.TextEditorPlugin" name="%pluginName" provider="%providerName"/>
+	<bundle bundleID="83" class="org.eclipse.ui.internal.WorkbenchPlugin" name="%pluginName" provider="%providerName">
+		<library name="compatibility.jar"/>
+		<library name="."/>
+	</bundle>
+	<bundle bundleID="80" name="%fragmentName" provider="%providerName">
+		<library name="."/>
+	</bundle>
+	<bundle bundleID="81" name="%fragmentName" provider="%providerName"/>
+	<bundle bundleID="86" name="%fragmentNameWin" provider="%providerName"/>
+	<bundle bundleID="87" class="org.eclipse.update.internal.core.UpdateCore" name="%pluginName" provider="%providerName"/>
+	<bundle bundleID="84" class="org.eclipse.ui.internal.UIPlugin" name="%Plugin.name" provider="%Plugin.providerName">
+		<library name="."/>
+	</bundle>
+	<bundle bundleID="85" class="org.eclipse.update.internal.configurator.ConfigurationActivator" name="%pluginName" provider="%providerName"/>
+	<bundle bundleID="67" class="org.eclipse.team.internal.ui.TeamUIPlugin" name="%pluginName" provider="%providerName"/>
+	<bundle bundleID="66" class="org.eclipse.team.internal.ccvs.ui.CVSUIPlugin" name="%pluginName" provider="%providerName"/>
+	<bundle bundleID="69" class="org.eclipse.tomcat.internal.TomcatPlugin" name="%pluginName" provider="%providerName">
+		<library name="tomcatwrapper.jar"/>
+		<library name="catalina.jar"/>
+		<library name="bootstrap.jar"/>
+		<library name="commons-beanutils.jar"/>
+		<library name="commons-collections.jar"/>
+		<library name="commons-digester.jar"/>
+		<library name="commons-logging-api.jar"/>
+		<library name="commons-modeler.jar"/>
+		<library name="jakarta-regexp-1.3.jar"/>
+		<library name="jasper-compiler.jar"/>
+		<library name="jasper-runtime.jar"/>
+		<library name="mx4j-jmx.jar"/>
+		<library name="naming-common.jar"/>
+		<library name="naming-factory.jar"/>
+		<library name="naming-resources.jar"/>
+		<library name="servlet.jar"/>
+		<library name="servlets-common.jar"/>
+		<library name="servlets-default.jar"/>
+		<library name="servlets-invoker.jar"/>
+		<library name="servlets-manager.jar"/>
+		<library name="tomcat-coyote.jar"/>
+		<library name="tomcat-http11.jar"/>
+		<library name="tomcat-util.jar"/>
+	</bundle>
+	<bundle bundleID="68" name="%pluginName" provider="%providerName"/>
+	<bundle bundleID="22" class="org.eclipse.help.internal.webapp.HelpWebappPlugin" name="%help_webapp_plugin_name" provider="%providerName">
+		<library name="webapp.jar"/>
+	</bundle>
+	<bundle bundleID="23" class="org.eclipse.help.internal.HelpPlugin" name="%help_plugin_name" provider="%providerName"/>
+	<bundle bundleID="24" class="org.eclipse.jdt.core.JavaCore" name="%pluginName" provider="%providerName">
+		<library name="."/>
+	</bundle>
+	<bundle bundleID="25" class="org.eclipse.jdt.internal.debug.ui.JDIDebugUIPlugin" name="%pluginName" provider="%providerName"/>
+	<bundle bundleID="26" class="org.eclipse.jdt.internal.debug.core.JDIDebugPlugin" name="%pluginName" provider="%providerName">
+		<library name="jdi.jar"/>
+		<library name="jdimodel.jar"/>
+		<library name="tools.jar"/>
+	</bundle>
+	<bundle bundleID="27" name="%pluginName" provider="%providerName"/>
+	<bundle bundleID="28" name="%pluginName" provider="%providerName"/>
+	<bundle bundleID="29" name="%pluginName" provider="%providerName">
+		<library name="junitruntime.jar"/>
+	</bundle>
+	<bundle bundleID="3" name="%lucene_plugin_name" provider="%providerName">
+		<library name="lucene-1.4.3.jar"/>
+		<library name="parser.jar"/>
+	</bundle>
+	<bundle bundleID="2" name="%pluginName" provider="%providerName">
+		<library name="lib/ant.jar"/>
+		<library name="lib/ant-antlr.jar"/>
+		<library name="lib/ant-apache-bcel.jar"/>
+		<library name="lib/ant-apache-bsf.jar"/>
+		<library name="lib/ant-apache-log4j.jar"/>
+		<library name="lib/ant-apache-oro.jar"/>
+		<library name="lib/ant-apache-regexp.jar"/>
+		<library name="lib/ant-apache-resolver.jar"/>
+		<library name="lib/ant-commons-logging.jar"/>
+		<library name="lib/ant-commons-net.jar"/>
+		<library name="lib/ant-icontract.jar"/>
+		<library name="lib/ant-jai.jar"/>
+		<library name="lib/ant-javamail.jar"/>
+		<library name="lib/ant-jdepend.jar"/>
+		<library name="lib/ant-jmf.jar"/>
+		<library name="lib/ant-jsch.jar"/>
+		<library name="lib/ant-junit.jar"/>
+		<library name="lib/ant-launcher.jar"/>
+		<library name="lib/ant-netrexx.jar"/>
+		<library name="lib/ant-nodeps.jar"/>
+		<library name="lib/ant-starteam.jar"/>
+		<library name="lib/ant-stylebook.jar"/>
+		<library name="lib/ant-swing.jar"/>
+		<library name="lib/ant-trax.jar"/>
+		<library name="lib/ant-vaj.jar"/>
+		<library name="lib/ant-weblogic.jar"/>
+		<library name="lib/ant-xalan1.jar"/>
+		<library name="lib/ant-xslp.jar"/>
+	</bundle>
+	<bundle bundleID="1" class="com.sysdeo.eclipse.tomcat.TomcatLauncherPlugin" name="Tomcat Plugin" provider="SYSDEO">
+		<library name="tomcat.jar"/>
+	</bundle>
+	<bundle bundleID="7" name="%pluginName" provider="%providerName"/>
+	<bundle bundleID="30" class="org.eclipse.jdt.internal.junit.ui.JUnitPlugin" name="%pluginName" provider="%providerName">
+		<library name="junitsupport.jar"/>
+	</bundle>
+	<bundle bundleID="6" class="org.eclipse.compare.internal.CompareUIPlugin" name="%pluginName" provider="%providerName"/>
+	<bundle bundleID="5" class="org.eclipse.ant.internal.ui.AntUIPlugin" name="%pluginName" provider="%providerName"/>
+	<bundle bundleID="32" name="%pluginName" provider="%providerName"/>
+	<bundle bundleID="4" class="org.eclipse.ant.core.AntCorePlugin" name="%pluginName" provider="%providerName"/>
+	<bundle bundleID="31" class="org.eclipse.jdt.internal.launching.LaunchingPlugin" name="%pluginName" provider="%providerName"/>
+	<bundle bundleID="70" class="org.eclipse.ui.internal.browser.WebBrowserUIPlugin" name="%Plugin.name" provider="%Plugin.providerName"/>
+	<bundle bundleID="71" class="org.eclipse.ui.internal.cheatsheets.CheatSheetPlugin" name="%PLUGIN_NAME" provider="%PROVIDER_NAME"/>
+	<bundle bundleID="9" class="org.eclipse.core.internal.expressions.ExpressionPlugin" name="%pluginName" provider="%providerName">
+		<library name="."/>
+	</bundle>
+	<bundle bundleID="72" class="org.eclipse.ui.console.ConsolePlugin" name="%pluginName" provider="%providerName"/>
+	<bundle bundleID="8" name="%pluginName" provider="%providerName">
+		<library name="."/>
+	</bundle>
+	<bundle bundleID="73" class="org.eclipse.ui.internal.editors.text.EditorsPlugin" name="%pluginName" provider="%providerName"/>
+	<bundle bundleID="74" class="org.eclipse.ui.externaltools.internal.model.ExternalToolsPlugin" name="%Plugin.name" provider="%Plugin.providerName"/>
+	<bundle bundleID="75" name="%name" provider="%provider-name"/>
+	<bundle bundleID="76" class="org.eclipse.ui.internal.ide.IDEWorkbenchPlugin" name="%Plugin.name" provider="%Plugin.providerName">
+		<library name="."/>
+	</bundle>
+	<bundle bundleID="59" class="org.eclipse.search.internal.ui.SearchPlugin" name="%pluginName" provider="%providerName"/>
+	<bundle bundleID="58" name="%pluginName" provider="%providerName"/>
+	<bundle bundleID="57" name="%pluginName" provider="%providerName"/>
+	<bundle bundleID="56" name="%pluginName" provider="%providerName"/>
+	<bundle bundleID="19" class="org.eclipse.help.internal.appserver.AppserverPlugin" name="%appserver_plugin_name" provider="%providerName">
+		<library name="."/>
+	</bundle>
+	<bundle bundleID="55" name="%pluginName" provider="%providerName"/>
+	<bundle bundleID="17" class="org.eclipse.debug.core.DebugPlugin" name="%pluginName" provider="%providerName">
+		<library name="."/>
+	</bundle>
+	<bundle bundleID="18" class="org.eclipse.debug.internal.ui.DebugUIPlugin" name="%pluginName" provider="%providerName"/>
+	<bundle bundleID="15" class="org.eclipse.core.internal.runtime.PlatformActivator" name="%pluginName" provider="%providerName"/>
+	<bundle bundleID="16" class="org.eclipse.core.variables.VariablesPlugin" name="%pluginName" provider="%providerName"/>
+	<bundle bundleID="13" class="org.eclipse.core.resources.ResourcesPlugin" name="%pluginName" provider="%providerName"/>
+	<bundle bundleID="14" class="org.eclipse.core.internal.plugins.CompatibilityActivator" name="%pluginName" provider="%providerName"/>
+	<bundle bundleID="11" name="%compatibilityFragmentName" provider="%providerName"/>
+	<bundle bundleID="12" name="%win32FragmentName" provider="%providerName"/>
+	<bundle bundleID="21" class="org.eclipse.help.ui.internal.HelpUIPlugin" name="%help_system_plugin_name" provider="%providerName"/>
+	<bundle bundleID="20" class="org.eclipse.help.internal.base.HelpBasePlugin" name="%help_base_plugin_name" provider="%providerName"/>
+	<bundle bundleID="64" class="org.eclipse.team.internal.ccvs.ssh2.CVSSSH2Plugin" name="%pluginName" provider="%providerName">
+		<library name="cvsssh2.jar"/>
+		<library name="jsch-0.1.18.jar"/>
+	</bundle>
+	<bundle bundleID="65" class="org.eclipse.team.internal.ccvs.ssh.SSHPlugin" name="%pluginName" provider="%providerName"/>
+	<bundle bundleID="62" class="org.eclipse.team.internal.core.TeamPlugin" name="%pluginName" provider="%providerName"/>
+	<bundle bundleID="63" class="org.eclipse.team.internal.ccvs.core.CVSProviderPlugin" name="%pluginName" provider="%providerName"/>
+	<bundle bundleID="60" name="%fragmentName" provider="%providerName"/>
+	<bundle bundleID="61" hasExtensibleAPI="true" name="%pluginName" provider="%providerName"/>
+	<bundle bundleID="49" class="org.eclipse.pde.internal.PDE" name="%pluginName" provider="%providerName"/>
+	<bundle bundleID="48" class="org.eclipse.pde.internal.ui.PDEPlugin" name="%name" provider="%provider-name"/>
+	<bundle bundleID="45" name="%pluginName" provider="%providerName">
+		<library name="pdejunit.jar"/>
+	</bundle>
+	<bundle bundleID="44" name="%pluginName" provider="%providerName"/>
+	<bundle bundleID="47" name="%pluginName" provider="%providerName"/>
+	<bundle bundleID="46" class="org.eclipse.pde.internal.runtime.PDERuntimePlugin" name="%name" provider="%provider-name"/>
+	<bundle bundleID="90" name="%pluginName" provider="%providerName">
+		<library name="junit.jar"/>
+	</bundle>
+	<bundle bundleID="10" class="org.eclipse.core.internal.filebuffers.FileBuffersPlugin" name="%pluginName" provider="%providerName"/>
+	<bundle bundleID="51" name="%pluginName" provider="%providerName"/>
+	<bundle bundleID="52" name="%pluginName" provider="%providerName"/>
+	<bundle bundleID="53" name="%pluginName" provider="%providerName"/>
+	<bundle bundleID="54" name="%pluginName" provider="%providerName">
+		<library name="startup.jar"/>
+		<library name="platform.jar"/>
+	</bundle>
+	<bundle bundleID="88" class="org.eclipse.update.internal.scheduler.UpdateSchedulerPlugin" name="%pluginName" provider="%providerName"/>
+	<bundle bundleID="89" class="org.eclipse.update.internal.ui.UpdateUI" name="%pluginName" provider="%providerName"/>
+	<bundle bundleID="50" name="%pluginName" provider="%providerName">
+		<library name="activeHelpSample.jar"/>
+	</bundle>
+</map>

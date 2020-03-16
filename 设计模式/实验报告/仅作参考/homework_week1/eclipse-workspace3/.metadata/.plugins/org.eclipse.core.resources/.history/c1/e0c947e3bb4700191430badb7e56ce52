@@ -1,0 +1,17 @@
+package simplefactory;
+
+public class Rectangle extends Shape {
+
+	@Override
+	void draw() {
+		System.out.println("»æÖÆ¾ØĞÎ");
+
+	}
+
+	@Override
+	void erase() {
+		System.out.println("²Á³ıÔ²ĞÎ");
+
+	}
+
+}

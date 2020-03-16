@@ -1,0 +1,17 @@
+package simplefactory;
+
+public class Circle extends Shape {
+
+	@Override
+	void draw() {
+		System.out.println("т╡пн");
+
+	}
+
+	@Override
+	void erase() {
+		// TODO Auto-generated method stub
+
+	}
+
+}

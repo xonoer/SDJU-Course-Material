@@ -1,0 +1,16 @@
+package simplefactory;
+
+public class ShapeFactory {
+
+	public static Shape getShape(String type) {
+		Shape shape = null;
+		if(type.equalsIgnoreCase("Circle")) 
+			shape = new Circle();
+		else if(type.equalsIgnoreCase("Triangle")) 
+			shape = new Triangle();
+		else if(type.equalsIgnoreCase("Rectangle"))
+			shape = new Rectangle();
+		return shape;
+	}
+
+}

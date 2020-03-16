@@ -1,0 +1,23 @@
+package simplefactory;
+
+public class ShapeFactory {
+
+	public static Shape getShape(String type) {
+		try {
+			Shape shape = null;
+			if(type.equalsIgnoreCase("Circle")) 
+				shape = new Circle();
+			else if(type.equalsIgnoreCase("Triangle")) 
+				shape = new Triangle();
+			else if(type.equalsIgnoreCase("Rectangle"))
+				shape = new Rectangle();
+			else
+				throw new Exception("UnsupportedShapeException");
+			return shape;
+		}
+		catch(Exception e) {
+			e.printStackTrace();
+		}
+	}
+
+}

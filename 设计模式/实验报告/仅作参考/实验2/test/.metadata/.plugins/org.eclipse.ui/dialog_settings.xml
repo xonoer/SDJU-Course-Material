@@ -1,0 +1,48 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<section name="Workbench">
+	<section name="FileSystemImportWizard">
+	</section>
+	<section name="org.eclipse.ui.views.problem">
+		<section name="sorter">
+			<item value="6" key="priority6"/>
+			<item value="1" key="priority4"/>
+			<item value="5" key="priority5"/>
+			<item value="0" key="defaultPriority0"/>
+			<item value="2" key="defaultPriority2"/>
+			<item value="3" key="defaultPriority1"/>
+			<item value="1" key="defaultPriority4"/>
+			<item value="4" key="defaultPriority3"/>
+			<item value="5" key="defaultPriority5"/>
+			<item value="-1" key="direction0"/>
+			<item value="6" key="defaultPriority6"/>
+			<item value="1" key="direction1"/>
+			<item value="1" key="direction2"/>
+			<item value="1" key="direction3"/>
+			<item value="1" key="direction4"/>
+			<item value="1" key="direction5"/>
+			<item value="1" key="direction6"/>
+			<item value="4" key="priority3"/>
+			<item value="2" key="priority2"/>
+			<item value="3" key="priority1"/>
+			<item value="0" key="priority0"/>
+			<item value="1" key="defaultDirection5"/>
+			<item value="1" key="defaultDirection4"/>
+			<item value="1" key="defaultDirection3"/>
+			<item value="1" key="defaultDirection2"/>
+			<item value="1" key="defaultDirection1"/>
+			<item value="-1" key="defaultDirection0"/>
+			<item value="1" key="defaultDirection6"/>
+		</section>
+		<section name="filter">
+			<item value="true" key="enabled"/>
+			<item value="false" key="selectBySeverity"/>
+			<item value="100" key="markerLimit"/>
+			<item value="true" key="filterOnMarkerLimit"/>
+			<item value="" key="description"/>
+			<item value="org.eclipse.core.resources.problemmarker:true:org.eclipse.jdt.core.buildpath_problem:true:org.eclipse.ant.ui.buildFileProblem:true:org.eclipse.jdt.core.problem:true:org.eclipse.pde.validation-marker:true:" key="selectionStatus"/>
+			<item value="true" key="contains"/>
+			<item value="0" key="severity"/>
+			<item value="0" key="onResource"/>
+		</section>
+	</section>
+</section>

@@ -1,0 +1,11 @@
+package factoryMethod;
+
+public class GifFactory implements IImageReader {
+
+	@Override
+	public void read() {
+		// TODO Auto-generated method stub
+
+	}
+
+}

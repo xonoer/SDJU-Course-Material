@@ -1,0 +1,11 @@
+package simplefactory;
+import javax.xml.parsers.*;
+import org.w3c.dom.*;
+import org.xml.sax.SAXException;
+public class XMLUtil {
+	public static String getShapeType() {
+		try {
+			DocumentBuilderFactory dFactory = Document
+		}
+	}
+}

@@ -1,0 +1,12 @@
+import factoryMethod.IImageFactory;
+import factoryMethod.IImageReader;
+
+public class GifFactory implements IImageFactory {
+
+	@Override
+	public IImageReader createReader() {
+		// TODO Auto-generated method stub
+		return null;
+	}
+
+}
